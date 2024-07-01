@@ -4,15 +4,40 @@
   background-size: cover;
   background-position: center;
 }
-.nav-bar-txt {
+.nav-bar-txt,
+.tagline {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  color: #dfdfdf;
 }
-
+.nav-bar-txt:hover {
+  color: #f81f31 !important;
+}
+.landing-header {
+  font-family: Gilroy;
+  font-size: 120px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  line-height: 115px;
+  font-weight: bold;
+  color: #dfdfdf;
+}
+@font-face {
+  font-family: Gilroy;
+  src: url("../assets/DentonTest-Black.otf");
+}
 @media (min-width: 768px) {
   .container {
     padding-left: 100px !important;
     padding-right: 100px !important;
     padding-top: 30px;
+  }
+  .landing-header {
+    padding-left: 13% !important;
+  }
+  .tagline {
+    padding-left: 14% !important;
+  }
+  .landing-btns {
+    padding-left: 14% !important;
   }
 }
 @media (max-width: 768px) {
@@ -20,5 +45,15 @@
     padding-left: 20px !important;
     padding-right: 20px !important;
     padding-top: 40px !important;
+  }
+  .landing-header {
+    font-size: 75px;
+    line-height: 75px;
+    letter-spacing: 3px;
+    margin-top: 75px !important;
+  }
+  .tagline {
+    font-size: 18px;
+    margin-top: 5px !important;
   }
 }
