@@ -1,0 +1,24 @@
+#landing {
+  min-height: 100vh;
+  background: url("/bg3.jpg");
+  background-size: cover;
+  background-position: center;
+}
+.nav-bar-txt {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-left: 100px !important;
+    padding-right: 100px !important;
+    padding-top: 30px;
+  }
+}
+@media (max-width: 768px) {
+  .container {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    padding-top: 40px !important;
+  }
+}
