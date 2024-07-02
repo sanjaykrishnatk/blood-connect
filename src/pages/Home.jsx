@@ -46,9 +46,9 @@ function Home() {
         </Navbar>
         <Row className="ms-0 me-0 w-100 d-flex flex-column pb-5">
           <h1 className=" landing-header mb-0" style={{ marginTop: "100px" }}>
-            <span style={{ color: "#D70012" }}>hope</span> starts
+            <span style={{ color: "#DF1626" }}>hope</span> starts
             <br />
-            with a <span style={{ color: "#D70012" }}>drop</span>
+            with a <span style={{ color: "#DF1626" }}>drop</span>
           </h1>
           <h4 className="mb-0 fw-bold tagline">
             Be the Reason Someone Smiles Today
