@@ -46,6 +46,9 @@
   width: 85%;
   height: 350px;
 }
+#section-4 {
+  padding: 100px 0;
+}
 @media (min-width: 768px) {
   .container {
     padding-left: 100px !important;
