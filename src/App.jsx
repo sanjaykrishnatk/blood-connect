@@ -1,6 +1,7 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
+import Donor from "./pages/Donor"
 import Dashboard from "./components/Dashboard";
 import Reportbloodrequest from "./pages/Reportbloodrequest";
 import Reportdonor from "./pages/Reportdonor";
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         
         <Route path="/" element={<Home />} />
+        <Route path="/donor" element={<Donor/>}/>
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/Reportbloodrequest" element={<Reportbloodrequest />} />
         <Route path="/Reportdonor" element={<Reportdonor />} />
