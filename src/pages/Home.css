@@ -1,18 +1,78 @@
+@font-face {
+  font-family: Gilroy;
+  src: url("../assets/DentonTest-Black.otf");
+}
 #landing {
   min-height: 100vh;
   background: url("/bg3.jpg");
   background-size: cover;
   background-position: center;
 }
-.nav-bar-txt {
+.nav-bar-txt,
+.tagline {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  color: #dfdfdf;
+}
+.nav-bar-txt:hover {
+  color: #f81f31 !important;
+}
+.landing-header {
+  font-family: Gilroy;
+  font-size: 120px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  line-height: 115px;
+  font-weight: bold;
+  color: #dfdfdf;
 }
 
+#section-2 {
+  background-color: #e8e9ed;
+  padding: 100px 0;
+}
+.impact-header,
+.section-3-header {
+  font-family: Gilroy;
+  font-size: 60px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  line-height: 70px;
+  font-weight: bold;
+  color: #dfdfdf;
+}
+#section-3 {
+  padding: 100px 0;
+}
+.blood-donation-img {
+  padding-left: 26%;
+  width: 85%;
+  height: 350px;
+}
+#section-4 {
+  padding: 100px 0;
+}
 @media (min-width: 768px) {
   .container {
     padding-left: 100px !important;
     padding-right: 100px !important;
     padding-top: 30px;
+  }
+  .landing-header {
+    padding-left: 13% !important;
+  }
+  .tagline {
+    padding-left: 14% !important;
+  }
+  .landing-btns {
+    padding-left: 14% !important;
+  }
+
+  .sec-2-content {
+    padding-left: 26% !important;
+  }
+  .know-more-btn {
+    width: 25%;
+  }
+  .section-3-content {
+    padding-right: 200px !important;
   }
 }
 @media (max-width: 768px) {
@@ -20,5 +80,55 @@
     padding-left: 20px !important;
     padding-right: 20px !important;
     padding-top: 40px !important;
+  }
+  .landing-header {
+    font-size: 75px;
+    line-height: 75px;
+    letter-spacing: 3px;
+    margin-top: 80px !important;
+    text-align: center;
+  }
+  .tagline {
+    font-size: 18px;
+    margin-top: 5px !important;
+    text-align: center;
+  }
+  .landing-btns {
+    align-items: center;
+    justify-content: center;
+  }
+  .impact-header,
+  .section-3-header {
+    font-size: 40px;
+    line-height: 45px;
+    text-align: center;
+    margin-bottom: 30px !important;
+  }
+  .impact-sub-txt {
+    text-align: center;
+    margin-bottom: 40px !important;
+  }
+  .sec-2-content {
+    justify-content: center !important;
+    align-items: center;
+  }
+  .know-more-btn {
+    width: 50%;
+    margin-bottom: 30px;
+  }
+  .impact-column {
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+  .impact-column p,
+  .section-3-content p {
+    padding: 0 60px !important;
+    text-align: center;
+  }
+  .blood-donation-img {
+    width: 100%;
+    height: 300px;
+    padding-left: 0 !important;
   }
 }
