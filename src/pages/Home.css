@@ -1,3 +1,7 @@
+@font-face {
+  font-family: Gilroy;
+  src: url("../assets/DentonTest-Black.otf");
+}
 #landing {
   min-height: 100vh;
   background: url("/bg3.jpg");
@@ -20,10 +24,19 @@
   font-weight: bold;
   color: #dfdfdf;
 }
-@font-face {
-  font-family: Gilroy;
-  src: url("../assets/DentonTest-Black.otf");
+
+#section-2 {
+  background-color: #e8e9ed;
+  padding: 100px 0;
 }
+.impact-header {
+  font-family: Gilroy;
+  font-size: 60px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  line-height: 70px;
+  font-weight: bold;
+}
+
 @media (min-width: 768px) {
   .container {
     padding-left: 100px !important;
@@ -39,6 +52,13 @@
   .landing-btns {
     padding-left: 14% !important;
   }
+
+  .sec-2-content {
+    padding-left: 26% !important;
+  }
+  .know-more-btn {
+    width: 25%;
+  }
 }
 @media (max-width: 768px) {
   .container {
@@ -50,7 +70,7 @@
     font-size: 75px;
     line-height: 75px;
     letter-spacing: 3px;
-    margin-top: 75px !important;
+    margin-top: 80px !important;
     text-align: center;
   }
   .tagline {
@@ -61,5 +81,31 @@
   .landing-btns {
     align-items: center;
     justify-content: center;
+  }
+  .impact-header {
+    font-size: 40px;
+    line-height: 45px;
+    text-align: center;
+    margin-bottom: 30px !important;
+  }
+  .impact-sub-txt {
+    text-align: center;
+    margin-bottom: 40px !important;
+  }
+  .sec-2-content {
+    justify-content: center !important;
+    align-items: center;
+  }
+  .know-more-btn {
+    width: 50%;
+    margin-bottom: 30px;
+  }
+  .impact-column {
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+  .impact-column p {
+    padding: 0 60px !important;
   }
 }
