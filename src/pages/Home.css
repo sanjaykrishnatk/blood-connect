@@ -107,5 +107,6 @@
   }
   .impact-column p {
     padding: 0 60px !important;
+    text-align: center;
   }
 }
