@@ -51,9 +51,15 @@
     line-height: 75px;
     letter-spacing: 3px;
     margin-top: 75px !important;
+    text-align: center;
   }
   .tagline {
     font-size: 18px;
     margin-top: 5px !important;
+    text-align: center;
+  }
+  .landing-btns {
+    align-items: center;
+    justify-content: center;
   }
 }
