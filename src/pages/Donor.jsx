@@ -1,44 +1,158 @@
-import React from 'react'
-
+import React, { useState } from 'react'
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 function Donor() {
-  const donors = [
-    { id: 1, name: 'John Doe', bloodType: 'A+', donationDate: '2023-06-21', contact: 8590123690 , },
-    { id: 2, name: 'Jane Smith', bloodType: 'O-', donationDate: '2023-07-14', contact: 8596331542 },
-    { id: 3, name: 'Michael Johnson', bloodType: 'B+', donationDate: '2023-05-30', contact: 9012345689 },
-    { id: 4, name: 'Emily Davis', bloodType: 'AB-', donationDate: '2023-06-02', contact: 9856541236 },
-  ]
-  return (
-    <>
-    <div style={{ padding: '20px' }}>
-      <h1>Donor's List</h1>
-      <table style={{ width: '50%', borderCollapse: 'collapse', margin: '20px 0' }}>
-        <thead>
-          <tr>
-            <th style={{ border: '1px solid #ddd', padding: '8px', backgroundColor: '#f4f4f4' }}>ID</th>
-            <th style={{ border: '1px solid #ddd', padding: '8px', backgroundColor: '#f4f4f4' }}>Name</th>
-            <th style={{ border: '1px solid #ddd', padding: '8px', backgroundColor: '#f4f4f4' }}>Blood Type</th>
-            <th style={{ border: '1px solid #ddd', padding: '8px', backgroundColor: '#f4f4f4' }}>Donation Date</th>
-            <th style={{ border: '1px solid #ddd', padding: '8px', backgroundColor: '#f4f4f4' }}>Contact</th>
-            <th style={{ border: '1px solid #ddd', padding: '8px', backgroundColor: '#f4f4f4' }}>Download Certificate</th>
-          </tr>
-        </thead>
-        <tbody>
-          {donors.map(donor => (
-            <tr key={donor.id}>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>{donor.id}</td>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>{donor.name}</td>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>{donor.bloodType}</td>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>{donor.donationDate}</td>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>{donor.contact}</td>
-              <td style={{ border: '1px solid #ddd', padding: '8px' }}>{donor.downloadcertificate}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-    </>
-  )
-}
+
+    const[donorRequest, setDonorRequest] = useState({
+        userName :"",
+        bloodgrp :"",
+        age :"",
+        gender :"",
+        address :"",
+        state :"",
+        district :"",
+        email :"",
+        phone : ""
+    });
+
+
+    return (
+     
+      <div className='mt-5 d-flex justify-content-center align-items-center ' style={{width:'100%', height:'100vh'}}>
+      <div className='bg-light p-5 rounded' style={{width:'500px'}} >
+        <h1 className='text-danger'>Blood Donor Registration</h1>
+
+      <Form className='mt-5'>
+      
+        <Form.Group className="mb-3" controlId="userName">
+          <Form.Label>Donor Name : </Form.Label>
+          <Form.Control type="text" placeholder="Enter your Name" 
+          onChange={(event)=> {
+          const value= event.target.value;
+          console.log(value);
+        setDonorRequest({...donorRequest, userName: value });
+         } }/>
+
+        </Form.Group>
+
+        <Form.Label>Donors Blood Group : </Form.Label>
+        <Form.Select aria-label="Blood Group">
+      <option>A+</option>
+      <option value="A+">A+</option>
+      <option value="O+">O+</option>
+      <option value="B+">B+</option>
+      <option value="AB+">AB</option>
+      <option value="A-">A-</option>
+      <option value="O-">O-</option>
+      <option value="B-">B-</option>
+      <option value="AB-">AB-</option>
+    </Form.Select>
+
+        <Form.Group className="mb-3" controlId="age">
+          <Form.Label>Donors Age :</Form.Label>
+          <Form.Control type="text" placeholder=" "
+          onChange={(event)=> {
+            const value= event.target.value;
+            console.log(value);
+          setDonorRequest({...donorRequest, age: value });
+           } } />
+
+        </Form.Group>
+        
+
+        <Form.Label>Gender : </Form.Label>
+
+        {['radio'].map((type) => (
+        <div key={`inline-${type}`} className="mb-3">
+          <Form.Check
+            inline
+            label="male"
+            name="group1"
+            type={type}
+            id={`inline-${type}-male`}
+          />
+          <Form.Check
+            inline
+            label="female"
+            name="group1"
+            type={type}
+            id={`inline-${type}-female`}
+          />
+          <Form.Check
+            inline
+            label="Other"
+            type={type}
+            id={`inline-${type}-other`}
+          />
+        </div>
+      ))}
+
+    <Form.Group className="mb-3" controlId="address">
+          <Form.Label>Address :</Form.Label>
+          <Form.Control type="text" placeholder="Address"
+          onChange={(event)=> {
+            const value= event.target.value;
+            console.log(value);
+          setDonorRequest({...donorRequest, address: value });
+           } } />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="state">
+          <Form.Label>State :</Form.Label>
+          <Form.Control type="text" placeholder="state" 
+          onChange={(event)=> {
+            const value= event.target.value;
+            console.log(value);
+          setDonorRequest({...donorRequest, state: value });
+           } }/>
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="district">
+          <Form.Label>District : </Form.Label>
+          <Form.Control type="text" placeholder="District" 
+          onChange={(event)=> {
+            const value= event.target.value;
+            console.log(value);
+          setDonorRequest({...donorRequest, district: value });
+           } }/>
+        </Form.Group>
+
+   
+
+    <Form.Group className="mb-3" controlId="email">
+          <Form.Label>Email </Form.Label>
+          <Form.Control type="text" placeholder="Enter your email id" 
+          onChange={(event)=> {
+            const value= event.target.value;
+            console.log(value);
+          setDonorRequest({...donorRequest, email: value });
+           } }/>
+          <Form.Text className="text-muted">
+            We'll never share your email with anyone else.
+          </Form.Text>
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="phone">
+          <Form.Label>Phone Number : </Form.Label>
+          <Form.Control type="text" placeholder="" 
+          onChange={(event)=> {
+            const value= event.target.value;
+            console.log(value);
+          setDonorRequest({...donorRequest, phone: value });
+           } }/>
+        </Form.Group>
+
+        <Button variant="warning" type="submit">
+          Submit
+        </Button>
+
+        
+      </Form>
+
+      </div>
+      </div>
+    );
+  }
 
 export default Donor
