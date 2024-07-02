@@ -30,7 +30,8 @@
   padding: 100px 0;
 }
 .impact-header,
-.section-3-header {
+.section-3-header,
+.services-header {
   font-family: Gilroy;
   font-size: 60px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -46,7 +47,8 @@
   width: 85%;
   height: 350px;
 }
-#section-4 {
+#section-4,
+#section-5 {
   padding: 100px 0;
 }
 @media (min-width: 768px) {
