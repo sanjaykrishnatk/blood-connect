@@ -168,6 +168,29 @@ function Home() {
           </Col>
         </Row>
       </section>
+      <section id="section-3">
+        <Row className="me-0 ms-0 w-100">
+          <Col md={6} sm={12} className="d-flex  align-items-center">
+            <img src="/v2.gif" alt="blood-img" className="blood-donation-img" />
+          </Col>
+          <Col
+            md={6}
+            sm={12}
+            className="d-flex flex-column justify-content-center section-3-content"
+          >
+            <h1 className="section-3-header">
+              A Drop of <span style={{ color: "#DF1626" }}> Hope</span>
+            </h1>
+            <p className="text-secondary">
+              Join us for "A Drop of Hope," where every blood donation brings
+              new life and renewed hope to those in need. Your contribution can
+              make a world of difference, turning small acts into life-saving
+              miracles. Be a part of this inspiring event and help us save
+              lives, one drop at a time.
+            </p>
+          </Col>
+        </Row>
+      </section>
     </>
   );
 }
