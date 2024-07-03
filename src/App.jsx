@@ -8,9 +8,6 @@ import Reportdonor from "./pages/Reportdonor";
 import Request from "./pages/Request";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SlidingForm from "./pages/Slidingform";
-import Donorpage from "./pages/Donorpage";
-import DonationHistory from "./pages/DonationHistory";
-
 
 function App() {
   return (
@@ -23,8 +20,6 @@ function App() {
         <Route path="/Reportdonor" element={<Reportdonor />} />
         <Route path="/Request" element={<Request />} />
         <Route path="/SlidingForm" element={<SlidingForm />} />
-        <Route path="/donorpage" element={<Donorpage/>}/>
-        <Route path="/donationhistory" element={<DonationHistory/>}/>
       </Routes>
     </>
   );
