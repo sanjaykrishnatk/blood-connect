@@ -31,7 +31,9 @@
 }
 .impact-header,
 .section-3-header,
-.services-header {
+.services-header,
+.banner-header,
+.donor-header {
   font-family: Gilroy;
   font-size: 60px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -76,6 +78,9 @@
   .section-3-content {
     padding-right: 200px !important;
   }
+  .banner-header {
+    width: 25% !important;
+  }
 }
 @media (max-width: 768px) {
   .container {
@@ -101,7 +106,8 @@
   }
   .impact-header,
   .section-3-header,
-  .services-header {
+  .services-header,
+  .donor-header {
     font-size: 40px;
     line-height: 45px;
     text-align: center;
@@ -138,6 +144,15 @@
     padding-left: 0 !important;
   }
   .services-section {
+    flex-direction: column !important;
+  }
+  .banner-header {
+    font-size: 40px;
+    line-height: 45px;
+    width: 100%;
+    padding-top: 20px;
+  }
+  .banner-content {
     flex-direction: column !important;
   }
 }

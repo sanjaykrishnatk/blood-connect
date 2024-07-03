@@ -211,12 +211,16 @@ function Home() {
           <h1 className="text-center services-header">
             Our <span style={{ color: "#DF1626" }}>Services</span>
           </h1>
-          <p className="text-center text-secondary mb-5">
+          <p className="text-center text-secondary mb-5 section-5-sub-txt">
             Empowering Communities with Lifesaving Blood. Every Drop, a Step
             Toward Hope.
           </p>
           <div className="services-wrapper d-flex  justify-content-center align-items-center w-100 services-section ">
-            <Col sm={12} md={3} className="mb-5">
+            <Col
+              sm={12}
+              md={3}
+              className="mb-5 d-flex  justify-content-center align-items-center"
+            >
               <Card style={{ width: "18rem" }} className="rounded-0  shadow">
                 <Card.Img
                   variant="top"
@@ -242,7 +246,11 @@ function Home() {
                 </Card.Body>
               </Card>{" "}
             </Col>
-            <Col sm={12} md={3} className="mb-5">
+            <Col
+              sm={12}
+              md={3}
+              className="mb-5 d-flex  justify-content-center align-items-center"
+            >
               <Card style={{ width: "18rem" }} className="rounded-0  shadow">
                 <Card.Img
                   variant="top"
@@ -268,7 +276,11 @@ function Home() {
                 </Card.Body>
               </Card>{" "}
             </Col>
-            <Col sm={12} md={3} className="mb-5">
+            <Col
+              sm={12}
+              md={3}
+              className="mb-5 d-flex  justify-content-center align-items-center"
+            >
               <Card style={{ width: "18rem" }} className="rounded-0  shadow">
                 <Card.Img
                   variant="top"
@@ -295,6 +307,50 @@ function Home() {
               </Card>
             </Col>
           </div>
+        </Row>
+      </section>
+      <section id="section-6">
+        <Row
+          className="w-100 ms-0 me-0 d-flex align-items-center ps-md-5 banner-content"
+          style={{
+            backgroundImage: "url('/panoramic-banner.jpg')",
+            backgroundPosition: "center",
+            backgroundSize: "cover",
+            minHeight: "230px",
+          }}
+        >
+          <h1 className="banner-header " style={{ color: "#DF1626" }}>
+            100+
+            <br />
+            Donors
+          </h1>
+          <h1 className="banner-header " style={{ color: "#DF1626" }}>
+            200+
+            <br />
+            Lives Saved
+          </h1>
+        </Row>
+      </section>
+      <section id="section-7">
+        <Row
+          className="ms-0 me-0 w-100 d-flex justify-content-center align-items-center"
+          style={{
+            backgroundColor: "#DF1626",
+            padding: "60px",
+          }}
+        >
+          <h1 className="donor-header text-center">Become a Donor</h1>
+          <Button
+            variant="light"
+            style={{
+              color: "#DF1626",
+              width: "100px",
+              backgroundColor: "#DFDFDF",
+            }}
+            className="fw-bold"
+          >
+            DONATE
+          </Button>{" "}
         </Row>
       </section>
     </>
