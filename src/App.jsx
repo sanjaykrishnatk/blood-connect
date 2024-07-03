@@ -6,6 +6,7 @@ import Dashboard from "./components/Dashboard";
 import Reportbloodrequest from "./pages/Reportbloodrequest";
 import Reportdonor from "./pages/Reportdonor";
 import Request from "./pages/Request";
+import Donor from "./pages/Donor";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SlidingForm from "./pages/Slidingform";
 
