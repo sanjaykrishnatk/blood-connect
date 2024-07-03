@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Drawer, List, ListItem, ListItemIcon, ListItemText, Toolbar, Box } from '@mui/material';
@@ -6,25 +5,27 @@ import HomeIcon from '@mui/icons-material/Home';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import PersonIcon from '@mui/icons-material/Person';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import HelpIcon from '@mui/icons-material/Help'; // Import Help icon
 
 const drawerWidth = 240;
 
-const Sidebar = () => {
-  return (
-    <Drawer
-      variant="permanent"
-      sx={{
-        width: drawerWidth,
-        flexShrink: 0,
-        '& .MuiDrawer-paper': {
-          width: drawerWidth,
-          boxSizing: 'border-box',
-          backgroundColor: '#3f51b5', 
-          color: '#fff', 
-        },
-      }}
-    >
-      <Toolbar />
+const Sidebar = ({ mobileOpen, handleDrawerToggle }) => {
+  const drawer = (
+    <div>
+      <Toolbar>
+        <Box
+          component="img"
+          src="logo1.png" 
+          alt="Logo"
+          sx={{
+            height: 90, 
+            width: 'auto',
+            margin: '0 auto',
+            display: 'block',
+            padding: '10px 0',
+          }}
+        />
+      </Toolbar>
       <Box sx={{ overflow: 'auto' }}>
         <List>
           <ListItem button component={Link} to="/">
@@ -43,9 +44,46 @@ const Sidebar = () => {
             <ListItemIcon><FavoriteIcon sx={{ color: '#fff' }} /></ListItemIcon>
             <ListItemText primary="Donor" />
           </ListItem>
+          <ListItem button component={Link} to="/help"> {/* Add new Help item */}
+            <ListItemIcon><HelpIcon sx={{ color: '#fff' }} /></ListItemIcon>
+            <ListItemText primary="Help" />
+          </ListItem>
         </List>
       </Box>
-    </Drawer>
+    </div>
+  );
+
+  return (
+    <Box
+      component="nav"
+      sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+      aria-label="mailbox folders"
+    >
+      <Drawer
+        variant="temporary"
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        ModalProps={{
+          keepMounted: true,
+        }}
+        sx={{
+          display: { xs: 'block', sm: 'none' },
+          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, backgroundColor: '#c55555', color: '#fff' },
+        }}
+      >
+        {drawer}
+      </Drawer>
+      <Drawer
+        variant="permanent"
+        sx={{
+          display: { xs: 'none', sm: 'block' },
+          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, backgroundColor: '#c55555', color: '#fff' },
+        }}
+        open
+      >
+        {drawer}
+      </Drawer>
+    </Box>
   );
 };
 
