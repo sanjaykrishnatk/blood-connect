@@ -12,7 +12,8 @@ import {
   faHeartPulse,
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
-
+import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
 function Home() {
   return (
     <>
@@ -210,6 +211,90 @@ function Home() {
           <h1 className="text-center services-header">
             Our <span style={{ color: "#DF1626" }}>Services</span>
           </h1>
+          <p className="text-center text-secondary mb-5">
+            Empowering Communities with Lifesaving Blood. Every Drop, a Step
+            Toward Hope.
+          </p>
+          <div className="services-wrapper d-flex  justify-content-center align-items-center w-100 services-section ">
+            <Col sm={12} md={3} className="mb-5">
+              <Card style={{ width: "18rem" }} className="rounded-0  shadow">
+                <Card.Img
+                  variant="top"
+                  src="/blood-donation.jpg"
+                  style={{ width: "100%", height: "200px" }}
+                  className="rounded-0"
+                />
+                <Card.Body className="p-5">
+                  <Card.Title className="fw-bold">
+                    Connecting Recipients to Donors
+                  </Card.Title>
+                  <Card.Text className="text-secondary">
+                    Efficiently connecting blood donors with patients in urgent
+                    need of transfusions.
+                  </Card.Text>
+                  <Link
+                    className="text-secondary fw-bold"
+                    to={"/"}
+                    style={{ textDecoration: "none", fontSize: "12px" }}
+                  >
+                    KNOW MORE
+                  </Link>
+                </Card.Body>
+              </Card>{" "}
+            </Col>
+            <Col sm={12} md={3} className="mb-5">
+              <Card style={{ width: "18rem" }} className="rounded-0  shadow">
+                <Card.Img
+                  variant="top"
+                  src="/blood-drive.png"
+                  style={{ width: "100%", height: "200px" }}
+                  className="rounded-0"
+                />
+                <Card.Body className="p-5">
+                  <Card.Title className="fw-bold">
+                    Organizing Blood Drives
+                  </Card.Title>
+                  <Card.Text className="text-secondary">
+                    Hosting and managing community blood donation events to
+                    ensure a steady and reliable blood supply for all.
+                  </Card.Text>
+                  <Link
+                    className="text-secondary fw-bold"
+                    to={"/"}
+                    style={{ textDecoration: "none", fontSize: "12px" }}
+                  >
+                    KNOW MORE
+                  </Link>
+                </Card.Body>
+              </Card>{" "}
+            </Col>
+            <Col sm={12} md={3} className="mb-5">
+              <Card style={{ width: "18rem" }} className="rounded-0  shadow">
+                <Card.Img
+                  variant="top"
+                  src="/blood-pack.jpg"
+                  style={{ width: "100%", height: "200px" }}
+                  className="rounded-0"
+                />
+                <Card.Body className="p-5">
+                  <Card.Title className="fw-bold">
+                    Emergency Blood Distribution
+                  </Card.Title>
+                  <Card.Text className="text-secondary">
+                    Coordinating the rapid and efficient delivery of blood to
+                    hospitals and patients during critical emergencies.
+                  </Card.Text>
+                  <Link
+                    className="text-secondary fw-bold"
+                    to={"/"}
+                    style={{ textDecoration: "none", fontSize: "12px" }}
+                  >
+                    KNOW MORE
+                  </Link>
+                </Card.Body>
+              </Card>
+            </Col>
+          </div>
         </Row>
       </section>
     </>
