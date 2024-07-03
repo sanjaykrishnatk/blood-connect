@@ -6,6 +6,8 @@ import Reportbloodrequest from "./pages/Reportbloodrequest";
 import Reportdonor from "./pages/Reportdonor";
 import Request from "./pages/Request";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Donorpage from "./pages/Donorpage";
+import DonationHistory from "./pages/DonationHistory";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route path="/Reportbloodrequest" element={<Reportbloodrequest />} />
         <Route path="/Reportdonor" element={<Reportdonor />} />
         <Route path="/Request" element={<Request />} />
+        <Route path="/donorpage" element={<Donorpage/>}/>
+        <Route path="/donationhistory" element={<DonationHistory/>}/>
       </Routes>
     </>
   );
