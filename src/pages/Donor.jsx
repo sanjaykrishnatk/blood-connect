@@ -25,6 +25,9 @@ function Donor() {
 
       <Form className='mt-5'>
       
+      <div className="row g-3">
+      <div className="col-md-6">
+
         <Form.Group className="mb-3" controlId="userName">
           <Form.Label>Donor Name : </Form.Label>
           <Form.Control type="text" placeholder="Enter your Name" 
@@ -35,8 +38,29 @@ function Donor() {
          } }/>
 
         </Form.Group>
+        </div>
 
-        <Form.Label>Donors Blood Group : </Form.Label>
+        <div className="col-md-6">
+        <Form.Group className="mb-3" controlId="age">
+          <Form.Label>Age :</Form.Label>
+          <Form.Control type="text" placeholder=" "
+          onChange={(event)=> {
+            const value= event.target.value;
+            console.log(value);
+          setDonorRequest({...donorRequest, age: value });
+           } } />
+
+        </Form.Group>
+        
+        </div>
+        </div>
+
+
+        <div className="row g-3">
+
+        <div className="col-md-6">
+
+        <Form.Label>Blood Group : </Form.Label>
         <Form.Select aria-label="Blood Group">
       <option>A+</option>
       <option value="A+">A+</option>
@@ -49,18 +73,10 @@ function Donor() {
       <option value="AB-">AB-</option>
     </Form.Select>
 
-        <Form.Group className="mb-3" controlId="age">
-          <Form.Label>Donors Age :</Form.Label>
-          <Form.Control type="text" placeholder=" "
-          onChange={(event)=> {
-            const value= event.target.value;
-            console.log(value);
-          setDonorRequest({...donorRequest, age: value });
-           } } />
+</div>
 
-        </Form.Group>
-        
-
+    
+ <div className="col-md-6">
         <Form.Label>Gender : </Form.Label>
 
         {['radio'].map((type) => (
@@ -88,6 +104,10 @@ function Donor() {
         </div>
       ))}
 
+</div>
+
+</div>
+
     <Form.Group className="mb-3" controlId="address">
           <Form.Label>Address :</Form.Label>
           <Form.Control type="text" placeholder="Address"
@@ -98,15 +118,23 @@ function Donor() {
            } } />
         </Form.Group>
 
+
+        <div className="row g-3">
+
+        <div className="col-md-6">
+
         <Form.Group className="mb-3" controlId="state">
           <Form.Label>State :</Form.Label>
-          <Form.Control type="text" placeholder="state" 
+          <Form.Control type="text" placeholder="State" 
           onChange={(event)=> {
             const value= event.target.value;
             console.log(value);
           setDonorRequest({...donorRequest, state: value });
            } }/>
         </Form.Group>
+        </div>
+
+        <div className="col-md-6">
 
         <Form.Group className="mb-3" controlId="district">
           <Form.Label>District : </Form.Label>
@@ -117,7 +145,8 @@ function Donor() {
           setDonorRequest({...donorRequest, district: value });
            } }/>
         </Form.Group>
-
+  </div>
+  </div>
    
 
     <Form.Group className="mb-3" controlId="email">
