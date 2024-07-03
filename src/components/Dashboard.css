@@ -1,0 +1,10 @@
+/* src/pages/Dashboard.css */
+.card-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap; /* Prevent wrapping to the next line */
+    justify-content: space-between; /* Space cards evenly */
+    margin-top: 20px;
+    overflow-x: auto; /* Enable horizontal scrolling if needed */
+  }
+  
