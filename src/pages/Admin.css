@@ -3,3 +3,6 @@
         flex-direction: column !important;
     }
 }
+.table{
+    overflow-x: scroll;
+}
