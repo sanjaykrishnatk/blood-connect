@@ -4,7 +4,7 @@ import { BarChart } from "@mui/x-charts/BarChart";
 import { axisClasses } from "@mui/x-charts/ChartsAxis";
 import { PieChart } from "@mui/x-charts/PieChart";
 import Table from "../components/Table";
-
+import './Admin.css'
 function Admin() {
   const chartSetting = {
     yAxis: [
@@ -100,9 +100,9 @@ function Admin() {
 
   return (
     <>
-      <div className="row w-100 py-5 mt-5">
+      <div className="row w-100 py-5 mt-5 ">
         <div className="col-12 p-3 d-flex flex-column">
-          <div className="d-flex">
+          <div className="d-flex chart">
             <BarChart
               dataset={dataset}
               xAxis={[{ scaleType: "band", dataKey: "month" }]}
@@ -113,22 +113,25 @@ function Admin() {
               ]}
               {...chartSetting}
             />
-            <PieChart
-              series={[
-                {
-                  data: [
-                    { id: 0, value: 10, label: "series A" },
-                    { id: 1, value: 15, label: "series B" },
-                    { id: 2, value: 20, label: "series C" },
-                  ],
-                },
-              ]}
-              width={400}
-              height={200}
-            />
-          </div>
-          <div className="row w-100 ">
-            <Table />
+           
+           
+              <PieChart
+                series={[
+                  {
+                    data: [
+                      { id: 0, value: 10, label: "series A" },
+                      { id: 1, value: 15, label: "series B" },
+                      { id: 2, value: 20, label: "series C" },
+                    ],
+                  },
+                ]}
+                width={400}
+                height={200}
+              />
+            </div>
+          
+          <div className="row w-100 table">
+           <table className="table-responsive"> <Table /></table>
           </div>
         </div>
       </div>
