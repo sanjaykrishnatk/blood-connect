@@ -3,17 +3,17 @@ import React from 'react'
 function DonationHistory() {
   return (
     <>
-    <div className="row">
+    <div className="row "style={{ marginTop: '2rem', textAlign: 'center' }} >
         <div className="col-md-1"></div>
-        <div className="col-md-10 p-5">
-                <table className="table shadow-sm ">
+        <div className="col-md-10 p-5 "style={{ margin: '0 auto', width: '50%' }}>
+                <table className="table shadow-sm "style={{ width: '100%', marginTop: '5rem', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }}>
                     <thead className='table-warning'>
                         <tr>
                             <th>#</th>
-                            <th style={{ minWidth: '120px' }}>User Name</th>
-                            <th style={{ minWidth: '130px' }}>Hospital</th>
-                            <th style={{ minWidth: '120px' }}>Place</th>
-                            <th style={{ minWidth: '120px' }}>Date </th>
+                            <th style={{ minWidth: '50px' }}>User Name</th>
+                            <th style={{ minWidth: '50px' }}>Hospital</th>
+                            <th style={{ minWidth: '50px' }}>Place</th>
+                            <th style={{ minWidth: '50px' }}>Date </th>
                             </tr>
                     </thead>
                     <tbody>

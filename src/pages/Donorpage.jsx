@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import './Donorpage.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -28,32 +27,33 @@ function Donorpage() {
 
     return (
     <>
-     <div className="container mt-5">
-        <div className="row justify-content-center mt-5">
-          <div className="col-md-10 mt-5 ">
-            <div className="form-container d-flex flex-column align-items-center">
-              <h1>Have you donated blood recently?</h1>
-              <form onSubmit={handleUpdate} className="w-75">
-                <div className="form-group">
-                  <label htmlFor="date">Date of Donation</label>
+     <div style={{ marginTop: '2rem', textAlign: 'center' }}>
+        <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'center' }}>
+          <div style={{ marginTop: '2rem', width: '30%' }}>
+            <div style={{ padding: '2rem', border: '1px solid #ddd', borderRadius: '8px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }}>
+              <h1 className='fs-2'>Have you donated blood recently?</h1>
+              <form onSubmit={handleUpdate} style={{ width: '50%', margin: '0 auto' }}>
+                <div style={{ marginBottom: '1rem' }}>
                   <input
                     type="date"
                     id="date"
                     name="date"
-                    className="form-control"
+                    style={{ display: 'block', width: '100%', padding: '0.5rem', borderRadius: '4px', border: '1px solid #ccc' }}
                     value={formData.date}
                     onChange={handleChange}
                     required
                   />
                 </div>
-                <button type="submit" className="btn btn-primary mt-3">Update</button>
+                <button type="submit" style={{ padding: '0.5rem 1rem', borderRadius: '4px', border: 'none', background: '#007bff', color: '#fff', marginTop: '1rem' }}>
+                  Update
+                </button>
               </form>
             </div>
           </div>
         </div>
-        <div className="row ">
-          <div className="col-md-8">
-            <table className="table my-5  shadow">
+        <div className="row "style={{ marginTop: '2rem', textAlign: 'center' }}>
+          <div className="col-md-8 " style={{ margin: '0 auto', width: '50%' }}>
+            <table className="table my-5  shadow justify-content-center"style={{ width: '100%', marginTop: '2rem', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)' }}>
               <thead>
                 <tr>
                   <th>#</th>
@@ -75,7 +75,7 @@ function Donorpage() {
                   <td>20/07/2024</td>
                   <td style={{display: 'flex', justifyContent: 'space-between'}}>
                   <button className="btn btn-success me-2">Accept</button>
-                  <button className="btn btn-danger">Delete</button>
+                  <button className="btn btn-danger">Reject</button>
                   </td>
                 </tr>
               </tbody>
