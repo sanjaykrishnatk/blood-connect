@@ -1,8 +1,8 @@
-@media(max-width:768px){
-  .d-flex {
-        flex-direction: column !important;
-    }
+@media (max-width: 768px) {
+  .chart {
+    flex-direction: column !important;
+  }
 }
-.table{
-    overflow-x: scroll;
+.table {
+  overflow-x: scroll;
 }
