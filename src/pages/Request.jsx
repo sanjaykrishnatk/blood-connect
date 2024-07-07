@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 
 function Request() {
   const [bloodRequest, setBloodRequest] = useState({
@@ -12,34 +17,58 @@ function Request() {
     address: "",
     state: "",
     district: "",
+    email: "",
     phone: "",
   });
 
+  const [startDate, setStartDate] = useState(new Date());
+
   return (
-    <div
-      className="mt-5 d-flex justify-content-center align-items-center "
-      style={{ width: "100%", height: "100vh" }}
-    >
-      <div className="bg-light p-5 rounded" style={{ width: "500px" }}>
+    <div className="d-flex justify-content-center align-items-center">
+      <div className="bg-light p-5 rounded">
         <h1 className="text-danger">Blood Request Form</h1>
 
-        <Form className="mt-5">
-          <Form.Group className="mb-3" controlId="userName">
-            <Form.Label>Patient's Name : </Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter your Name"
-              onChange={(event) => {
-                const value = event.target.value;
-                console.log(value);
-                setBloodRequest({ ...bloodRequest, userName: value });
-              }}
-            />
-          </Form.Group>
+        <Form>
+          <Row className="mb-5">
+            {/* <Form.Group className="mb-3" controlId="userName"> */}
+            <Form.Group as={Col} controlId="username">
+              <Form.Label>Pateint's Name : </Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter your Name"
+                onChange={(event) => {
+                  const value = event.target.value;
+                  console.log(value);
+                  setBloodRequest({ ...bloodRequest, userName: value });
+                }}
+              />
+            </Form.Group>
 
-          <div className="row g-3">
-            <div className="col-md-6">
-              <Form.Label>Required Blood Group : </Form.Label>
+            <Form.Group as={Col} controlId="age">
+              <Form.Label>Age :</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder=" "
+                onChange={(event) => {
+                  const value = event.target.value;
+                  console.log(value);
+                  setBloodRequest({ ...bloodRequest, age: value });
+                }}
+              />
+            </Form.Group>
+
+            <Form.Group as={Col} controlId="date">
+              <Form.Label>Blood Required Date : </Form.Label>
+              <DatePicker
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+              />
+            </Form.Group>
+          </Row>
+
+          <Row className="mb-3">
+            <Form.Group as={Col} controlId="bloodgrp">
+              <Form.Label>Blood Group : </Form.Label>
               <Form.Select aria-label="Blood Group">
                 <option>A+</option>
                 <option value="A+">A+</option>
@@ -51,40 +80,9 @@ function Request() {
                 <option value="B-">B-</option>
                 <option value="AB-">AB-</option>
               </Form.Select>
-            </div>
-            <div className="col-md-6">
-              <Form.Group className="mb-3" controlId="unit">
-                <Form.Label>Units required :</Form.Label>
-                <Form.Control
-                  type="number"
-                  placeholder="Units"
-                  onChange={(event) => {
-                    const value = event.target.value;
-                    console.log(value);
-                    setBloodRequest({ ...bloodRequest, unit: value });
-                  }}
-                />
-              </Form.Group>
-            </div>
-          </div>
+            </Form.Group>
 
-          <div className="row g-3">
-            <div className="col-md-6">
-              <Form.Group className="mb-3" controlId="age">
-                <Form.Label>Patient's Age :</Form.Label>
-                <Form.Control
-                  type="number"
-                  placeholder=" "
-                  onChange={(event) => {
-                    const value = event.target.value;
-                    console.log(value);
-                    setBloodRequest({ ...bloodRequest, age: value });
-                  }}
-                />
-              </Form.Group>
-            </div>
-
-            <div className="col-md-6">
+            <Form.Group as={Col} controlId="gender">
               <Form.Label>Gender : </Form.Label>
 
               {["radio"].map((type) => (
@@ -111,60 +109,80 @@ function Request() {
                   />
                 </div>
               ))}
-            </div>
-          </div>
+            </Form.Group>
 
-         
-          <Form.Group className="mb-3" controlId="address">
-            <Form.Label>Address :</Form.Label>
+            <Form.Group as={Col} controlId="unit">
+              <Form.Label>Units required :</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Units"
+                onChange={(event) => {
+                  const value = event.target.value;
+                  console.log(value);
+                  setBloodRequest({ ...bloodRequest, unit: value });
+                }}
+              />
+            </Form.Group>
+          </Row>
+
+          <Row className="mb-3">
+            <Form.Group as={Col} controlId="address">
+              <Form.Label>Address :</Form.Label>
+              <Form.Control
+                onChange={(event) => {
+                  const value = event.target.value;
+                  console.log(value);
+                  setBloodRequest({ ...bloodRequest, address: value });
+                }}
+              />
+            </Form.Group>
+
+            <Form.Group as={Col} controlId="state">
+              <Form.Label>State :</Form.Label>
+              <Form.Select defaultValue="Choose...">
+                <option>Choose...</option>
+                <option>...</option> onChange=
+                {(event) => {
+                  const value = event.target.value;
+                  console.log(value);
+                  setBloodRequest({ ...bloodRequest, state: value });
+                }}
+              </Form.Select>
+            </Form.Group>
+
+            <Form.Group as={Col} controlId="district">
+              <Form.Label>District :</Form.Label>
+              <Form.Control
+                onChange={(event) => {
+                  const value = event.target.value;
+                  console.log(value);
+                  setBloodRequest({ ...bloodRequest, district: value });
+                }}
+              />
+            </Form.Group>
+          </Row>
+
+          <Form.Group className="mb-3" controlId="email">
+            <Form.Label>Email </Form.Label>
             <Form.Control
               type="text"
-              placeholder="Address"
+              placeholder="Enter your email id"
               onChange={(event) => {
                 const value = event.target.value;
                 console.log(value);
-                setBloodRequest({ ...bloodRequest, address: value });
+                setBloodRequest({ ...bloodRequest, email: value });
               }}
             />
+            <Form.Text className="text-muted">
+              We'll never share your email with anyone else.
+            </Form.Text>
           </Form.Group>
-
-          <div className="row g-3">
-            <div className="col-md-6">
-              <Form.Group className="mb-3" controlId="state">
-                <Form.Label>State :</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="State"
-                  onChange={(event) => {
-                    const value = event.target.value;
-                    console.log(value);
-                    setBloodRequest({ ...bloodRequest, state: value });
-                  }}
-                />
-              </Form.Group>
-            </div>
-
-            <div className="col-md-6">
-              <Form.Group className="mb-3" controlId="district">
-                <Form.Label>District : </Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="District"
-                  onChange={(event) => {
-                    const value = event.target.value;
-                    console.log(value);
-                    setBloodRequest({ ...bloodRequest, district: value });
-                  }}
-                />
-              </Form.Group>
-            </div>
-          </div>
 
           <Form.Group className="mb-3" controlId="phone">
             <Form.Label>Phone Number : </Form.Label>
             <Form.Control
-              type=" "
-              placeholder="+91-1234567890"
+              type="text"
+              placeholder=""
               onChange={(event) => {
                 const value = event.target.value;
                 console.log(value);
@@ -173,12 +191,9 @@ function Request() {
             />
           </Form.Group>
 
-          <div className="d-flex justify-content-center align-items-center ">
-            <Button variant="warning" type="submit">
-              Submit
-            </Button>
-          </div>
-
+          <Button variant="warning" type="submit">
+            Submit
+          </Button>
         </Form>
       </div>
     </div>
@@ -186,3 +201,4 @@ function Request() {
 }
 
 export default Request;
+
