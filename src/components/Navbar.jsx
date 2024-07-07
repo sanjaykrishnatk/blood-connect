@@ -38,7 +38,7 @@ const Navbar = ({ handleDrawerToggle }) => {
           <FontAwesomeIcon icon={faBars} />
         </IconButton>
         <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-          Admin Dashboard
+           Dashboard
         </Typography>
         <IconButton color="inherit">
           <NotificationsIcon />
