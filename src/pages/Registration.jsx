@@ -19,26 +19,27 @@ const Registration = () => {
                 <input type="text" placeholder='Username' />
                 <FontAwesomeIcon className="icons"icon={faUser} />
                 </div>
+                
                 <div className="input-box">
                 <input type="password" placeholder='Password' />
                 <FontAwesomeIcon  className="icons"icon={faLock} />
                 </div>
-                <div className='input-box'>
-                <input type="text"  placeholder="Select Blood Group"  />
-                <FontAwesomeIcon className="icons" icon={faDroplet} />
-                
-                <select className='input-box'>
-    <option>A +ve</option>
-    <option>A -ve</option>
-    <option>B +ve</option>
-    <option>B -ve</option>
-    <option>AB +ve</option>
-    <option>AB -ve</option>
-    <option>O +ve</option>
-    <option>O -ve</option>
-</select>
-                </div>
                
+    < div className="input-box">
+        <input type="text" placeholder="Select Blood Group" readOnly />
+        <FontAwesomeIcon className="icons" icon={faDroplet} />
+        <select className="input-box">
+            <option value={"A+"}>A +ve </option>
+            <option value={"A-"}>A-ve</option>
+            <option  value={"B+"}>B +ve</option>
+            <option  value={"B-"}>B -ve</option>
+            <option  value={"AB+"}>AB +ve</option>
+            <option  value={"AB-"}>AB -ve</option>
+            <option  value={"0+"}>O +ve</option>
+            <option  value={"0-"}>O -ve</option>
+        </select>
+   
+</div>
 
                 <div className='input-box'>
                 <input  type="text"   placeholder="Enter District" />
@@ -51,13 +52,13 @@ const Registration = () => {
                 </div>
                 
                 <div className='input-box'>
-                <input type="tel"   placeholder="Enter Phone Number..." />
+                <input type="tel"   placeholder="Enter Phone Number" />
                 <FontAwesomeIcon className="icons" icon={faPhone} />
                </div>
 
                 <button type="submit">Register</button>
 
-                <div className="remember-forget">
+                <div className="remember-forget  mt-2">
                     <label><input type="checkbox" />I agree to all terms & conditions.</label>
                     <a href="#">Forget Password?</a>
                 </div>

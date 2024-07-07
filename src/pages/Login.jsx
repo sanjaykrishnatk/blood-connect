@@ -26,7 +26,7 @@ const Login = () => {
                 
                 <div className="remember-forget">
                     <label><input type="checkbox" />Remember Me</label>
-                    <a href="#">Forget Password?</a>
+                    <a href="#">Forget Password?</a>style={{color:'blueviolet'}}
                 </div>
                 <button type="submit">Login</button>
                 <div className="register-link">
