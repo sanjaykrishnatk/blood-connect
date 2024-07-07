@@ -1,5 +1,5 @@
 import React from 'react'
-import './login.css';
+import './Login.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLock, faUser  } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
