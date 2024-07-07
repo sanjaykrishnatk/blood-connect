@@ -1,6 +1,7 @@
 @media (max-width: 768px) {
   .chart {
     flex-direction: column !important;
+    overflow-x: scroll;
   }
 }
 .table {
