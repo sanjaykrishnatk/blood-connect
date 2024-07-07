@@ -11,12 +11,15 @@ import SlidingForm from "./pages/Slidingform";
 import Donorpage from "./pages/Donorpage";
 import Donorhistory from "./pages/Donorhistory";
 import UserDashboard from "./components/UserDashboard";
-
+import Login from "./pages/Login";
+import Registration from "./pages/Registration";
 function App() {
   return (
     <>
       <Routes>
         <Route path="/" element={<Home />} />
+         <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Registration />} />
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/Reportbloodrequest" element={<Reportbloodrequest />} />
         <Route path="/Reportdonor" element={<Reportdonor />} />
