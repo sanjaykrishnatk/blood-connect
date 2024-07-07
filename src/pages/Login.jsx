@@ -23,32 +23,9 @@ const Login = () => {
                 <input type="password" placeholder='Password' />
                 <FontAwesomeIcon  className="icons"icon={faLock} />
                 </div>
-                <div className='input-box'>
-                <input type="text"  placeholder="Select Blood Group"  />
                 
-                <select>
-    <option>A +ve</option>
-    <option>A -ve</option>
-    <option>B +ve</option>
-    <option>B -ve</option>
-    <option>AB +ve</option>
-    <option>AB -ve</option>
-    <option>O +ve</option>
-    <option>O -ve</option>
-</select>
-                </div>
-                <div>
-                <input  type="text"   placeholder="Enter District" />
-              
-                </div>
-                <div>
-                <input  type="text"   placeholder="Enter State" />
                
-                </div>
-                <div>
-                <input type="tel"   placeholder="Enter Phone Number..." />
-            
-                </div>
+               
                
         
                 
