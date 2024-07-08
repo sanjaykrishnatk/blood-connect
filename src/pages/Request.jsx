@@ -14,7 +14,6 @@ function Request() {
     unit: "",
     age: "",
     gender: "",
-    address: "",
     state: "",
     district: "",
     email: "",
@@ -24,13 +23,13 @@ function Request() {
   const [startDate, setStartDate] = useState(new Date());
 
   return (
-    <div className="d-flex justify-content-center align-items-center">
+    <div className=" mt-5 d-flex justify-content-center align-items-center">
       <div className="bg-light p-5 rounded">
         <h1 className="text-danger">Blood Request Form</h1>
 
         <Form>
           <Row className="mb-5">
-            {/* <Form.Group className="mb-3" controlId="userName"> */}
+   
             <Form.Group as={Col} controlId="username">
               <Form.Label>Pateint's Name : </Form.Label>
               <Form.Control
@@ -57,31 +56,7 @@ function Request() {
               />
             </Form.Group>
 
-            <Form.Group as={Col} controlId="date">
-              <Form.Label>Blood Required Date : </Form.Label>
-              <DatePicker
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-              />
-            </Form.Group>
-          </Row>
-
-          <Row className="mb-3">
-            <Form.Group as={Col} controlId="bloodgrp">
-              <Form.Label>Blood Group : </Form.Label>
-              <Form.Select aria-label="Blood Group">
-                <option>A+</option>
-                <option value="A+">A+</option>
-                <option value="O+">O+</option>
-                <option value="B+">B+</option>
-                <option value="AB+">AB</option>
-                <option value="A-">A-</option>
-                <option value="O-">O-</option>
-                <option value="B-">B-</option>
-                <option value="AB-">AB-</option>
-              </Form.Select>
-            </Form.Group>
-
+          
             <Form.Group as={Col} controlId="gender">
               <Form.Label>Gender : </Form.Label>
 
@@ -111,6 +86,34 @@ function Request() {
               ))}
             </Form.Group>
 
+          </Row> 
+
+          <Row className="mb-3">
+            <Form.Group as={Col} controlId="bloodgrp">
+              <Form.Label>Blood Group : </Form.Label>
+              <Form.Select aria-label="Blood Group">
+                <option>A+</option>
+                <option value="A+">A+</option>
+                <option value="O+">O+</option>
+                <option value="B+">B+</option>
+                <option value="AB+">AB</option>
+                <option value="A-">A-</option>
+                <option value="O-">O-</option>
+                <option value="B-">B-</option>
+                <option value="AB-">AB-</option>
+              </Form.Select>
+            </Form.Group>
+
+
+               <Form.Group as={Col} controlId="date">
+              <Form.Label>Blood Required Date : </Form.Label>
+              <DatePicker
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+              />
+            </Form.Group>
+
+
             <Form.Group as={Col} controlId="unit">
               <Form.Label>Units required :</Form.Label>
               <Form.Control
@@ -126,17 +129,7 @@ function Request() {
           </Row>
 
           <Row className="mb-3">
-            <Form.Group as={Col} controlId="address">
-              <Form.Label>Address :</Form.Label>
-              <Form.Control
-                onChange={(event) => {
-                  const value = event.target.value;
-                  console.log(value);
-                  setBloodRequest({ ...bloodRequest, address: value });
-                }}
-              />
-            </Form.Group>
-
+          
             <Form.Group as={Col} controlId="state">
               <Form.Label>State :</Form.Label>
               <Form.Select defaultValue="Choose...">
@@ -161,22 +154,6 @@ function Request() {
               />
             </Form.Group>
           </Row>
-
-          <Form.Group className="mb-3" controlId="email">
-            <Form.Label>Email </Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter your email id"
-              onChange={(event) => {
-                const value = event.target.value;
-                console.log(value);
-                setBloodRequest({ ...bloodRequest, email: value });
-              }}
-            />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
 
           <Form.Group className="mb-3" controlId="phone">
             <Form.Label>Phone Number : </Form.Label>
