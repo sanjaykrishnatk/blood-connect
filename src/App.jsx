@@ -10,7 +10,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import SlidingForm from "./pages/Slidingform";
 import Donorpage from "./pages/Donorpage";
 import Donorhistory from "./pages/Donorhistory";
-
+import Footer from "./components/Footer"
 function App() {
   return (
     <>
@@ -25,6 +25,7 @@ function App() {
         <Route path="/donorpage" element={<Donorpage/>} />
         <Route path="/donorhistory" element={<Donorhistory/>} />
       </Routes>
+      <Footer/>
     </>
   );
 }
