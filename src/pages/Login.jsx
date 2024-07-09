@@ -24,18 +24,13 @@ const Login = () => {
                 <FontAwesomeIcon  className="icons"icon={faLock} />
                 </div>
                 
-               
-               
-               
-        
-                
                 <div className="remember-forget">
                     <label><input type="checkbox" />Remember Me</label>
-                    <a href="#">Forget Password?</a>
+                    <a href="#">Forget Password?</a>style={{color:'blueviolet'}}
                 </div>
                 <button type="submit">Login</button>
                 <div className="register-link">
-                    <p>Don't have an account? <Link to="/register">Register</Link></p>
+                    <p>Don't have an account? <Link style={{color:'blueviolet'}} to="/register">Register</Link></p>
                 </div>
         </form>
       </div>
