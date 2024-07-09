@@ -26,18 +26,9 @@ const Registration = () => {
                 </div>
                
     < div className="input-box">
-        <input type="text" placeholder="Select Blood Group" readOnly />
+        <input type="text" placeholder="Enter Blood Group"  />
         <FontAwesomeIcon className="icons" icon={faDroplet} />
-        <select className="input-box">
-            <option value={"A+"}>A +ve </option>
-            <option value={"A-"}>A-ve</option>
-            <option  value={"B+"}>B +ve</option>
-            <option  value={"B-"}>B -ve</option>
-            <option  value={"AB+"}>AB +ve</option>
-            <option  value={"AB-"}>AB -ve</option>
-            <option  value={"0+"}>O +ve</option>
-            <option  value={"0-"}>O -ve</option>
-        </select>
+       
    
 </div>
 
