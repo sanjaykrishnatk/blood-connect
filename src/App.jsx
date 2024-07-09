@@ -14,6 +14,8 @@ import UserDashboard from "./components/UserDashboard";
 import Login from "./pages/Login";
 import Registration from "./pages/Registration";
 import DonorDashboard from "./components/DonorDasboard";
+import UserBloodRequestReport from "./components/UserBloodRequestReport";
+
 function App() {
   return (
     <>
@@ -27,6 +29,7 @@ function App() {
         {/* <Route path="/donorpage" element={<Donorpage/>} /> */}
         <Route path="/donorhistory" element={<Donorhistory />} />
         <Route path="/UserDashboard" element={<UserDashboard />} />
+        <Route path="/UserBloodRequestReport" element={<UserBloodRequestReport />} />
         <Route path="/donorpage" element={<DonorDashboard />} />
       </Routes>
       <Footer />
