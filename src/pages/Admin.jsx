@@ -1,11 +1,26 @@
 // Admin.jsx
-import React from "react";
+import React, { useEffect } from "react";
 import { BarChart } from "@mui/x-charts/BarChart";
 import { axisClasses } from "@mui/x-charts/ChartsAxis";
 import { PieChart } from "@mui/x-charts/PieChart";
 import Table from "../components/Table";
 import "./Admin.css";
+import {retrieveRequestApi} from '../services/allApi'
+
 function Admin() {
+  
+
+
+  const retrieveRequest = async()=>{
+    const result = await retrieveRequestApi()
+    console.log(result);
+  }
+
+useEffect(()=>{
+  retrieveRequest()
+},[])
+
+
   const chartSetting = {
     yAxis: [
       {
