@@ -10,7 +10,7 @@ import { retrieveRequestApi } from "../services/allApi";
 function Admin() {
   const retrieveRequest = async () => {
     const result = await retrieveRequestApi();
-    console.log(result);
+    console.log(result.data);
   };
 
   useEffect(() => {
