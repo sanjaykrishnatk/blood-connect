@@ -5,21 +5,17 @@ import { axisClasses } from "@mui/x-charts/ChartsAxis";
 import { PieChart } from "@mui/x-charts/PieChart";
 import Table from "../components/Table";
 import "./Admin.css";
-import {retrieveRequestApi} from '../services/allApi'
+import { retrieveRequestApi } from "../services/allApi";
 
 function Admin() {
-  
-
-
-  const retrieveRequest = async()=>{
-    const result = await retrieveRequestApi()
+  const retrieveRequest = async () => {
+    const result = await retrieveRequestApi();
     console.log(result);
-  }
+  };
 
-useEffect(()=>{
-  retrieveRequest()
-},[])
-
+  useEffect(() => {
+    retrieveRequest();
+  }, []);
 
   const chartSetting = {
     yAxis: [
