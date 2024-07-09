@@ -20,3 +20,7 @@ export const getDonorsByBloodGroupApi = async (bloodGroup) => {
 export const retrieveRequestApi = async () => {
   return await commonApi("GET", `${serverUrl}/requests`, "");
 };
+
+export const deleteRequestApi = async (id) => {
+  return await commonApi("DELETE", `${serverUrl}/requests/${id}`, "");
+};
