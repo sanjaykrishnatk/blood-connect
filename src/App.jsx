@@ -15,6 +15,9 @@ import Login from "./pages/Login";
 import Registration from "./pages/Registration";
 import DonorDashboard from "./components/DonorDasboard";
 import UserBloodRequestReport from "./components/UserBloodRequestReport";
+import AcceptRequest from "./pages/AcceptRequest";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -34,7 +37,9 @@ function App() {
         <Route path="/UserDashboard" element={<UserDashboard />} />
         <Route path="/UserBloodRequestReport" element={<UserBloodRequestReport />} />
         <Route path="/donorpage" element={<DonorDashboard />} />
+        <Route path="/accept" element={<AcceptRequest />} />
       </Routes>
+      <ToastContainer position="top-center" autoClose="1000" />
       <Footer />
     </>
   );
