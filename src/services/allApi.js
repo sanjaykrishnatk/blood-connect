@@ -22,6 +22,7 @@ export const retrieveRequestApi = async () => {
 };
 
 
+
 //api to get/retrieve requests of the specific user
 
 export const getRequestReportApi= async()=>{
@@ -32,3 +33,7 @@ export const getRequestReportApi= async()=>{
 export const addRequestApi = async(reqBody)=>{
   return await commonApi('POST',`${serverUrl}/requests`, reqBody )
 }
+export const deleteRequestApi = async (id) => {
+  return await commonApi("DELETE", `${serverUrl}/requests/${id}`, "");
+};
+

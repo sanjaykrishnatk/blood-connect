@@ -1,16 +1,22 @@
-// Admin.jsx
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BarChart } from "@mui/x-charts/BarChart";
 import { axisClasses } from "@mui/x-charts/ChartsAxis";
 import { PieChart } from "@mui/x-charts/PieChart";
 import Table from "../components/Table";
 import "./Admin.css";
-import { retrieveRequestApi } from "../services/allApi";
+import { retrieveRequestApi, deleteRequestApi } from "../services/allApi";
 
 function Admin() {
+  const [requests, setRequests] = useState([]);
+
   const retrieveRequest = async () => {
     const result = await retrieveRequestApi();
-    console.log(result);
+    setRequests(result.data);
+  };
+
+  const deleteRequest = async (id) => {
+    await deleteRequestApi(id);
+    retrieveRequest();  
   };
 
   useEffect(() => {
@@ -109,6 +115,8 @@ function Admin() {
     },
   ];
 
+
+
   return (
     <>
       <div className="row w-100 py-5 mt-5 ">
@@ -142,8 +150,16 @@ function Admin() {
 
           <div className="row w-100 table">
             <table className="table-responsive">
-              {" "}
-              <Table />
+              <Table>
+                {requests.map((request) => (
+                  <tr key={request.id}>
+                    <td>{request.data}</td>
+                    <td>
+                      <button onClick={() => deleteRequest(request.id)}>Delete</button>
+                    </td>
+                  </tr>
+                ))}
+              </Table>
             </table>
           </div>
         </div>
