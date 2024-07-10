@@ -21,6 +21,19 @@ export const retrieveRequestApi = async () => {
   return await commonApi("GET", `${serverUrl}/requests`, "");
 };
 
+
+
+//api to get/retrieve requests of the specific user
+
+export const getRequestReportApi= async()=>{
+  return await commonApi('GET', `${serverUrl}/requests`, "")
+}
+
+//api to add form data to request section
+export const addRequestApi = async(reqBody)=>{
+  return await commonApi('POST',`${serverUrl}/requests`, reqBody )
+}
 export const deleteRequestApi = async (id) => {
   return await commonApi("DELETE", `${serverUrl}/requests/${id}`, "");
 };
+
