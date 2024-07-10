@@ -39,3 +39,7 @@ export const updateRequestDetails = async (id, reqBody) => {
 export const getDonorDetailsApi = async (id) => {
   return await commonApi("GET", `${serverUrl}/donors/${id}`, "");
 };
+//api to update donor donation history
+export const updateDonorHistoryApi = async (id, reqBody) => {
+  return await commonApi("PUT", `${serverUrl}/donors/${id}`, reqBody);
+};
