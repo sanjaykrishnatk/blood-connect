@@ -14,14 +14,17 @@ import UserDashboard from "./components/UserDashboard";
 import Login from "./pages/Login";
 import Registration from "./pages/Registration";
 import DonorDashboard from "./components/DonorDasboard";
+import UserBloodRequestReport from "./components/UserBloodRequestReport";
 import AcceptRequest from "./pages/AcceptRequest";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   return (
     <>
       <Routes>
         <Route path="/" element={<Home />} />
+
 
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registration />} />
@@ -32,6 +35,7 @@ function App() {
         {/* <Route path="/donorpage" element={<Donorpage/>} /> */}
         <Route path="/donorhistory" element={<Donorhistory />} />
         <Route path="/UserDashboard" element={<UserDashboard />} />
+        <Route path="/UserBloodRequestReport" element={<UserBloodRequestReport />} />
         <Route path="/donorpage" element={<DonorDashboard />} />
         <Route path="/accept" element={<AcceptRequest />} />
       </Routes>

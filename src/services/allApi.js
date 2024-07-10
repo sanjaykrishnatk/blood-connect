@@ -23,6 +23,18 @@ export const retrieveRequestApi = async () => {
 
 
 
+//api to get/retrieve requests of the specific user
+
+export const getRequestReportApi= async()=>{
+  return await commonApi('GET', `${serverUrl}/requests`, "")
+}
+
+//api to add form data to request section
+export const addRequestApi = async(reqBody)=>{
+  return await commonApi('POST',`${serverUrl}/requests`, reqBody )
+}
+
+
 // API to retrieve last donation date by donor ID
 export const retrieveLastDonation = async (donorId) => {
   return await commonApi("GET", `${serverUrl}/donors/${donorId}`, "");
@@ -38,7 +50,6 @@ export const retrieveHistoryApi = async () => {
   return await commonApi("GET", `${serverUrl}/history`, "");
 };
 
-
 export const deleteRequestApi = async (id) => {
   return await commonApi("DELETE", `${serverUrl}/requests/${id}`, "");
 };
@@ -47,8 +58,8 @@ export const deleteRequestApi = async (id) => {
 export const getRequestDetails = async (id) => {
   return await commonApi("GET", `${serverUrl}/requests/${id}`, "");
 };
-//api to update request by request id
 
+//api to update request by request id
 export const updateRequestDetails = async (id, reqBody) => {
   return await commonApi("PUT", `${serverUrl}/requests/${id}`, reqBody);
 };
@@ -57,7 +68,9 @@ export const updateRequestDetails = async (id, reqBody) => {
 export const getDonorDetailsApi = async (id) => {
   return await commonApi("GET", `${serverUrl}/donors/${id}`, "");
 };
+
 //api to update donor donation history
 export const updateDonorHistoryApi = async (id, reqBody) => {
   return await commonApi("PUT", `${serverUrl}/donors/${id}`, reqBody);
 };
+
