@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import {
   getDonorDetailsApi,
   getRequestDetails,
+  updateDonorHistoryApi,
   updateRequestDetails,
 } from "../services/allApi";
 import { toast } from "react-toastify";
@@ -32,21 +33,37 @@ function AcceptRequest() {
         toast.info("Interest has been already marked.");
         navigate("/");
       } else {
+        const donatedDonors = {
+          name: donorDetails.data.username,
+          mobile: donorDetails.data.phone,
+        };
         const updatedRequest = {
           ...result.data,
           currentUnit: result.data.currentUnit + 1,
-          donorList: [
-            {
-              name: donorDetails.data.username,
-              mobile: donorDetails.data.phone,
-            },
-          ],
         };
+        updatedRequest.donorList.push(donatedDonors);
+        const historyData = {
+          id: result.data.id,
+          recieverName: result.data.userName,
+          phone: result.data.phone,
+          date: result.data.startDate,
+        };
+
+        const updatedDonorDetails = {
+          ...donorDetails.data,
+          lastDonation: result.data.startDate,
+        };
+        updatedDonorDetails.history.push(historyData);
+        const historyStatus = await updateDonorHistoryApi(
+          did,
+          updatedDonorDetails
+        );
+        console.log(historyStatus);
         const updateStatus = await updateRequestDetails(id, updatedRequest);
         console.log(updateStatus.data);
         if (updateStatus.status >= 200 && updateStatus.status < 300) {
           toast.success("Interest marked successfully!");
-          navigate("/");
+          // navigate("/");
         }
       }
     }

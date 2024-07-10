@@ -256,7 +256,7 @@ BloodConnect Team`,
                   </Card.Title>
                   <Card.Text className="text-secondary">
                     Efficiently connecting blood donors with patients in urgent
-                    need of transfusions.
+                    need of transfusions through technology
                   </Card.Text>
                   <Link
                     className="text-secondary fw-bold"
@@ -268,6 +268,38 @@ BloodConnect Team`,
                 </Card.Body>
               </Card>{" "}
             </Col>
+
+            {/* <Col
+              sm={12}
+              md={3}
+              className="mb-5 d-flex  justify-content-center align-items-center"
+            >
+              <Card style={{ width: "18rem" }} className="rounded-0  shadow">
+                <Card.Img
+                  variant="top"
+                  src="/blood-drive.png"
+                  style={{ width: "100%", height: "200px" }}
+                  className="rounded-0"
+                />
+                <Card.Body className="p-5">
+                  <Card.Title className="fw-bold">
+                    Organizing Blood Drives
+                  </Card.Title>
+                  <Card.Text className="text-secondary">
+                    Hosting and managing community blood donation events to
+                    ensure a steady and reliable blood supply for all.
+                  </Card.Text>
+                  <Link
+                    className="text-secondary fw-bold"
+                    to={"/"}
+                    style={{ textDecoration: "none", fontSize: "12px" }}
+                  >
+                    KNOW MORE
+                  </Link>
+                </Card.Body>
+              </Card>{" "}
+            </Col> */}
+
             <Col
               sm={12}
               md={3}
