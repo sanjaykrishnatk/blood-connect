@@ -23,15 +23,14 @@ function Home() {
     console.log(mobileNumbers);
     await Promise.all(
       response.data.map(async (item) => {
-      
         let message = {
           route: "q",
           message: `Hi ${item?.username}, An urgent blood donation request matches your profile. Your help can save a life! Click here for details and to confirm your donation: https://blood-connect-seven.vercel.app/ 
 Thank you,
 BloodConnect Team`,
           flash: 0,
-          numbers: item?.phone, 
-      };
+          numbers: item?.phone,
+        };
         const response = await smsApi(message);
         console.log(response.data);
       })
@@ -67,7 +66,7 @@ BloodConnect Team`,
                     variant="danger"
                     style={{ backgroundColor: "#DF1626" }}
                     className="fw-bold"
-                    onClick={() => handleRequest("A+ve")}
+                    onClick={() => handleRequest("A+")}
                   >
                     DONATE
                   </Button>{" "}

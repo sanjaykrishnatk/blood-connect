@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
-    <div className="container-fluid">
+    <div className="container-fluid login-wrapper">
       <div className="wrapper">
         <div className="form-box login">
           <form action="">
