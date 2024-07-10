@@ -40,6 +40,11 @@ export const retrieveLastDonation = async (donorId) => {
   return await commonApi("GET", `${serverUrl}/donors/${donorId}`, "");
 };
 
+//Api to retrieve donor data by admin
+export const retrieveDonorsApi = async () => {
+  return await commonApi("GET", `${serverUrl}/donors`, "");
+};
+
 // API to update last donation date by donor ID
 export const updateLastDonationApi = async (donorId, reqBody) => {
   return await commonApi("PATCH", `${serverUrl}/donors/${donorId}`, reqBody);
@@ -50,6 +55,7 @@ export const retrieveHistoryApi = async () => {
   return await commonApi("GET", `${serverUrl}/history`, "");
 };
 
+//Api to delete request by admin
 export const deleteRequestApi = async (id) => {
   return await commonApi("DELETE", `${serverUrl}/requests/${id}`, "");
 };
