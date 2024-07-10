@@ -50,6 +50,7 @@ export const retrieveHistoryApi = async () => {
   return await commonApi("GET", `${serverUrl}/history`, "");
 };
 
+//API to delete request by admin
 export const deleteRequestApi = async (id) => {
   return await commonApi("DELETE", `${serverUrl}/requests/${id}`, "");
 };
@@ -57,6 +58,11 @@ export const deleteRequestApi = async (id) => {
 //api to get request by request id
 export const getRequestDetails = async (id) => {
   return await commonApi("GET", `${serverUrl}/requests/${id}`, "");
+};
+
+// API to retrieve donors data
+export const retrieveDonorsApi = async () => {
+  return await commonApi('GET', `${serverUrl}/donors`, '');
 };
 
 //api to update request by request id
