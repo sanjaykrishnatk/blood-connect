@@ -23,11 +23,6 @@ export const retrieveRequestApi = async () => {
 
 
 
-//api to get/retrieve blood requests of the specific user - FARHANA
-
-export const getRequestReportApi= async()=>{
-  return await commonApi('GET', `${serverUrl}/requests`, "")
-}
 
 //api to get/retrieve blood requests of the specific user - FARHANA
 
