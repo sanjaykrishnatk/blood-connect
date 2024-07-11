@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect} from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import DatePicker from "react-datepicker";
@@ -6,6 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import { retrieveDonorsApi } from '../services/allApi';
 
 
 function Donor() {
@@ -19,10 +20,19 @@ function Donor() {
         state :"",
         district :"",
         email :"",
-        phone : ""
+        phone : "",
     });
 
     const [startDate, setStartDate] = useState(new Date());
+    const [donors, setDonors] = useState([]);
+
+    useEffect(() => { 
+      const fetchDonors = async () => {
+        const response = await retrieveDonorsApi();
+        setDonors(response.data);
+      };
+      fetchDonors();
+    }, []);
 
 
     return (
