@@ -23,13 +23,19 @@ export const retrieveRequestApi = async () => {
 
 
 
-//api to get/retrieve requests of the specific user
+//api to get/retrieve blood requests of the specific user - FARHANA
 
 export const getRequestReportApi= async()=>{
   return await commonApi('GET', `${serverUrl}/requests`, "")
 }
 
-//api to add form data to request section
+//api to get/retrieve blood requests of the specific user - FARHANA
+
+export const getRequestByIdApi= async(id)=>{
+  return await commonApi('GET', `${serverUrl}/requests/${id}`, "")
+}
+
+//api to add form data to blood request section - FARHANA
 export const addRequestApi = async(reqBody)=>{
   return await commonApi('POST',`${serverUrl}/requests`, reqBody )
 }

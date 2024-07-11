@@ -23,34 +23,41 @@ function Request() {
     state: "",
     district: "",
     phone: "",
-    startDate: new Date(),
+    // startDate: (new Date()).toLocaleDateString()
+    startDate: new Date()
   };
 
-  const [bloodRequest, setBloodRequest] = useState({...initialBloodRequest});
+  const [bloodRequest, setBloodRequest] = useState({ ...initialBloodRequest });
 
   const bloodGroupOptions = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 
   const handleClose = () => {
-    setBloodRequest({...initialBloodRequest});
+    setBloodRequest({ ...initialBloodRequest });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     const { userName, bloodGroup, unit, age, gender, state, district, phone, startDate } = bloodRequest
+    const formattedStartDate = startDate.toLocaleDateString('en-GB');
 
     console.log(bloodRequest);
     if (!userName || !bloodGroup || !unit || !age || !gender || !state || !district || !phone || !startDate) {
       toast.info("Please fill the form completely");
     }
     else {
-      const result = await addRequestApi(bloodRequest)
-      console.log(result);
+      // const result = await addRequestApi(bloodRequest)
+      // console.log(result);
 
+      const result = await addRequestApi({
+        ...bloodRequest,
+        startDate: formattedStartDate
+      });
+      
       if (result.status >= 200 && result.status < 300) {
-        toast.success("Form Submitted Successfully");
         handleClose();
 
+        toast.success("Form Submitted Successfully");        
       } else {
         toast.error("Something went wrong");
       }
@@ -173,8 +180,10 @@ function Request() {
                 <Form.Label>Blood Required Date : </Form.Label>
                 <DatePicker
                   selected={bloodRequest.startDate}
+                  // onChange={(date) => setBloodRequest({ ...bloodRequest, startDate: date.toLocaleDateString() })}
                   onChange={(date) => setBloodRequest({ ...bloodRequest, startDate: date })}
-                />
+                  dateFormat="dd/MM/yyyy"
+                  />
               </Form.Group>
 
 
@@ -197,7 +206,7 @@ function Request() {
 
               <Form.Group as={Col} controlId="state">
                 <Form.Label>State :</Form.Label>
-                <Form.Select  value={bloodRequest.state} onChange={(event) => {
+                <Form.Select value={bloodRequest.state} onChange={(event) => {
                   const value = event.target.value;
                   console.log(value);
                   setBloodRequest({ ...bloodRequest, state: value });
@@ -212,7 +221,7 @@ function Request() {
 
               <Form.Group as={Col} controlId="district">
                 <Form.Label>District :</Form.Label>
-                <Form.Control 
+                <Form.Control
                   value={bloodRequest.district}
                   onChange={(event) => {
                     const value = event.target.value;
@@ -238,19 +247,19 @@ function Request() {
             </Form.Group>
 
             <div className='d-flex justify-content-between'>
-            <Button className="ms-3 fs-5" variant="success" type="submit" onClick={handleSubmit}>
-              Submit
-            </Button>
+              <Button className="ms-3 fs-5" variant="success" type="submit" onClick={handleSubmit}>
+                Submit
+              </Button>
 
-            <Button className="ms-5 fs-5" variant="warning" onClick={handleClose}>
-              Reset
-            </Button>
+              <Button className="ms-5 fs-5" variant="warning" onClick={handleClose}>
+                Reset
+              </Button>
             </div>
           </Form>
         </div>
       </div>
 
-      <ToastContainer theme="colored" position="top-center" autoClose={2000} />
+      {/* <ToastContainer theme="colored" position="top-center" autoClose={2000} limit={1}/> */}
     </>
   );
 }

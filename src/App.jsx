@@ -39,7 +39,7 @@ function App() {
         <Route path="/donorpage" element={<DonorDashboard />} />
         <Route path="/accept" element={<AcceptRequest />} />
       </Routes>
-      <ToastContainer position="top-center" autoClose="1000" />
+      <ToastContainer theme="colored" position="top-center" autoClose="2000" />
       <Footer />
     </>
   );
