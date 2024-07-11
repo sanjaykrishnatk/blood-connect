@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import {toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { retrieveLastDonation, updateLastDonationApi } from '../services/allApi';
-
+import { acceptBloodRequestApi } from '../services/allApi';
+import { serverUrl } from '../services/serverUrl'; 
 
 function Donorpage() {
   const [formData, setFormData] = useState({
@@ -61,10 +62,39 @@ function Donorpage() {
       console.error('Error updating donation date:', error);
       toast.error('Failed to update. Please try again.');
     }
-   
-
-  
    };
+
+
+   const [requests, setRequests] = useState([]);
+
+  useEffect(() => {
+    // Fetch existing requests from the server when the component mounts
+    const fetchRequests = async () => {
+      try {
+        const response = await fetch(`${serverUrl}/requests`);
+        const data = await response.json();
+        setRequests(data.filter(request => request.status !== 'Accepted'));
+      } catch (error) {
+        console.error('Error fetching requests:', error);
+      }
+    };
+
+    fetchRequests();
+  }, []);
+
+  const handleAccept = async (request) => {
+    try {
+      const updatedRequest = { ...request, status: 'Accepted' };
+      await acceptBloodRequestApi(request.id,updatedRequest);
+      setRequests((prevRequests) =>
+        prevRequests.filter((req) => req.id !== request.id)
+      );
+      toast.success('Request accepted successfully!');
+    } catch (error) {
+      console.error('Error accepting request:', error);
+      toast.error('Failed to accept request. Please try again.');
+    }
+  };
 
   
   return (
@@ -115,7 +145,7 @@ function Donorpage() {
           </div>
         </div>
       </div>
-
+      <hr/>
       <div className="row" style={{ marginTop: '2rem', textAlign: 'center' }}>
         <div className="col-md-12" style={{ margin: '0 auto' }}>
           <div className="table-responsive" style={{ maxWidth: '100%', overflowX: 'auto', marginTop: '1rem' }}>
@@ -130,26 +160,30 @@ function Donorpage() {
                 <tr>
                   <th>#</th>
                   <th style={{ minWidth: '50px' }}>User Name</th>
-                  <th style={{ minWidth: '50px' }}>Hospital</th>
-                  <th style={{ minWidth: '50px' }}>Place</th>
-                  <th style={{ minWidth: '50px' }}>Blood Group</th>
+                  <th style={{ minWidth: '50px' }}>Gender</th>
+                  <th style={{ minWidth: '50px' }}>Age</th>
+                  <th style={{ minWidth: '50px' }}>District</th>
                   <th style={{ minWidth: '50px' }}>Date Needed</th>
+                  <th style={{ minWidth: '50px' }}>Phone</th>
                   <th style={{ minWidth: '50px' }}>Status</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>David Abhraham</td>
-                  <td>Merry Matha Hospital</td>
-                  <td>London</td>
-                  <td>A+</td>
-                  <td>20/07/2024</td>
-                  <td style={{ display: 'flex' }}>
-                    <button className="btn btn-success me-2">Accept</button>
-                    <button className="btn btn-danger">Reject</button>
+              {requests.map((request, index) => (
+                <tr key={request.id}>
+                  <td>{index + 1}</td>
+                  <td>{request.userName}</td>
+                  <td>{request.gender}</td>
+                  <td>{request.age}</td>
+                  <td>{request.district}</td>
+                  <td>{request.startDate}</td>
+                  <td>{request.phone}</td>
+                  <td>
+                    <button className="btn btn-success me-2" onClick={() => handleAccept(request)}>Accept</button>
+                    
                   </td>
                 </tr>
+              ))}
               </tbody>
             </table>
           </div>

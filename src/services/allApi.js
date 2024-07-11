@@ -47,7 +47,7 @@ export const updateLastDonationApi = async (donorId, reqBody) => {
 
 // API to retrieve history to donorhistory
 export const retrieveHistoryApi = async () => {
-  return await commonApi("GET", `${serverUrl}/history`, "");
+  return await commonApi("GET", `${serverUrl}/donors`, "");
 };
 
 export const deleteRequestApi = async (id) => {
@@ -72,5 +72,10 @@ export const getDonorDetailsApi = async (id) => {
 //api to update donor donation history
 export const updateDonorHistoryApi = async (id, reqBody) => {
   return await commonApi("PUT", `${serverUrl}/donors/${id}`, reqBody);
+};
+
+//api to a to request section
+export const acceptBloodRequestApi = async (requestId, reqBody) => {
+  return await commonApi('PUT', `${serverUrl}/requests/${requestId}`, reqBody);
 };
 
