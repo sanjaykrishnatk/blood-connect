@@ -53,7 +53,7 @@ function Request() {
         ...bloodRequest,
         startDate: formattedStartDate
       });
-      
+
       if (result.status >= 200 && result.status < 300) {
         handleClose();
 
@@ -67,7 +67,7 @@ function Request() {
 
   return (
     <>
-      <div className=" mt-5 d-flex justify-content-center align-items-center">
+      <div className=" mt-5 mb-5 d-flex justify-content-center align-items-center">
         <div className="bg-light p-5 rounded">
           <h1 className="text-danger">Blood Request Form</h1>
 
@@ -247,7 +247,7 @@ function Request() {
             </Form.Group>
 
             <div className='d-flex justify-content-between'>
-              <Button className="ms-3 fs-5" variant="success" type="submit" onClick={handleSubmit}>
+              <Button className="ms-3 fs-5" variant="danger" type="submit" onClick={handleSubmit}>
                 Submit
               </Button>
 
