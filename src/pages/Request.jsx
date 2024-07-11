@@ -109,7 +109,7 @@ function Request() {
           eligibleDonors.map(async (item) => {
             let message = {
               route: "q",
-              message: `Hi ${item?.username}, An urgent blood donation request matches your profile. Your help can save a life! Click here for details and to confirm your donation: https://blood-connect-seven.vercel.app/?rid=${rid}&did=${item.id}
+              message: `Hi ${item?.username}, An urgent blood donation request matches your profile. Your help can save a life! Click here for details and to confirm your donation: https://blood-connect-seven.vercel.app/accept?rid=${rid}&did=${item.id}
         
 Thank you,
 BloodConnect Team`,
