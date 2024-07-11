@@ -5,9 +5,16 @@ import { PieChart } from "@mui/x-charts/PieChart";
 import Table from "../components/Table";
 import "./Admin.css";
 import { retrieveRequestApi, deleteRequestApi } from "../services/allApi";
-
+import { retrieveRecipientApi } from "../services/allApi";
 function Admin() {
   const [requests, setRequests] = useState([]);
+  const [recipients,setRecipients] = useState([]);
+
+  const retrieveRecipients = async ()=>{
+    const result = await retrieveRecipientApi();
+      setRecipients(result.data);
+      console.log(result.data);
+  }
 
   const retrieveRequest = async () => {
     const result = await retrieveRequestApi();
@@ -21,6 +28,7 @@ function Admin() {
 
   useEffect(() => {
     retrieveRequest();
+    retrieveRecipients();
   }, []);
 
   const chartSetting = {
