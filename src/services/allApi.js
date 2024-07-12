@@ -88,8 +88,11 @@ export const updateDonorHistoryApi = async (id, reqBody) => {
   return await commonApi("PUT", `${serverUrl}/donors/${id}`, reqBody);
 };
 
-//api to a to request section
-export const acceptBloodRequestApi = async (requestId, reqBody) => {
-  return await commonApi('PUT', `${serverUrl}/requests/${requestId}`, reqBody);
+export const retrieveDonorDetails = async (donorId) => {
+  return await commonApi('GET', `${serverUrl}/donors/${donorId}`);
+};
+
+export const updateDonorDetails = async (donorId, donorData) => {
+  return await commonApi('PUT', `${serverUrl}/donors/${donorId}`, donorData);
 };
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { retrieveLastDonation, updateLastDonationApi, updateRequestDetails } from '../services/allApi';
+import { retrieveLastDonation, updateLastDonationApi, updateRequestDetails, retrieveDonorDetails, updateDonorDetails } from '../services/allApi';
 import { serverUrl } from '../services/serverUrl';
 
 function Donorpage() {
@@ -34,7 +34,14 @@ function Donorpage() {
     try {
       const response = await fetch(`${serverUrl}/requests`);
       const data = await response.json();
-      setRequests(data.filter(request => request.status !== 'Accepted'));
+
+      // Retrieve accepted request IDs from local storage
+      const acceptedRequestIds = JSON.parse(localStorage.getItem('acceptedRequestIds')) || [];
+
+      // Filter out accepted requests
+      const filteredRequests = data.filter(request => request.status !== 'Accepted' && !acceptedRequestIds.includes(request.id));
+
+      setRequests(filteredRequests);
     } catch (error) {
       console.error('Error fetching requests:', error);
       toast.error('Failed to fetch requests. Please try again.');
@@ -58,6 +65,8 @@ function Donorpage() {
 
   const handleAccept = async (request) => {
     try {
+      console.log('Current request data:', request);
+
       if (request.currentUnit < request.unit) {
         const updatedRequest = {
           ...request,
@@ -71,7 +80,6 @@ function Donorpage() {
 
         await updateRequestDetails(request.id, updatedRequest);
 
-        
         const donor = await retrieveDonorDetails(donorId);
 
         if (donor) {
@@ -86,7 +94,6 @@ function Donorpage() {
             phone: request.phone,
           });
 
-         
           await updateDonorDetails(donor.id, donor);
 
           toast.success('Request accepted successfully!');
@@ -94,8 +101,15 @@ function Donorpage() {
           toast.error('Failed to update donor details.');
         }
 
+        // Add accepted request ID to local storage
+        const acceptedRequestIds = JSON.parse(localStorage.getItem('acceptedRequestIds')) || [];
+        acceptedRequestIds.push(request.id);
+        localStorage.setItem('acceptedRequestIds', JSON.stringify(acceptedRequestIds));
+
+        // Filter out the accepted request from the requests state
         setRequests((prevRequests) => prevRequests.filter((req) => req.id !== request.id));
       } else {
+        console.log('Request has already met the required unit:', request.currentUnit, request.unit);
         toast.info('Request has already met the required unit.');
       }
     } catch (error) {
@@ -103,7 +117,6 @@ function Donorpage() {
       toast.error('Failed to accept request. Please try again.');
     }
   };
-  
 
   return (
     <>
