@@ -9,7 +9,7 @@ import HelpIcon from '@mui/icons-material/Help'; // Import Help icon
 
 const drawerWidth = 240;
 
-const Sidebar = ({ mobileOpen, handleDrawerToggle }) => {
+const Sidebar = ({ mobileOpen, handleDrawerToggle, userRole }) => {
   const drawer = (
     <div>
       <Toolbar>
@@ -27,8 +27,9 @@ const Sidebar = ({ mobileOpen, handleDrawerToggle }) => {
         />
       </Toolbar>
       <Box sx={{ overflow: 'auto' }}>
-        <List>
-          <ListItem button component={Link} to="/">
+        
+          <List>
+            <ListItem button component={Link} to="/">
             <ListItemIcon><HomeIcon sx={{ color: '#fff' }} /></ListItemIcon>
             <ListItemText primary="Home" />
           </ListItem>
@@ -48,7 +49,11 @@ const Sidebar = ({ mobileOpen, handleDrawerToggle }) => {
             <ListItemIcon><HelpIcon sx={{ color: '#fff' }} /></ListItemIcon>
             <ListItemText primary="Help" />
           </ListItem>
+          
+        
+        
         </List>
+        
       </Box>
     </div>
   );
