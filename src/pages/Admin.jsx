@@ -9,6 +9,7 @@ import { retrieveRequestApi, deleteRequestApi,retrieveDonorsApi,retrieveRecipien
 function Admin() {
   const [requests, setRequests] = useState([]);
   const [recipients,setRecipients] = useState([]);
+  const [donors,setDonors] = useState([]);
 
   const retrieveRecipients = async ()=>{
     const result = await retrieveRecipientApi();
@@ -25,10 +26,10 @@ function Admin() {
     setDonors(result.data);
   };
 
-  const deleteRequest = async (id) => {
+/* const deleteRequest = async (id) => {
     await deleteRequestApi(id);
     retrieveRequest();  
-  };
+  };  */
 
   useEffect(() => {
     retrieveRequest();
@@ -169,12 +170,13 @@ function Admin() {
                   <tr key={request.id}>
                     <td>{request.data}</td>
                     <td>
-                      <button onClick={() => deleteRequest(request.id)}>Delete</button>
+                     
                     </td>
                   </tr>
                 ))}
               </Table>
-            </table>
+            </table> 
+           
           </div>
         </div>
       </div>
