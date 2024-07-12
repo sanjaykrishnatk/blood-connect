@@ -19,15 +19,17 @@ import AcceptRequest from "./pages/AcceptRequest";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 function App() {
   return (
     <>
       <Routes>
         <Route path="/" element={<Home />} />
 
+
+        <Route path="/admin" element={<Dashboard/>}/>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registration />} />
-
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/Reportbloodrequest" element={<Reportbloodrequest />} />
         <Route path="/Reportdonor" element={<Reportdonor />} />

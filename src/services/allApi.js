@@ -17,10 +17,15 @@ export const getDonorsByBloodGroupApi = async (bloodGroup) => {
   );
 };
 
+//api to retrieve requests from admin side-Smera
 export const retrieveRequestApi = async () => {
   return await commonApi("GET", `${serverUrl}/requests`, "");
 };
 
+//api to retrieve recipients data from admin side-Smera
+export const retrieveRecipientApi = async () =>{
+ return await commonApi("GET",`${serverUrl}/recipients`,"");
+};
 
 
 
@@ -56,7 +61,9 @@ export const retrieveHistoryApi = async () => {
   return await commonApi("GET", `${serverUrl}/donors`, "");
 };
 
-//Api to delete request by admin
+
+//api to delete request from admin side
+
 export const deleteRequestApi = async (id) => {
   return await commonApi("DELETE", `${serverUrl}/requests/${id}`, "");
 };
