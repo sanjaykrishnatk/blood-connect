@@ -3,7 +3,7 @@ import Table from 'react-bootstrap/Table';
 import { faArrowLeft, faHouse, faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom';
-Link
+
 
 function Reportbloodrequest() {
   return (

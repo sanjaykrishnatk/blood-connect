@@ -40,7 +40,7 @@ const Sidebar = ({ mobileOpen, handleDrawerToggle }) => {
             <ListItemIcon><PersonIcon sx={{ color: '#fff' }} /></ListItemIcon>
             <ListItemText primary="User" />
           </ListItem>
-          <ListItem button component={Link} to="/donor">
+          <ListItem button component={Link} to="/donorpage">
             <ListItemIcon><FavoriteIcon sx={{ color: '#fff' }} /></ListItemIcon>
             <ListItemText primary="Donor" />
           </ListItem>

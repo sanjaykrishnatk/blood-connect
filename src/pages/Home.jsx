@@ -14,7 +14,29 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
+import { getDonorsByBloodGroupApi, smsApi } from "../services/allApi";
 function Home() {
+  const handleRequest = async (bloodGroup) => {
+    console.log(bloodGroup);
+    const response = await getDonorsByBloodGroupApi(bloodGroup);
+    const mobileNumbers = response.data.map((item) => item.phone).toString();
+    console.log(mobileNumbers);
+    await Promise.all(
+      response.data.map(async (item) => {
+      
+        let message = {
+          route: "q",
+          message: `Hi ${item?.username}, An urgent blood donation request matches your profile. Your help can save a life! Click here for details and to confirm your donation: https://blood-connect-seven.vercel.app/ 
+Thank you,
+BloodConnect Team`,
+          flash: 0,
+          numbers: item?.phone, 
+      };
+        const response = await smsApi(message);
+        console.log(response.data);
+      })
+    );
+  };
   return (
     <>
       <section id="landing">
@@ -45,6 +67,7 @@ function Home() {
                     variant="danger"
                     style={{ backgroundColor: "#DF1626" }}
                     className="fw-bold"
+                    onClick={() => handleRequest("A+ve")}
                   >
                     DONATE
                   </Button>{" "}
