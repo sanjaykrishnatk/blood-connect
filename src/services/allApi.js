@@ -28,13 +28,14 @@ export const retrieveRecipientApi = async () =>{
 };
 
 
-//api to get/retrieve requests of the specific user
 
-export const getRequestReportApi= async()=>{
-  return await commonApi('GET', `${serverUrl}/requests`, "")
+//api to get/retrieve blood requests of the specific user - FARHANA
+
+export const getRequestByIdApi= async(id)=>{
+  return await commonApi('GET', `${serverUrl}/requests/${id}`, "")
 }
 
-//api to add form data to request section
+//api to add form data to blood request section - FARHANA
 export const addRequestApi = async(reqBody)=>{
   return await commonApi('POST',`${serverUrl}/requests`, reqBody )
 }
@@ -45,6 +46,11 @@ export const retrieveLastDonation = async (donorId) => {
   return await commonApi("GET", `${serverUrl}/donors/${donorId}`, "");
 };
 
+//Api to retrieve donor data by admin
+export const retrieveDonorsApi = async () => {
+  return await commonApi("GET", `${serverUrl}/donors`, "");
+};
+
 // API to update last donation date by donor ID
 export const updateLastDonationApi = async (donorId, reqBody) => {
   return await commonApi("PATCH", `${serverUrl}/donors/${donorId}`, reqBody);
@@ -52,10 +58,12 @@ export const updateLastDonationApi = async (donorId, reqBody) => {
 
 // API to retrieve history to donorhistory
 export const retrieveHistoryApi = async () => {
-  return await commonApi("GET", `${serverUrl}/history`, "");
+  return await commonApi("GET", `${serverUrl}/donors`, "");
 };
 
+
 //api to delete request from admin side
+
 export const deleteRequestApi = async (id) => {
   return await commonApi("DELETE", `${serverUrl}/requests/${id}`, "");
 };
@@ -78,5 +86,10 @@ export const getDonorDetailsApi = async (id) => {
 //api to update donor donation history
 export const updateDonorHistoryApi = async (id, reqBody) => {
   return await commonApi("PUT", `${serverUrl}/donors/${id}`, reqBody);
+};
+
+//api to a to request section
+export const acceptBloodRequestApi = async (requestId, reqBody) => {
+  return await commonApi('PUT', `${serverUrl}/requests/${requestId}`, reqBody);
 };
 

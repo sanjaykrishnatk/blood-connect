@@ -28,6 +28,7 @@ const Navbar = ({ handleDrawerToggle }) => {
       }}
     >
       <Toolbar>
+      
         <IconButton
           color="inherit"
           aria-label="open drawer"

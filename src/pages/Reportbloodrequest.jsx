@@ -4,14 +4,16 @@ import { faArrowLeft, faHouse, faTrashCan } from '@fortawesome/free-solid-svg-ic
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom';
 
-import { getRequestReportApi } from "../services/allApi";
+// import { getRequestReportApi } from "../services/allApi";
+
+import {getRequestByIdApi } from "../services/allApi";
 
 function Reportbloodrequest() {
 
   const [requestReport, setRequestReport] = useState([])
 
   const getReport = async()=>{
-    const result = await getRequestReportApi()
+    const result = await getRequestByIdApi();
 
     if(result.status >=200 && result.status <300){
       setRequestReport(result.data)
@@ -52,7 +54,7 @@ function Reportbloodrequest() {
     </tr>
   </thead>
   <tbody>
-  { requestReport?.map((item, index)=>(<tr>
+  { requestReport?.map((item, index)=>(<tr key={index}>
       <td> {index +1} </td>
       <td> {item?.userName} </td>
       <td> {item?.bloodGroup} </td>

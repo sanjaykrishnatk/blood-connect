@@ -26,21 +26,24 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
 
+
         <Route path="/admin" element={<Dashboard/>}/>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registration />} />
-
         <Route path="/Dashboard" element={<Dashboard />} />
         <Route path="/Reportbloodrequest" element={<Reportbloodrequest />} />
         <Route path="/Reportdonor" element={<Reportdonor />} />
         {/* <Route path="/donorpage" element={<Donorpage/>} /> */}
         <Route path="/donorhistory" element={<Donorhistory />} />
         <Route path="/UserDashboard" element={<UserDashboard />} />
-        <Route path="/UserBloodRequestReport" element={<UserBloodRequestReport />} />
+        <Route
+          path="/UserBloodRequestReport"
+          element={<UserBloodRequestReport />}
+        />
         <Route path="/donorpage" element={<DonorDashboard />} />
         <Route path="/accept" element={<AcceptRequest />} />
       </Routes>
-      <ToastContainer position="top-center" autoClose="1000" />
+      <ToastContainer position="top-center" autoClose="2000" />
       <Footer />
     </>
   );

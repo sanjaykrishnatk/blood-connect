@@ -4,8 +4,8 @@ import { axisClasses } from "@mui/x-charts/ChartsAxis";
 import { PieChart } from "@mui/x-charts/PieChart";
 import Table from "../components/Table";
 import "./Admin.css";
-import { retrieveRequestApi, deleteRequestApi } from "../services/allApi";
-import { retrieveRecipientApi } from "../services/allApi";
+
+import { retrieveRequestApi, deleteRequestApi,retrieveDonorsApi,retrieveRecipientApi} from "../services/allApi";
 function Admin() {
   const [requests, setRequests] = useState([]);
   const [recipients,setRecipients] = useState([]);
@@ -15,10 +15,14 @@ function Admin() {
       setRecipients(result.data);
       console.log(result.data);
   }
-
   const retrieveRequest = async () => {
     const result = await retrieveRequestApi();
     setRequests(result.data);
+  };
+
+  const retrieveDonors = async () => {
+    const result = await retrieveDonorsApi();
+    setDonors(result.data);
   };
 
   const deleteRequest = async (id) => {
@@ -29,6 +33,8 @@ function Admin() {
   useEffect(() => {
     retrieveRequest();
     retrieveRecipients();
+    retrieveDonors();
+
   }, []);
 
   const chartSetting = {
