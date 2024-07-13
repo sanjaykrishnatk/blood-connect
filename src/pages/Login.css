@@ -28,33 +28,13 @@
   color: rgb(242, 232, 232);
   padding: 40px;
 }
+
 @media (max-width: 768px) {
   .wrapper {
     width: 90%;
     padding: 20px;
   }
 
-    .input-box {
-        margin: 20px 0; 
-    
-    }
-
-    .remember-forget {
-        flex-direction: row;
-        justify-content: space-between; 
-        align-items: center; 
-        gap: 10px;
-        width: 100%;
-       
-    }
-
-    .remember-forget label {
-        flex: 1; 
-        
-    }
-    .remember-forget a {
-        flex-shrink: 0; 
-    }
   form h1 {
     font-size: 28px;
     font-weight: 800;
@@ -75,6 +55,7 @@
   .remember-forget label {
     flex: 1;
   }
+
   .remember-forget a {
     flex-shrink: 0;
   }
@@ -88,31 +69,37 @@
     font-size: 12px;
   }
 }
-#label1{
-    margin-left: 13px;
-    margin-top: 5px;
+
+#label1 {
+  margin-left: 13px;
+  margin-top: 5px;
 }
-#label2{
-    margin-left: 150px;
-    margin-top: 10px;
+
+#label2 {
+  margin-left: 150px;
+  margin-top: 10px;
 }
 
 .form-box {
   width: 100%;
 }
+
 form h1 {
   font-size: 36px;
   text-align: center;
 }
+
 form .input-box {
   position: relative;
   width: 100%;
   height: 50px;
   margin: 30px 0;
 }
+
 .input-box input {
   width: 100%;
   height: 100%;
+  padding-left: 10px;
   background: transparent;
   border: none;
   outline: none;
@@ -121,9 +108,11 @@ form .input-box {
   font-size: 16px;
   color: rgb(244, 239, 239);
 }
+
 .input-box input::placeholder {
   color: rgb(238, 229, 229);
 }
+
 .icons {
   position: absolute;
   right: 18px;
@@ -131,44 +120,22 @@ form .input-box {
   transform: translateX(50%);
   font-size: 16px;
 }
+
 .remember-forget {
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 14.5px;
+  margin-top: 20px;
 }
+
 .remember-forget label {
   accent-color: white;
   display: flex;
   align-items: center;
   margin-right: 85px;
+  margin-bottom: 10px;
 }
-form h1{
-    font-size: 36px;
-    text-align: center;
-}
-form .input-box{
-    position:relative;
-    width:100%;
-    height: 50px;
-    margin:30px 0;
-    
-}
-.input-box input{
-    width:100%;
-    height:100%;
-    padding-left: 10px;
-    background: transparent;
-    border:none;
-    outline:none;
-    border:2px solid rgb(239, 231, 231);
-    border-radius:40px;
-    font-size:16px;
-    color:rgb(244, 239, 239)
-
-}
-.input-box input::placeholder{
-    color:rgb(238, 229, 229)
 
 .remember-forget input[type="checkbox"] {
   margin-right: 8px;
@@ -178,28 +145,11 @@ form .input-box{
   color: rgb(240, 230, 230);
   text-decoration: none;
 }
-.remember-forget{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size:14.5px;
-    margin-top: 20px;
 
-   
-}
-.remember-forget label{
-    accent-color: white;
-    display: flex;
-    align-items: center;
-    margin-right:85px;
-    margin-bottom: 10px;
-}
-.remember-forget input[type="checkbox"] {
-    margin-right: 8px; 
-    
 .remember-forget a:hover {
   text-decoration: underline;
 }
+
 form button {
   width: 100%;
   height: 45px;
@@ -220,11 +170,13 @@ form .register-link {
   text-align: center;
   margin: 20px 0 15px;
 }
+
 .register-link p a {
   color: rgb(237, 231, 231);
   text-decoration: none;
   font-weight: 600;
 }
+
 .register-link p a:hover {
   text-decoration: underline;
 }
