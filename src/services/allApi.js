@@ -23,23 +23,20 @@ export const retrieveRequestApi = async () => {
 };
 
 //api to retrieve recipients data from admin side-Smera
-export const retrieveRecipientApi = async () =>{
- return await commonApi("GET",`${serverUrl}/recipients`,"");
+export const retrieveRecipientApi = async () => {
+  return await commonApi("GET", `${serverUrl}/recipients`, "");
 };
-
-
 
 //api to get/retrieve blood requests of the specific user - FARHANA
 
-export const getRequestByIdApi= async(id)=>{
-  return await commonApi('GET', `${serverUrl}/requests/${id}`, "")
-}
+export const getRequestByIdApi = async (id) => {
+  return await commonApi("GET", `${serverUrl}/requests?userName=${id}`, "");
+};
 
 //api to add form data to blood request section - FARHANA
-export const addRequestApi = async(reqBody)=>{
-  return await commonApi('POST',`${serverUrl}/requests`, reqBody )
-}
-
+export const addRequestApi = async (reqBody) => {
+  return await commonApi("POST", `${serverUrl}/requests`, reqBody);
+};
 
 // API to retrieve last donation date by donor ID
 export const retrieveLastDonation = async (donorId) => {
@@ -60,7 +57,6 @@ export const updateLastDonationApi = async (donorId, reqBody) => {
 export const retrieveHistoryApi = async () => {
   return await commonApi("GET", `${serverUrl}/donors`, "");
 };
-
 
 //api to delete request from admin side
 
@@ -89,10 +85,9 @@ export const updateDonorHistoryApi = async (id, reqBody) => {
 };
 
 export const retrieveDonorDetails = async (donorId) => {
-  return await commonApi('GET', `${serverUrl}/donors/${donorId}`);
+  return await commonApi("GET", `${serverUrl}/donors/${donorId}`);
 };
 
 export const updateDonorDetails = async (donorId, donorData) => {
-  return await commonApi('PUT', `${serverUrl}/donors/${donorId}`, donorData);
+  return await commonApi("PUT", `${serverUrl}/donors/${donorId}`, donorData);
 };
-
