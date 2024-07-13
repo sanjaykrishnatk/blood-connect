@@ -5,19 +5,129 @@ import { PieChart } from "@mui/x-charts/PieChart";
 import Table from "../components/Table";
 import "./Admin.css";
 
-import { retrieveRequestApi, deleteRequestApi,retrieveDonorsApi,retrieveRecipientApi} from "../services/allApi";
+import {
+  retrieveRequestApi,
+  deleteRequestApi,
+  retrieveDonorsApi,
+  retrieveRecipientApi,
+} from "../services/allApi";
 function Admin() {
   const [requests, setRequests] = useState([]);
-  const [recipients,setRecipients] = useState([]);
+  const [recipients, setRecipients] = useState([]);
+  const [donors, setDonors] = useState([]);
+  const [dataset, setDataset] = useState([
+    { Total: 0, Fulfilled: 0, month: "Jan" },
+    { Total: 0, Fulfilled: 0, month: "Feb" },
+    { Total: 0, Fulfilled: 0, month: "Mar" },
+    { Total: 0, Fulfilled: 0, month: "Apr" },
+    { Total: 0, Fulfilled: 0, month: "May" },
+    { Total: 0, Fulfilled: 0, month: "June" },
+    { Total: 0, Fulfilled: 0, month: "July" },
+    { Total: 0, Fulfilled: 0, month: "Aug" },
+    { Total: 0, Fulfilled: 0, month: "Sept" },
+    { Total: 0, Fulfilled: 0, month: "Oct" },
+    { Total: 0, Fulfilled: 0, month: "Nov" },
+    { Total: 0, Fulfilled: 0, month: "Dec" },
+  ]);
 
-  const retrieveRecipients = async ()=>{
+  //   {
+  //     Total: 0,
+  //     Fulfilled: 0,
+  //     month: "Jan",
+  //   },
+  //   {
+  //     Total: 0,
+  //     Fulfilled: 0,
+  //     month: "Feb",
+  //   },
+  //   {
+  //     Total: 0,
+  //     Fulfilled: 0,
+  //     month: "Mar",
+  //   },
+  //   {
+  //     Total: 0,
+  //     Fulfilled: 0,
+  //     month: "Apr",
+  //   },
+  //   {
+  //     Total: 0,
+  //     Fulfilled: 0,
+  //     month: "May",
+  //   },
+  //   {
+  //     Total: 0,
+  //     Fulfilled: 0,
+  //     month: "June",
+  //   },
+  //   {
+  //     Total: 0,
+  //     Fulfilled: 0,
+  //     month: "July",
+  //   },
+  //   {
+  //     Total: 0,
+  //     Fulfilled: 0,
+  //     month: "Aug",
+  //   },
+  //   {
+  //     Total: 0,
+  //     Fulfilled: 0,
+  //     month: "Sept",
+  //   },
+  //   {
+  //     Total: 0,
+  //     Fulfilled: 0,
+  //     month: "Oct",
+  //   },
+  //   {
+  //     Total: 0,
+  //     Fulfilled: 0,
+  //     month: "Nov",
+  //   },
+  //   {
+  //     Total: 0,
+  //     Fulfilled: 0,
+  //     month: "Dec",
+  //   },
+  // ];
+
+  const retrieveRecipients = async () => {
     const result = await retrieveRecipientApi();
-      setRecipients(result.data);
-      console.log(result.data);
-  }
+    setRecipients(result.data);
+  };
   const retrieveRequest = async () => {
     const result = await retrieveRequestApi();
     setRequests(result.data);
+    console.log("Requests data:", result.data);
+
+    const updatedDataset = [
+      { Total: 0, Fulfilled: 0, month: "Jan" },
+      { Total: 0, Fulfilled: 0, month: "Feb" },
+      { Total: 0, Fulfilled: 0, month: "Mar" },
+      { Total: 0, Fulfilled: 0, month: "Apr" },
+      { Total: 0, Fulfilled: 0, month: "May" },
+      { Total: 0, Fulfilled: 0, month: "June" },
+      { Total: 0, Fulfilled: 0, month: "July" },
+      { Total: 0, Fulfilled: 0, month: "Aug" },
+      { Total: 0, Fulfilled: 0, month: "Sept" },
+      { Total: 0, Fulfilled: 0, month: "Oct" },
+      { Total: 0, Fulfilled: 0, month: "Nov" },
+      { Total: 0, Fulfilled: 0, month: "Dec" },
+    ];
+
+    result.data.forEach((request) => {
+      const [day, month, year] = request.startDate.split("/").map(Number);
+      const requestDate = new Date(year, month - 1, day);
+      const monthIndex = requestDate.getMonth();
+      updatedDataset[monthIndex].Total += 1;
+      if (parseInt(request.unit, 10) === parseInt(request.currentUnit, 10)) {
+        updatedDataset[monthIndex].Fulfilled += 1;
+      }
+    });
+
+    setDataset(updatedDataset);
+    console.log("Updated dataset:", updatedDataset);
   };
 
   const retrieveDonors = async () => {
@@ -27,14 +137,13 @@ function Admin() {
 
   const deleteRequest = async (id) => {
     await deleteRequestApi(id);
-    retrieveRequest();  
+    retrieveRequest();
   };
 
   useEffect(() => {
     retrieveRequest();
     retrieveRecipients();
     retrieveDonors();
-
   }, []);
 
   const chartSetting = {
@@ -52,84 +161,7 @@ function Admin() {
     },
   };
 
-  const valueFormatter = (value) => `${value}mm`;
-
-  const dataset = [
-    {
-      london: 90,
-      paris: 50,
-      newYork: 10,
-      month: "Jan",
-    },
-    {
-      london: 10,
-      paris: 29,
-      newYork: 89,
-      month: "Feb",
-    },
-    {
-      london: 47,
-      paris: 53,
-      newYork: 10,
-      month: "Mar",
-    },
-    {
-      london: 4,
-      paris: 5,
-      newYork: 92,
-      month: "Apr",
-    },
-    {
-      london: 57,
-      paris: 69,
-      newYork: 92,
-      month: "May",
-    },
-    {
-      london: 60,
-      paris: 63,
-      newYork: 103,
-      month: "June",
-    },
-    {
-      london: 59,
-      paris: 60,
-      newYork: 105,
-      month: "July",
-    },
-    {
-      london: 65,
-      paris: 60,
-      newYork: 106,
-      month: "Aug",
-    },
-    {
-      london: 51,
-      paris: 51,
-      newYork: 95,
-      month: "Sept",
-    },
-    {
-      london: 60,
-      paris: 65,
-      newYork: 97,
-      month: "Oct",
-    },
-    {
-      london: 67,
-      paris: 64,
-      newYork: 76,
-      month: "Nov",
-    },
-    {
-      london: 61,
-      paris: 70,
-      newYork: 103,
-      month: "Dec",
-    },
-  ];
-
-
+  const valueFormatter = (value) => `${value}`;
 
   return (
     <>
@@ -140,9 +172,12 @@ function Admin() {
               dataset={dataset}
               xAxis={[{ scaleType: "band", dataKey: "month" }]}
               series={[
-                { dataKey: "london", label: "London", valueFormatter },
-                { dataKey: "paris", label: "Paris", valueFormatter },
-                { dataKey: "newYork", label: "New York", valueFormatter },
+                { dataKey: "Total", label: "Total Requests", valueFormatter },
+                {
+                  dataKey: "Fulfilled",
+                  label: "Fulfilled Requests",
+                  valueFormatter,
+                },
               ]}
               {...chartSetting}
             />
@@ -151,9 +186,8 @@ function Admin() {
               series={[
                 {
                   data: [
-                    { id: 0, value: 10, label: "series A" },
-                    { id: 1, value: 15, label: "series B" },
-                    { id: 2, value: 20, label: "series C" },
+                    { id: 0, value: donors.length, label: "Donors" },
+                    { id: 1, value: recipients.length, label: "Recipients" },
                   ],
                 },
               ]}
@@ -169,7 +203,9 @@ function Admin() {
                   <tr key={request.id}>
                     <td>{request.data}</td>
                     <td>
-                      <button onClick={() => deleteRequest(request.id)}>Delete</button>
+                      <button onClick={() => deleteRequest(request.id)}>
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 ))}
