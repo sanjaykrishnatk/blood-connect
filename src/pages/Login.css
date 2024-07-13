@@ -1,9 +1,3 @@
-* {
-  margin: 0;
-  padding: 0px;
-  box-sizing: border-box;
-}
-
 .login-wrapper {
   overflow: hidden;
   background-image: url("https://c4.wallpaperflare.com/wallpaper/459/387/737/blood-bags-blood-transfusion-blood-donation-wallpaper-preview.jpg");
@@ -40,6 +34,27 @@
     padding: 20px;
   }
 
+    .input-box {
+        margin: 20px 0; 
+    
+    }
+
+    .remember-forget {
+        flex-direction: row;
+        justify-content: space-between; 
+        align-items: center; 
+        gap: 10px;
+        width: 100%;
+       
+    }
+
+    .remember-forget label {
+        flex: 1; 
+        
+    }
+    .remember-forget a {
+        flex-shrink: 0; 
+    }
   form h1 {
     font-size: 28px;
     font-weight: 800;
@@ -72,6 +87,14 @@
   .register-link {
     font-size: 12px;
   }
+}
+#label1{
+    margin-left: 13px;
+    margin-top: 5px;
+}
+#label2{
+    margin-left: 150px;
+    margin-top: 10px;
 }
 
 .form-box {
@@ -120,6 +143,33 @@ form .input-box {
   align-items: center;
   margin-right: 85px;
 }
+form h1{
+    font-size: 36px;
+    text-align: center;
+}
+form .input-box{
+    position:relative;
+    width:100%;
+    height: 50px;
+    margin:30px 0;
+    
+}
+.input-box input{
+    width:100%;
+    height:100%;
+    padding-left: 10px;
+    background: transparent;
+    border:none;
+    outline:none;
+    border:2px solid rgb(239, 231, 231);
+    border-radius:40px;
+    font-size:16px;
+    color:rgb(244, 239, 239)
+
+}
+.input-box input::placeholder{
+    color:rgb(238, 229, 229)
+
 .remember-forget input[type="checkbox"] {
   margin-right: 8px;
 }
@@ -128,6 +178,25 @@ form .input-box {
   color: rgb(240, 230, 230);
   text-decoration: none;
 }
+.remember-forget{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size:14.5px;
+    margin-top: 20px;
+
+   
+}
+.remember-forget label{
+    accent-color: white;
+    display: flex;
+    align-items: center;
+    margin-right:85px;
+    margin-bottom: 10px;
+}
+.remember-forget input[type="checkbox"] {
+    margin-right: 8px; 
+    
 .remember-forget a:hover {
   text-decoration: underline;
 }
