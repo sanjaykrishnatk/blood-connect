@@ -30,68 +30,6 @@ function Admin() {
     { Total: 0, Fulfilled: 0, month: "Dec" },
   ]);
 
-  //   {
-  //     Total: 0,
-  //     Fulfilled: 0,
-  //     month: "Jan",
-  //   },
-  //   {
-  //     Total: 0,
-  //     Fulfilled: 0,
-  //     month: "Feb",
-  //   },
-  //   {
-  //     Total: 0,
-  //     Fulfilled: 0,
-  //     month: "Mar",
-  //   },
-  //   {
-  //     Total: 0,
-  //     Fulfilled: 0,
-  //     month: "Apr",
-  //   },
-  //   {
-  //     Total: 0,
-  //     Fulfilled: 0,
-  //     month: "May",
-  //   },
-  //   {
-  //     Total: 0,
-  //     Fulfilled: 0,
-  //     month: "June",
-  //   },
-  //   {
-  //     Total: 0,
-  //     Fulfilled: 0,
-  //     month: "July",
-  //   },
-  //   {
-  //     Total: 0,
-  //     Fulfilled: 0,
-  //     month: "Aug",
-  //   },
-  //   {
-  //     Total: 0,
-  //     Fulfilled: 0,
-  //     month: "Sept",
-  //   },
-  //   {
-  //     Total: 0,
-  //     Fulfilled: 0,
-  //     month: "Oct",
-  //   },
-  //   {
-  //     Total: 0,
-  //     Fulfilled: 0,
-  //     month: "Nov",
-  //   },
-  //   {
-  //     Total: 0,
-  //     Fulfilled: 0,
-  //     month: "Dec",
-  //   },
-  // ];
-
   const retrieveRecipients = async () => {
     const result = await retrieveRecipientApi();
     setRecipients(result.data);
@@ -135,10 +73,10 @@ function Admin() {
     setDonors(result.data);
   };
 
-  const deleteRequest = async (id) => {
+/* const deleteRequest = async (id) => {
     await deleteRequestApi(id);
-    retrieveRequest();
-  };
+    retrieveRequest();  
+  };  */
 
   useEffect(() => {
     retrieveRequest();
@@ -203,14 +141,13 @@ function Admin() {
                   <tr key={request.id}>
                     <td>{request.data}</td>
                     <td>
-                      <button onClick={() => deleteRequest(request.id)}>
-                        Delete
-                      </button>
+
                     </td>
                   </tr>
                 ))}
               </Table>
-            </table>
+            </table> 
+           
           </div>
         </div>
       </div>
