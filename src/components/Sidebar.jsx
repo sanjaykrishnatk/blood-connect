@@ -45,6 +45,14 @@ const Sidebar = ({ mobileOpen, handleDrawerToggle, userRole }) => {
             <ListItemIcon><FavoriteIcon sx={{ color: '#fff' }} /></ListItemIcon>
             <ListItemText primary="Donor" />
           </ListItem>
+          <ListItem button component={Link} to="/userdashboard">
+            <ListItemIcon><FavoriteIcon sx={{ color: '#fff' }} /></ListItemIcon>
+            <ListItemText primary="Blood Request" />
+          </ListItem>
+          <ListItem button component={Link} to="/requestreport">
+            <ListItemIcon><FavoriteIcon sx={{ color: '#fff' }} /></ListItemIcon>
+            <ListItemText primary="Request Report" />
+          </ListItem>
           <ListItem button component={Link} to="/help"> {/* Add new Help item */}
             <ListItemIcon><HelpIcon sx={{ color: '#fff' }} /></ListItemIcon>
             <ListItemText primary="Help" />
