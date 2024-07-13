@@ -1,4 +1,4 @@
-import React, { useState } from 'react';/*
+import React, { useState } from "react"; /*
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -130,63 +130,59 @@ export default function ColumnGroupingTable() {
     </Paper>
   );
 } */
-import { deleteRequestApi } from '../services/allApi';
 
+function Table({ columns, data }) {
+  console.log(data);
+  return (
+    <div className="row" style={{ marginTop: "2rem", textAlign: "center" }}>
+      <div className="col-md-12" style={{ margin: "0 auto" }}>
+        <div
+          className="table-responsive"
+          style={{ maxWidth: "100%", overflowX: "auto", marginTop: "1rem" }}
+        >
+          <table
+            className="table shadow-sm"
+            style={{
+              width: "100%",
+              boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+            }}
+          >
+            <thead className="table-warning">
+              <tr>
+                <th>#</th>
+                {columns.map((column, index) => (
+                  <th style={{ minWidth: "50px" }} key={index}>
+                    {column}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((request, index) => (
+                // <tr key={request.id}>
+                //   <td>{index + 1}</td>
+                //   <td>{request.userName}</td>
+                //   <td>{request.gender}</td>
+                //   <td>{request.age}</td>
+                //   <td>{request.district}</td>
+                //   <td>{request.startDate}</td>
+                //   <td>{request.phone}</td>
+                //
+                // </tr>
 
-
-function table() {
-
-  const [requests, setRequests] = useState([]);
-  
-  const deleteRequest = async (id) => {
-    await deleteRequestApi(id);
-    retrieveRequest();  
-  };
-
-  return(
-  <div className="row" style={{ marginTop: '2rem', textAlign: 'center' }}>
-  <div className="col-md-12" style={{ margin: '0 auto' }}>
-    <div className="table-responsive" style={{ maxWidth: '100%', overflowX: 'auto', marginTop: '1rem' }}>
-      <table
-        className="table shadow-sm"
-        style={{
-          width: '100%',
-          boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-        }}
-      >
-        <thead className="table-warning">
-          <tr>
-            <th>#</th>
-            <th style={{ minWidth: '50px' }}>User Name</th>
-            <th style={{ minWidth: '50px' }}>Gender</th>
-            <th style={{ minWidth: '50px' }}>Age</th>
-            <th style={{ minWidth: '50px' }}>District</th>
-            <th style={{ minWidth: '50px' }}>Date Needed</th>
-            <th style={{ minWidth: '50px' }}>Phone</th>
-            <th style={{ minWidth: '50px' }}>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {requests.map((request, index) => (
-            <tr key={request.id}>
-              <td>{index + 1}</td>
-              <td>{request.userName}</td>
-              <td>{request.gender}</td>
-              <td>{request.age}</td>
-              <td>{request.district}</td>
-              <td>{request.startDate}</td>
-              <td>{request.phone}</td>
-              <td>
-              <button onClick={() => deleteRequest(request.id)}>Delete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                <tr key={index}>
+                  <td key={index}>{index + 1}</td>
+                  {Object.values(request).map((value, i) => (
+                    <td key={i}>{String(value)}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-  )
+  );
 }
-  
-export default table ;
+
+export default Table;

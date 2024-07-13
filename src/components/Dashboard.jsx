@@ -54,12 +54,8 @@ const Dashboard = () => {
         sx={{ flexGrow: 1, p: 3, width: `calc(100% - ${drawerWidth}px)` }}
       >
         <Toolbar />
-        <div className="card-container">
-          <Card {...donors} />
-          <Card {...users} />
-          <Card {...totalDonors} />
-        </div>
-        <Admin /> {/* Keep your existing content here */}
+
+        <Admin />
       </Box>
     </Box>
   );

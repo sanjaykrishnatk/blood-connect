@@ -1,38 +1,37 @@
 /* src/components/Card.css */
 .card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    width: 400px; /* Adjust width as needed */
-    height: 80px; /* Adjust height as needed */
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    margin-right: 10px; /* Adjust spacing between cards */
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.1); /* Updated shadow */
-    transition: box-shadow 0.3s ease; /* Smooth transition for hover effect */
-  }
-  
-  .card:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(0, 0, 0, 0.1); /* Updated shadow on hover */
-  }
-  
-  .card-logo {
-    width: 60px;
-    height: 60px;
-    margin-right: 20px;
-  }
-  
-  .card-title {
-    font-size: 20px; /* Increase font size */
-    font-weight: bold; /* Make font bold */
-    color: red; /* Set font color to red */
-    margin-bottom: 5px;
-  }
-  
-  .card-count, .card-date {
-    font-size: 16px; /* Adjust font size */
-    margin: 5px 0;
-  }
-  
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  width: 400px; /* Adjust width as needed */
+  height: 80px; /* Adjust height as needed */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-right: 10px; /* Adjust spacing between cards */
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.1); /* Updated shadow */
+  transition: box-shadow 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(0, 0, 0, 0.1); /* Updated shadow on hover */
+}
+
+.card-logo {
+  width: 60px;
+  height: 60px;
+}
+
+.card-title {
+  font-size: 20px; /* Increase font size */
+  font-weight: bold; /* Make font bold */
+  color: red; /* Set font color to red */
+  margin-bottom: 5px;
+}
+
+.card-count,
+.card-date {
+  font-size: 16px; /* Adjust font size */
+  margin: 5px 0;
+}

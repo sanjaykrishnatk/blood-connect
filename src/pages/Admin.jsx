@@ -4,7 +4,7 @@ import { axisClasses } from "@mui/x-charts/ChartsAxis";
 import { PieChart } from "@mui/x-charts/PieChart";
 import Table from "../components/Table";
 import "./Admin.css";
-
+import Card from "../components/Card";
 import {
   retrieveRequestApi,
   deleteRequestApi,
@@ -32,13 +32,35 @@ function Admin() {
 
   const retrieveRecipients = async () => {
     const result = await retrieveRecipientApi();
-    setRecipients(result.data);
+    let recipientTableData = result.data.map((item) => {
+      return {
+        userName: item.userName,
+        bloodGroup: item.bloodGroup,
+        gender: item.gender,
+        age: item.age,
+        state: item.state,
+        district: item.district,
+        phone: item.phone,
+      };
+    });
+    setRecipients(recipientTableData);
   };
   const retrieveRequest = async () => {
     const result = await retrieveRequestApi();
-    setRequests(result.data);
+    let requestTableData = result.data.map((item) => {
+      return {
+        userName: item.userName,
+        bloodGroup: item.bloodGroup,
+        gender: item.gender,
+        age: item.age,
+        district: item.district,
+        startDate: item.startDate,
+        phone: item.phone,
+      };
+    });
+    setRequests(requestTableData);
     console.log("Requests data:", result.data);
-
+    console.log(`Table data: ${requestTableData}`);
     const updatedDataset = [
       { Total: 0, Fulfilled: 0, month: "Jan" },
       { Total: 0, Fulfilled: 0, month: "Feb" },
@@ -70,13 +92,30 @@ function Admin() {
 
   const retrieveDonors = async () => {
     const result = await retrieveDonorsApi();
-    setDonors(result.data);
+    let donorData = result.data.map((item) => {
+      return {
+        name: item.username,
+        bloodGroup: item.bloodGroup,
+        gender: item.gender,
+        age: item.age,
+        state: item.state,
+        district: item.district,
+        lastDonation: item.lastDonation,
+        phone: item.phone,
+      };
+    });
+    setDonors(donorData);
+    // console.log(`donor data : ${result.data}`); JSON.stringify(donorData, null, 2)
+    console.log(
+      "Transformed donor data:",
+      JSON.stringify(result.data, null, 2)
+    );
   };
 
-/* const deleteRequest = async (id) => {
+  const deleteRequest = async (id) => {
     await deleteRequestApi(id);
-    retrieveRequest();  
-  };  */
+    retrieveRequest();
+  };
 
   useEffect(() => {
     retrieveRequest();
@@ -87,7 +126,7 @@ function Admin() {
   const chartSetting = {
     yAxis: [
       {
-        label: "Cases",
+        label: "Requests",
       },
     ],
     width: 500,
@@ -100,12 +139,38 @@ function Admin() {
   };
 
   const valueFormatter = (value) => `${value}`;
+  console.log("donors:" + donors);
 
+  const donorsCard = {
+    logo: "https://thumbs.dreamstime.com/b/blood-donors-logo-symbol-icon-your-needs-such-donor-sign-public-information-add-to-presentation-website-app-etc-154842885.jpg",
+    title: "Donors",
+    count: donors.length,
+  };
+
+  const usersCard = {
+    logo: "https://cdn.dribbble.com/users/2620348/screenshots/10495041/media/b110a1631ac9ae054007f19bd98295c0.png?compress=1&resize=768x576&vertical=top",
+    title: "Recipients",
+    count: recipients.length,
+  };
+
+  const requestsCard = {
+    logo: "https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes-3/3/74-1024.png",
+    title: "Requests",
+    count: requests.length,
+  };
   return (
     <>
-      <div className="row w-100 py-5 mt-5 ">
+      <div className="row w-100 py-3  ms-0 me-0">
         <div className="col-12 p-3 d-flex flex-column">
-          <div className="d-flex chart">
+          <div
+            className="card-container d-flex justify-content-between mb-5"
+            style={{ flexWrap: "nowrap", overflowX: "auto" }}
+          >
+            <Card {...donorsCard} />
+            <Card {...usersCard} />
+            <Card {...requestsCard} />
+          </div>
+          <div className="d-flex chart mt-5">
             <BarChart
               dataset={dataset}
               xAxis={[{ scaleType: "band", dataKey: "month" }]}
@@ -135,19 +200,43 @@ function Admin() {
           </div>
 
           <div className="row w-100 table">
-            <table className="table-responsive">
-              <Table>
-                {requests.map((request) => (
-                  <tr key={request.id}>
-                    <td>{request.data}</td>
-                    <td>
-
-                    </td>
-                  </tr>
-                ))}
-              </Table>
-            </table> 
-           
+            <Table
+              columns={[
+                "Name",
+                "Blood Group",
+                "Gender",
+                "Age",
+                "District",
+                "Date",
+                "Phone",
+              ]}
+              data={requests}
+            />
+            <Table
+              columns={[
+                "Name",
+                "Blood Group",
+                "Gender",
+                "Age",
+                "State",
+                "District",
+                "Phone",
+              ]}
+              data={recipients}
+            />
+            <Table
+              columns={[
+                "Name",
+                "Blood Group",
+                "Gender",
+                "Age",
+                "State",
+                "District",
+                "Last Donation",
+                "Phone",
+              ]}
+              data={donors}
+            />
           </div>
         </div>
       </div>

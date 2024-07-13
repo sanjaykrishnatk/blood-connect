@@ -1,15 +1,14 @@
 // src/components/Card.jsx
-import React from 'react';
-import './Card.css';
+import React from "react";
+import "./Card.css";
 
-const Card = ({ logo, title, count, month, year }) => {
+const Card = ({ logo, title, count }) => {
   return (
     <div className="card">
       <img src={logo} alt={`${title} logo`} className="card-logo" />
-      <div className="card-info">
+      <div className="card-info d-flex flex-column align-items-center justify-content-center">
         <h2 className="card-title">{title}</h2>
-        <p className="card-count">Count: {count}</p>
-        <p className="card-date">{month}, {year}</p>
+        <p className="card-count fw-bold">{count}</p>
       </div>
     </div>
   );
