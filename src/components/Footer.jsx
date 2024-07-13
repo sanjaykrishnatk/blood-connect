@@ -8,11 +8,15 @@ import {
   faXTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import { Link } from "react-router-dom";
+
 function Footer() {
   return (
     <div
-      style={{ backgroundColor: "#E8E9ED" }}
-      className="d-flex flex-column justify-content-center align-items-center p-5"
+      style={{
+        backgroundColor: "#E8E9ED",
+        width: "100%",
+      }}
+      className="d-flex flex-column justify-content-center align-items-center p-5 "
     >
       <div className="d-flex justify-content-center align-items-center">
         <FontAwesomeIcon icon={faGithub} className="fa-2x text-secondary" />

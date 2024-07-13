@@ -1,6 +1,6 @@
 import { commonApi } from "./commonApi";
 import { serverUrl } from "./serverUrl";
-
+//sms api
 export const smsApi = async (reqBody) => {
   return await commonApi(
     "POST",
@@ -8,7 +8,7 @@ export const smsApi = async (reqBody) => {
     reqBody
   );
 };
-
+//api to get donors grouped by blood group
 export const getDonorsByBloodGroupApi = async (bloodGroup) => {
   return await commonApi(
     "GET",
@@ -17,6 +17,82 @@ export const getDonorsByBloodGroupApi = async (bloodGroup) => {
   );
 };
 
+//api to retrieve requests from admin side-Smera
 export const retrieveRequestApi = async () => {
   return await commonApi("GET", `${serverUrl}/requests`, "");
 };
+
+//api to retrieve recipients data from admin side-Smera
+export const retrieveRecipientApi = async () =>{
+ return await commonApi("GET",`${serverUrl}/recipients`,"");
+};
+
+
+
+//api to get/retrieve blood requests of the specific user - FARHANA
+
+export const getRequestByIdApi= async(id)=>{
+  return await commonApi('GET', `${serverUrl}/requests/${id}`, "")
+}
+
+//api to add form data to blood request section - FARHANA
+export const addRequestApi = async(reqBody)=>{
+  return await commonApi('POST',`${serverUrl}/requests`, reqBody )
+}
+
+
+// API to retrieve last donation date by donor ID
+export const retrieveLastDonation = async (donorId) => {
+  return await commonApi("GET", `${serverUrl}/donors/${donorId}`, "");
+};
+
+//Api to retrieve donor data by admin
+export const retrieveDonorsApi = async () => {
+  return await commonApi("GET", `${serverUrl}/donors`, "");
+};
+
+// API to update last donation date by donor ID
+export const updateLastDonationApi = async (donorId, reqBody) => {
+  return await commonApi("PATCH", `${serverUrl}/donors/${donorId}`, reqBody);
+};
+
+// API to retrieve history to donorhistory
+export const retrieveHistoryApi = async () => {
+  return await commonApi("GET", `${serverUrl}/donors`, "");
+};
+
+
+//api to delete request from admin side
+
+export const deleteRequestApi = async (id) => {
+  return await commonApi("DELETE", `${serverUrl}/requests/${id}`, "");
+};
+
+//api to get request by request id
+export const getRequestDetails = async (id) => {
+  return await commonApi("GET", `${serverUrl}/requests/${id}`, "");
+};
+
+//api to update request by request id
+export const updateRequestDetails = async (id, reqBody) => {
+  return await commonApi("PUT", `${serverUrl}/requests/${id}`, reqBody);
+};
+
+//api to get donor by donor id
+export const getDonorDetailsApi = async (id) => {
+  return await commonApi("GET", `${serverUrl}/donors/${id}`, "");
+};
+
+//api to update donor donation history
+export const updateDonorHistoryApi = async (id, reqBody) => {
+  return await commonApi("PUT", `${serverUrl}/donors/${id}`, reqBody);
+};
+
+export const retrieveDonorDetails = async (donorId) => {
+  return await commonApi('GET', `${serverUrl}/donors/${donorId}`);
+};
+
+export const updateDonorDetails = async (donorId, donorData) => {
+  return await commonApi('PUT', `${serverUrl}/donors/${donorId}`, donorData);
+};
+

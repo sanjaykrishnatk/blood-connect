@@ -1,14 +1,9 @@
-
 import './Login.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLock, faUser } from '@fortawesome/free-solid-svg-icons'
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
-
-
-
 
 
 const Login = () => {
@@ -62,8 +57,8 @@ const Login = () => {
 
 
   return (
-    <div className='container-fluid'>
-      <div className='wrapper'>
+    <div className="container-fluid login-wrapper">
+      <div className="wrapper">
         <div className='form-box login'>
           {error && <p className="error text-center">{error}</p>}
           <form action="" onSubmit={handleSubmit}>
@@ -109,12 +104,9 @@ const Login = () => {
             </div>
           </form>
         </div>
-
-
-
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

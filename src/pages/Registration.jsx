@@ -80,9 +80,8 @@ const Registration = () => {
       setIsLoading(false);
     }, 1000);
   };
-
   return (
-    <div className='container-fluid'>
+    <div className='container-fluid registration-wrapper'>
       <div className='wrapper'>
         <div className='form-box login'>
           {error && <p className="error text-center">{error}</p>}
@@ -92,7 +91,6 @@ const Registration = () => {
               <input className="p-2" type="text" placeholder='Username' onChange={(e) => setName(e.target.value)} required />
               <FontAwesomeIcon className="icons" icon={faUser} />
             </div>
-
             <div className="input-box">
               <input className="p-2" type="password" placeholder='Password' onChange={(e) => setPassword(e.target.value)}  required />
               <FontAwesomeIcon className="icons" icon={faLock} />
@@ -164,7 +162,9 @@ const Registration = () => {
         </div>
       </div>
     </div>
+
   )
 }
 
 export default Registration;
+

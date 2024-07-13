@@ -1,4 +1,3 @@
-// src/pages/DonorDashboard.jsx
 import React, { useState } from 'react';
 import { Box, CssBaseline, Toolbar } from '@mui/material';
 import Sidebar from '../components/Sidebar';
