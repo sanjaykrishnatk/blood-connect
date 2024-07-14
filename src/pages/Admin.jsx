@@ -11,10 +11,11 @@ import {
   retrieveDonorsApi,
   retrieveRecipientApi,
 } from "../services/allApi";
-function Admin() {
+function Admin({ page }) {
   const [requests, setRequests] = useState([]);
   const [recipients, setRecipients] = useState([]);
   const [donors, setDonors] = useState([]);
+  const [pageValue, setPageValue] = useState(page);
   const [dataset, setDataset] = useState([
     { Total: 0, Fulfilled: 0, month: "Jan" },
     { Total: 0, Fulfilled: 0, month: "Feb" },
@@ -30,6 +31,10 @@ function Admin() {
     { Total: 0, Fulfilled: 0, month: "Dec" },
   ]);
 
+  const handlePageLoading = (page) => {
+    console.log("function called page value: " + page);
+    setPageValue(page);
+  };
   const retrieveRecipients = async () => {
     const result = await retrieveRecipientApi();
     let recipientTableData = result.data.map((item) => {
@@ -121,7 +126,8 @@ function Admin() {
     retrieveRequest();
     retrieveRecipients();
     retrieveDonors();
-  }, []);
+    handlePageLoading(page);
+  }, [pageValue]);
 
   const chartSetting = {
     yAxis: [
@@ -158,85 +164,104 @@ function Admin() {
     title: "Requests",
     count: requests.length,
   };
+  console.log(pageValue);
   return (
     <>
       <div className="row w-100 py-3  ms-0 me-0">
         <div className="col-12 p-3 d-flex flex-column">
-          <div
-            className="card-container d-flex justify-content-between mb-5"
-            style={{ flexWrap: "nowrap", overflowX: "auto" }}
-          >
-            <Card {...donorsCard} />
-            <Card {...usersCard} />
-            <Card {...requestsCard} />
-          </div>
-          <div className="d-flex chart mt-5">
-            <BarChart
-              dataset={dataset}
-              xAxis={[{ scaleType: "band", dataKey: "month" }]}
-              series={[
-                { dataKey: "Total", label: "Total Requests", valueFormatter },
-                {
-                  dataKey: "Fulfilled",
-                  label: "Fulfilled Requests",
-                  valueFormatter,
-                },
-              ]}
-              {...chartSetting}
-            />
+          {page == "home" && (
+            <>
+              <div
+                className="card-container d-flex justify-content-between mb-5"
+                style={{ flexWrap: "nowrap", overflowX: "auto" }}
+              >
+                <Card {...donorsCard} />
+                <Card {...usersCard} />
+                <Card {...requestsCard} />
+              </div>
+              <div className="d-flex chart mt-5">
+                <BarChart
+                  dataset={dataset}
+                  xAxis={[{ scaleType: "band", dataKey: "month" }]}
+                  series={[
+                    {
+                      dataKey: "Total",
+                      label: "Total Requests",
+                      valueFormatter,
+                    },
+                    {
+                      dataKey: "Fulfilled",
+                      label: "Fulfilled Requests",
+                      valueFormatter,
+                    },
+                  ]}
+                  {...chartSetting}
+                />
 
-            <PieChart
-              series={[
-                {
-                  data: [
-                    { id: 0, value: donors.length, label: "Donors" },
-                    { id: 1, value: recipients.length, label: "Recipients" },
-                  ],
-                },
-              ]}
-              width={400}
-              height={200}
-            />
-          </div>
+                <PieChart
+                  series={[
+                    {
+                      data: [
+                        { id: 0, value: donors.length, label: "Donors" },
+                        {
+                          id: 1,
+                          value: recipients.length,
+                          label: "Recipients",
+                        },
+                      ],
+                    },
+                  ]}
+                  width={400}
+                  height={200}
+                />
+              </div>
+            </>
+          )}
 
-          <div className="row w-100 table">
-            <Table
-              columns={[
-                "Name",
-                "Blood Group",
-                "Gender",
-                "Age",
-                "District",
-                "Date",
-                "Phone",
-              ]}
-              data={requests}
-            />
-            <Table
-              columns={[
-                "Name",
-                "Blood Group",
-                "Gender",
-                "Age",
-                "State",
-                "District",
-                "Phone",
-              ]}
-              data={recipients}
-            />
-            <Table
-              columns={[
-                "Name",
-                "Blood Group",
-                "Gender",
-                "Age",
-                "State",
-                "District",
-                "Last Donation",
-                "Phone",
-              ]}
-              data={donors}
-            />
+          <div className="row w-100 table" style={{ overflowX: "hidden" }}>
+            {page == "requests" && (
+              <Table
+                columns={[
+                  "Name",
+                  "Blood Group",
+                  "Gender",
+                  "Age",
+                  "District",
+                  "Date",
+                  "Phone",
+                ]}
+                data={requests}
+              />
+            )}
+            {page == "recipients" && (
+              <Table
+                columns={[
+                  "Name",
+                  "Blood Group",
+                  "Gender",
+                  "Age",
+                  "State",
+                  "District",
+                  "Phone",
+                ]}
+                data={recipients}
+              />
+            )}
+            {page == "donorsPage" && (
+              <Table
+                columns={[
+                  "Name",
+                  "Blood Group",
+                  "Gender",
+                  "Age",
+                  "State",
+                  "District",
+                  "Last Donation",
+                  "Phone",
+                ]}
+                data={donors}
+              />
+            )}
           </div>
         </div>
       </div>

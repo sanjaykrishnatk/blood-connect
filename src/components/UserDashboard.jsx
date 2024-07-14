@@ -1,14 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, CssBaseline, Toolbar } from "@mui/material";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
 import Request from "../pages/Request";
-
+import Reportbloodrequest from "../pages/Reportbloodrequest";
 const drawerWidth = 240;
 
-const UserDashboard = () => {
+const UserDashboard = ({ userHome, userRequests }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
-
+  const [page, setPage] = useState("userHome");
+  const handlePage = (userHome, userRequests) => {
+    if (userHome) {
+      setPage("userHome");
+    } else if (userRequests) {
+      setPage("userRequests");
+    }
+  };
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -17,24 +24,19 @@ const UserDashboard = () => {
     {
       option: "Home",
       icon: "HomeIcon",
-      link: "",
+      link: "/userdashboard",
     },
     {
       option: "Requests",
       icon: "RequestIcon",
-      link: "",
-    },
-    {
-      option: "Donors",
-      icon: "DonorsIcon",
-      link: "",
-    },
-    {
-      option: "Recipients",
-      icon: "RecipientsIcon",
-      link: "",
+      link: "/user_requests",
     },
   ];
+
+  useEffect(() => {
+    handlePage(userHome, userRequests);
+  }, [userHome, userRequests]);
+
   return (
     <Box //sx={{ display: 'flex' }}
     >
@@ -50,7 +52,8 @@ const UserDashboard = () => {
         //sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
       >
         <Toolbar />
-        <Request />
+        {page == "userHome" && <Request />}
+        {page == "userRequests" && <Reportbloodrequest />}
       </Box>
     </Box>
   );

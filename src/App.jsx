@@ -19,32 +19,35 @@ import AcceptRequest from "./pages/AcceptRequest";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 function App() {
   return (
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-
-
-        <Route path="/admin" element={<Dashboard/>}/>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Registration />} />
-        <Route path="/Dashboard" element={<Dashboard />} />
-        <Route path="/Reportdonor" element={<Reportdonor />} />
-        {/* <Route path="/donorpage" element={<Donorpage/>} /> */}
-        <Route path="/donorhistory" element={<Donorhistory />} />
-        <Route path="/userdashboard" element={<UserDashboard />} />
+        <Route path="/admin" element={<Dashboard home={true} />} />
+        <Route path="/admin_requests" element={<Dashboard requests={true} />} />
+        <Route path="/admin_donors" element={<Dashboard donorsPage={true} />} />
         <Route
-          path="/requestreport"
-          element={<UserBloodRequestReport />}
+          path="/admin_recipients"
+          element={<Dashboard recipients={true} />}
         />
+        <Route
+          path="/userdashboard"
+          element={<UserDashboard userHome={true} />}
+        />
+        <Route
+          path="/user_requests"
+          element={<UserDashboard userRequests={true} />}
+        />
+
+        <Route path="/donorhistory" element={<Donorhistory />} />
+        <Route path="/requestreport" element={<UserBloodRequestReport />} />
         <Route path="/donorpage" element={<DonorDashboard />} />
         <Route path="/accept" element={<AcceptRequest />} />
-
       </Routes>
       <ToastContainer position="top-center" autoClose="2000" />
-
 
       <Footer />
     </>

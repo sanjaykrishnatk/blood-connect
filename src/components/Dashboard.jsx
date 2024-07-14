@@ -1,5 +1,5 @@
 // src/pages/Dashboard.jsx
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, CssBaseline, Toolbar } from "@mui/material";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
@@ -10,11 +10,23 @@ import { width } from "@fortawesome/free-brands-svg-icons/fa42Group";
 
 const drawerWidth = 240;
 
-const Dashboard = () => {
+const Dashboard = ({ home, requests, donorsPage, recipients }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
-
+  const [page, setPage] = useState("home");
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
+  };
+
+  const handlePage = (home, requests, donorsPage, recipients) => {
+    if (home) {
+      setPage("home");
+    } else if (requests) {
+      setPage("requests");
+    } else if (donorsPage) {
+      setPage("donorsPage");
+    } else if (recipients) {
+      setPage("recipients");
+    }
   };
 
   const donors = {
@@ -45,25 +57,29 @@ const Dashboard = () => {
     {
       option: "Home",
       icon: "HomeIcon",
-      link: "",
+      link: "/admin",
     },
     {
       option: "Requests",
       icon: "RequestIcon",
-      link: "",
+      link: "/admin_requests",
     },
     {
       option: "Donors",
       icon: "DonorsIcon",
-      link: "",
+      link: "/admin_donors",
     },
     {
       option: "Recipients",
       icon: "RecipientsIcon",
-      link: "",
+      link: "/admin_recipients",
     },
   ];
 
+  useEffect(() => {
+    handlePage(home, requests, donorsPage, recipients);
+  }, [home, requests, donorsPage, recipients]);
+  console.log("page loaded is " + page);
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -79,7 +95,7 @@ const Dashboard = () => {
       >
         <Toolbar />
 
-        <Admin />
+        <Admin page={page} />
       </Box>
     </Box>
   );

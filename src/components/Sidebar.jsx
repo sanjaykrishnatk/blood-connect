@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Drawer,
   List,
@@ -10,13 +10,10 @@ import {
   Box,
 } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
-import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
-import PersonIcon from "@mui/icons-material/Person";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import HelpIcon from "@mui/icons-material/Help"; // Import Help icon
-import RequestIcon from "@mui/icons-material/RequestPage"; // Assuming a suitable icon
-import DonorsIcon from "@mui/icons-material/People"; // Assuming a suitable icon
-import RecipientsIcon from "@mui/icons-material/Person"; // Assuming a suitable icon
+import RequestIcon from "@mui/icons-material/Article";
+import DonorsIcon from "@mui/icons-material/People";
+import RecipientsIcon from "@mui/icons-material/People";
+
 const drawerWidth = 240;
 
 const Sidebar = ({
@@ -31,6 +28,10 @@ const Sidebar = ({
     RequestIcon: RequestIcon,
     DonorsIcon: DonorsIcon,
     RecipientsIcon: RecipientsIcon,
+  };
+  const navigate = useNavigate();
+  const handlePages = (pageLink) => {
+    navigate(pageLink);
   };
   const drawer = (
     <div>
@@ -53,7 +54,7 @@ const Sidebar = ({
           {sidebarContents.map((option, index) => {
             const IconComponent = iconMap[option.icon];
             return (
-              <ListItem key={index} button component={Link} to="/">
+              <ListItem key={index} button component={Link} to={option.link}>
                 <ListItemIcon>
                   <IconComponent sx={{ color: "#fff" }} />
                 </ListItemIcon>

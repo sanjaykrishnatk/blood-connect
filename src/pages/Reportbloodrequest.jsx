@@ -24,18 +24,21 @@ function Reportbloodrequest() {
 
   return (
     <>
-      <div className="d-flex justify-content-center align-items-center p-3 mt-5 w-100 mb-5">
-        <h4 className="fs-2">Blood Request Report</h4>
-      </div>
-
-      <div className="row" style={{ marginTop: "2rem", textAlign: "center" }}>
+      <div
+        className="row ms-0 me-0"
+        style={{ marginTop: "2rem", textAlign: "center" }}
+      >
         <div className="col-md-12" style={{ margin: "0 auto" }}>
           <div
-            className="table-responsive"
-            style={{ maxWidth: "100%", overflowX: "auto", marginTop: "1rem" }}
+            className="table-responsive previous-reqyuests-table"
+            style={{
+              maxWidth: "100%",
+              overflowX: "auto",
+              marginTop: "1rem",
+            }}
           >
             <table
-              className="table shadow-sm"
+              className="table shadow-sm ps-3 pe-3"
               style={{
                 width: "100%",
                 boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
