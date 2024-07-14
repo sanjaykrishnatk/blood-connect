@@ -28,14 +28,14 @@ export const retrieveRecipientApi = async () => {
 };
 
 //api to get/retrieve blood requests of the specific user - FARHANA
-export const getRequestByIdApi = async (id) => {
-  return await commonApi("GET", `${serverUrl}/requests?userName=${id}`, "");
+export const getRequestByPhoneApi = async (phone) => {
+  return await commonApi("GET", `${serverUrl}/requests?phone=${phone}`, "");
 };
 
-//api to get all blood requests - FARHANA
-export const getRequests = async () => {
-  return await commonApi("GET", `${serverUrl}/requests`, "");
-};
+// //api to get all blood requests - FARHANA
+// export const getRequests = async () => {
+//   return await commonApi("GET", `${serverUrl}/requests`, "");
+// };
 
 //api to add form data to blood request section - FARHANA
 export const addRequestApi = async (reqBody) => {
