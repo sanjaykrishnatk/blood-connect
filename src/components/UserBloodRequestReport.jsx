@@ -4,7 +4,7 @@ import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 import Reportbloodrequest from '../pages/Reportbloodrequest';
 
-// const drawerWidth = 240;
+const drawerWidth = 240;
 
 const UserBloodRequestReport = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -14,21 +14,20 @@ const UserBloodRequestReport = () => {
   };
 
   return (
-    <Box //sx={{ display: 'flex' }}
+    <Box sx={{ display: 'flex' }}
     >
       <CssBaseline />
       <Navbar handleDrawerToggle={handleDrawerToggle} />
       <Sidebar mobileOpen={mobileOpen} handleDrawerToggle={handleDrawerToggle} />
       <Box
         component="main"
-        //sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+        sx={{ flexGrow: 1, p: 3, width: `calc(100% - ${drawerWidth}px)` }}
       >
 
-
         <Toolbar />
-        <Reportbloodrequest/> 
+        <Reportbloodrequest />
       </Box>
-    </Box>
+    </Box >
   );
 };
 
