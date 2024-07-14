@@ -1,26 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { retrieveLastDonation, updateLastDonationApi, updateRequestDetails, retrieveDonorDetails, updateDonorDetails } from '../services/allApi';
+import { retrieveLastDonation, updateLastDonationApi, updateRequestDetails, getDonorDetailsApi, updateDonorDetails, getRequestDetails } from '../services/allApi';
 import { serverUrl } from '../services/serverUrl';
 
-function Donorpage() {
+function Donorpage({ requestId }) {
   const [formData, setFormData] = useState({
     date: '',
   });
-  const [donorId, setDonorId] = useState(1);
+  const [donorId, setDonorId] = useState(1); // Assuming donorId is known and set
   const [requests, setRequests] = useState([]);
+  const [donorDetails, setDonorDetails] = useState(null);
+  const [requestDetails, setRequestDetails] = useState(null);
 
   useEffect(() => {
     fetchLastDonation();
     fetchRequests();
-  }, []);
+    if (requestId) {
+      fetchRequestDetails();
+    }
+    fetchDonorDetails();
+  }, [requestId]); // Include requestId in dependency array to trigger effect on change
 
   const fetchLastDonation = async () => {
     try {
       const response = await retrieveLastDonation(donorId);
       if (response) {
-        setFormData({ date: response.lastDonation });
+        setFormData({ date: response.data.lastDonation });
       } else {
         toast.error('Failed to fetch last donation date.');
       }
@@ -33,18 +39,47 @@ function Donorpage() {
   const fetchRequests = async () => {
     try {
       const response = await fetch(`${serverUrl}/requests`);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch requests. Status: ${response.status}`);
+      }
       const data = await response.json();
 
       // Retrieve accepted request IDs from local storage
       const acceptedRequestIds = JSON.parse(localStorage.getItem('acceptedRequestIds')) || [];
 
-      // Filter out accepted requests
-      const filteredRequests = data.filter(request => request.status !== 'Accepted' && !acceptedRequestIds.includes(request.id));
+      // Filter out accepted requests and requests already accepted
+      const filteredRequests = data.filter(request => (
+        request.status !== 'Accepted' && !acceptedRequestIds.includes(request.id)
+      ));
 
       setRequests(filteredRequests);
     } catch (error) {
       console.error('Error fetching requests:', error);
       toast.error('Failed to fetch requests. Please try again.');
+    }
+  };
+
+  const fetchRequestDetails = async () => {
+    try {
+      const details = await getRequestDetails(requestId);
+      setRequestDetails(details);
+    } catch (error) {
+      console.error('Error fetching request details:', error);
+      toast.error('Failed to fetch request details. Please try again.');
+    }
+  };
+
+  const fetchDonorDetails = async () => {
+    try {
+      const response = await getDonorDetailsApi(donorId);
+      if (response) {
+        setDonorDetails(response.data);
+      } else {
+        toast.error('Failed to fetch donor details.');
+      }
+    } catch (error) {
+      console.error('Error fetching donor details:', error);
+      toast.error('Failed to fetch donor details. Please try again.');
     }
   };
 
@@ -65,51 +100,58 @@ function Donorpage() {
 
   const handleAccept = async (request) => {
     try {
-      console.log('Current request data:', request);
+      const lastDonationDate = new Date(formData.date);
+      const currentDate = new Date();
+      const diffTime = Math.abs(currentDate - lastDonationDate);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
+      // Check if it has been at least 90 days since the last donation
+      if (diffDays < 90) {
+        toast.error('Cannot accept request. It has not been 3 months since the last donation.');
+        return;
+      }
+
+      // Check if the currentUnit is less than the required unit
       if (request.currentUnit < request.unit) {
         const updatedRequest = {
           ...request,
           currentUnit: request.currentUnit + 1,
-          donorList: [...request.donorList, { name: 'Lekshmi', mobile: '8596526340' }],
+          donorList: [...request.donorList, { name: donorDetails.name, mobile: donorDetails.phone }],
         };
 
+        // If the currentUnit meets the required unit, update status to 'Accepted'
         if (updatedRequest.currentUnit === request.unit) {
           updatedRequest.status = 'Accepted';
         }
 
         await updateRequestDetails(request.id, updatedRequest);
 
-        const donor = await retrieveDonorDetails(donorId);
-
+        // Update donor details with request history
+        const donor = await getDonorDetailsApi(donorId);
         if (donor) {
           donor.history = donor.history || [];
           donor.history.push({
             requestId: request.id,
             userName: request.userName,
+            phone: request.phone,
             gender: request.gender,
             age: request.age,
             district: request.district,
             startDate: request.startDate,
-            phone: request.phone,
           });
 
-          await updateDonorDetails(donor.id, donor);
+          await updateDonorDetails(donorId, donor);
 
+          // Show success message and update local state (remove accepted request from list)
           toast.success('Request accepted successfully!');
+          const acceptedRequestIds = JSON.parse(localStorage.getItem('acceptedRequestIds')) || [];
+          acceptedRequestIds.push(request.id);
+          localStorage.setItem('acceptedRequestIds', JSON.stringify(acceptedRequestIds));
+          setRequests((prevRequests) => prevRequests.filter((req) => req.id !== request.id));
         } else {
           toast.error('Failed to update donor details.');
         }
-
-        // Add accepted request ID to local storage
-        const acceptedRequestIds = JSON.parse(localStorage.getItem('acceptedRequestIds')) || [];
-        acceptedRequestIds.push(request.id);
-        localStorage.setItem('acceptedRequestIds', JSON.stringify(acceptedRequestIds));
-
-        // Filter out the accepted request from the requests state
-        setRequests((prevRequests) => prevRequests.filter((req) => req.id !== request.id));
       } else {
-        console.log('Request has already met the required unit:', request.currentUnit, request.unit);
         toast.info('Request has already met the required unit.');
       }
     } catch (error) {
