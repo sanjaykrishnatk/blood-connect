@@ -41,6 +41,29 @@ const Dashboard = () => {
     year: 2024,
   };
 
+  const sidebarContents = [
+    {
+      option: "Home",
+      icon: "HomeIcon",
+      link: "",
+    },
+    {
+      option: "Requests",
+      icon: "RequestIcon",
+      link: "",
+    },
+    {
+      option: "Donors",
+      icon: "DonorsIcon",
+      link: "",
+    },
+    {
+      option: "Recipients",
+      icon: "RecipientsIcon",
+      link: "",
+    },
+  ];
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -48,6 +71,7 @@ const Dashboard = () => {
       <Sidebar
         mobileOpen={mobileOpen}
         handleDrawerToggle={handleDrawerToggle}
+        sidebarContents={sidebarContents}
       />
       <Box
         component="main"
