@@ -17,7 +17,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import stateOptions from "../services/states";
 
-function Request() {
+function Request({ phoneNo }) {
   const initialBloodRequest = {
     userName: "",
     bloodGroup: "",
@@ -26,7 +26,7 @@ function Request() {
     gender: "",
     state: "",
     district: "",
-    phone: "",
+    phone: phoneNo,
     donorList: [],
     currentUnit: 0,
     startDate: new Date(),
@@ -69,7 +69,7 @@ function Request() {
     } = bloodRequest;
     const formattedStartDate = startDate.toLocaleDateString("en-GB");
 
-    console.log(bloodRequest);
+    // console.log({ ...bloodRequest, phone: phoneNo });
     if (
       !userName ||
       !bloodGroup ||
@@ -78,16 +78,16 @@ function Request() {
       !gender ||
       !state ||
       !district ||
-      !phone ||
       !startDate
     ) {
       toast.info("Please fill the form completely");
     } else {
       // const result = await addRequestApi(bloodRequest)
       // console.log(result);
-
+      console.log(bloodRequest);
       const result = await addRequestApi({
         ...bloodRequest,
+        phone: phoneNo,
         startDate: formattedStartDate,
       });
 
@@ -110,9 +110,9 @@ function Request() {
             let message = {
               route: "q",
               message: `Hi ${item?.username}, An urgent blood donation request matches your profile. Your help can save a life! Click here for details and to confirm your donation: https://blood-connect-seven.vercel.app/accept?rid=${rid}&did=${item.id}
-        
-Thank you,
-BloodConnect Team`,
+
+      Thank you,
+      BloodConnect Team`,
               flash: 0,
               numbers: item?.phone,
             };
@@ -138,7 +138,7 @@ BloodConnect Team`,
                 <Form.Label>Patient's Name : </Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Enter your Name"
+                  placeholder="Name"
                   value={bloodRequest.userName}
                   onChange={(event) => {
                     const value = event.target.value;
@@ -169,7 +169,7 @@ BloodConnect Team`,
                   <div key={`inline-${type}`} className="mb-3">
                     <Form.Check
                       inline
-                      label="male"
+                      label="Male"
                       name="group1"
                       type={type}
                       id={`inline-${type}-male`}
@@ -183,26 +183,12 @@ BloodConnect Team`,
                     />
                     <Form.Check
                       inline
-                      label="female"
+                      label="Female"
                       name="group1"
                       type={type}
                       id={`inline-${type}-female`}
                       value="female"
                       checked={bloodRequest.gender === "female"}
-                      onChange={(event) => {
-                        const value = event.target.value;
-                        console.log(value);
-                        setBloodRequest({ ...bloodRequest, gender: value });
-                      }}
-                    />
-                    <Form.Check
-                      inline
-                      label="other"
-                      name="group1"
-                      type={type}
-                      id={`inline-${type}-other`}
-                      value="other"
-                      checked={bloodRequest.gender === "other"}
                       onChange={(event) => {
                         const value = event.target.value;
                         console.log(value);
@@ -299,12 +285,8 @@ BloodConnect Team`,
               <Form.Control
                 type="text"
                 placeholder=""
-                value={bloodRequest.phone}
-                onChange={(event) => {
-                  const value = event.target.value;
-                  console.log(value);
-                  setBloodRequest({ ...bloodRequest, phone: value });
-                }}
+                value={phoneNo}
+                readOnly
               />
             </Form.Group>
 

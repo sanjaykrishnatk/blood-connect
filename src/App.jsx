@@ -41,10 +41,21 @@ function App() {
           path="/user_requests"
           element={<UserDashboard userRequests={true} />}
         />
+        <Route
+          path="/donorpage"
+          element={<DonorDashboard donorHome={true} />}
+        />
+        <Route
+          path="/donor_requests"
+          element={<DonorDashboard donorRequests={true} />}
+        />
+        <Route
+          path="/donor_history"
+          element={<DonorDashboard donorHistory={true} />}
+        />
 
-        <Route path="/donorhistory" element={<Donorhistory />} />
+        {/* <Route path="/donorhistory" element={<Donorhistory />} /> */}
         <Route path="/requestreport" element={<UserBloodRequestReport />} />
-        <Route path="/donorpage" element={<DonorDashboard />} />
         <Route path="/accept" element={<AcceptRequest />} />
       </Routes>
       <ToastContainer position="top-center" autoClose="2000" />

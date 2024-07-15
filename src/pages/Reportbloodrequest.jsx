@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { getRequestByPhoneApi } from "../services/allApi";
 
-function Reportbloodrequest() {
+function Reportbloodrequest({ phoneNo }) {
   const [requestReport, setRequestReport] = useState([]);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -19,7 +19,7 @@ function Reportbloodrequest() {
   console.log(requestReport);
 
   useEffect(() => {
-    getReport("7025167527");
+    getReport(phoneNo);
   }, []);
 
   return (
@@ -91,8 +91,8 @@ function Reportbloodrequest() {
                           <Modal.Body>
                             {request.donorList.map((donor) => (
                               <>
-                                <p>Donor Name: {donor.userName}</p>
-                                <p>Contact Number: {donor.phone}</p>
+                                <p>Donor Name: {donor.name}</p>
+                                <p>Contact Number: {donor.mobile}</p>
                               </>
                             ))}
                           </Modal.Body>

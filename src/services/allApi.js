@@ -32,11 +32,6 @@ export const getRequestByPhoneApi = async (phone) => {
   return await commonApi("GET", `${serverUrl}/requests?phone=${phone}`, "");
 };
 
-// //api to get all blood requests - FARHANA
-// export const getRequests = async () => {
-//   return await commonApi("GET", `${serverUrl}/requests`, "");
-// };
-
 //api to add form data to blood request section - FARHANA
 export const addRequestApi = async (reqBody) => {
   return await commonApi("POST", `${serverUrl}/requests`, reqBody);
@@ -96,6 +91,23 @@ export const updateDonorDetails = async (donorId, donorData) => {
   return await commonApi("PUT", `${serverUrl}/donors/${donorId}`, donorData);
 };
 
+// registration api
+export const registrationApi = async (reqBody, type) => {
+  let urlType = type == "recipient" ? "recipients" : "donors";
+  return await commonApi("POST", `${serverUrl}/${urlType}`, reqBody);
+};
 
+//authenticate user api
+export const authenticationApi = async (phone, type) => {
+  let urlType = type == "recipient" ? "recipients" : "donors";
+  return await commonApi("GET", `${serverUrl}/${urlType}?phone=${phone}`, "");
+};
 
-
+//get donation requests by blood group api
+export const getRequestsByBloodGroupApi = async (bloodGroup) => {
+  return await commonApi(
+    "GET",
+    `${serverUrl}/requests?bloodGroup=${encodeURIComponent(bloodGroup)}`,
+    ""
+  );
+};

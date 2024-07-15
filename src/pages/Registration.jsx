@@ -10,65 +10,68 @@ import {
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { authenticationApi, registrationApi } from "../services/allApi";
 
 const Registration = () => {
-  const [name, setName] = useState("");
-  const [mobile, setMobile] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [selectedOption, setSelectedOption] = useState("");
-  const [district, setDistrict] = useState("");
-  const [state, setState] = useState("");
-  const [blood, setBlood] = useState("");
+  const [userData, setUserData] = useState({
+    username: "",
+    age: "",
+    gender: "",
+    password: "",
+    bloodGroup: "",
+    district: "",
+    state: "",
+    phone: "",
+    type: "",
+    lastDonation: "",
+    history: [],
+  });
   const navigate = useNavigate();
-
-  const handleOptionChange = (e) => {
-    setSelectedOption(e.target.value);
-  };
-
-  const validateMobile = (mobile) => {
-    return mobile.length === 10;
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setError("");
-
-    if (name.trim() === "") {
-      setError("Name is required");
-      return;
-    }
-    if (!validateMobile(mobile)) {
-      setError("Mobile number must be 10 digits");
-      return;
-    }
-
-    if (password.length < 6) {
-      setError("Password must be at least 8 characters long");
-      return;
-    }
-
-    if (district.trim() === "") {
-      setError("District is required");
-      return;
-    }
-
-    if (state.trim() === "") {
-      setError("State is required");
-      return;
-    }
-
-    if (blood === "") {
-      setError("Blood Group not selected");
-      return;
+  console.log(userData);
+  const handleRegister = async () => {
+    const {
+      username,
+      age,
+      gender,
+      password,
+      bloodGroup,
+      district,
+      state,
+      phone,
+      type,
+      lastDonation,
+    } = userData;
+    if (
+      !username ||
+      !age ||
+      !gender ||
+      !password ||
+      !bloodGroup ||
+      !district ||
+      !state ||
+      !phone ||
+      !type ||
+      (type == "donor" && !lastDonation)
+    ) {
+      toast.info("Please fill out the form completely");
+    } else {
+      const checkUser = await authenticationApi(phone, type);
+      if (checkUser.data.length > 0) {
+        toast.error("User already exists");
+      } else {
+        const result = await registrationApi(userData, userData.type);
+        if (result.status >= 200 && result.status < 300) {
+          toast.success("Registration Succesful");
+          navigate("/login");
+        }
+      }
     }
   };
   return (
     <div className="container-fluid registration-wrapper">
       <div className="wrapper">
         <div className="form-box login">
-          {error && <p className="error text-center">{error}</p>}
-          <form action="" onSubmit={handleSubmit}>
+          <form>
             <h3 className="fw-bold text-center">Registration</h3>
             <div className="d-flex">
               <div className="input-box">
@@ -76,7 +79,9 @@ const Registration = () => {
                   className="p-2"
                   type="text"
                   placeholder="Username"
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) =>
+                    setUserData({ ...userData, username: e.target.value })
+                  }
                   required
                 />
                 <FontAwesomeIcon className="icons" icon={faUser} />
@@ -86,7 +91,9 @@ const Registration = () => {
                   className="p-2"
                   type="password"
                   placeholder="Password"
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) =>
+                    setUserData({ ...userData, password: e.target.value })
+                  }
                   required
                 />
                 <FontAwesomeIcon className="icons" icon={faLock} />
@@ -99,7 +106,9 @@ const Registration = () => {
                   name="Select Blood Group"
                   id="blood"
                   className="p-2"
-                  onChange={(e) => setBlood(e.target.value)}
+                  onChange={(e) =>
+                    setUserData({ ...userData, bloodGroup: e.target.value })
+                  }
                   required
                 >
                   <option
@@ -142,11 +151,13 @@ const Registration = () => {
                 <input
                   className="p-2"
                   type="text"
-                  placeholder="Enter District"
-                  onChange={(e) => setDistrict(e.target.value)}
+                  placeholder="Age"
+                  onChange={(e) =>
+                    setUserData({ ...userData, age: e.target.value })
+                  }
                   required
                 />
-                <FontAwesomeIcon className="icons" icon={faLocationDot} />
+                <FontAwesomeIcon className="icons" icon={faUser} />
               </div>
             </div>
 
@@ -156,7 +167,9 @@ const Registration = () => {
                   className="p-2"
                   type="text"
                   placeholder="Enter State"
-                  onChange={(e) => setState(e.target.value)}
+                  onChange={(e) =>
+                    setUserData({ ...userData, state: e.target.value })
+                  }
                   required
                 />
                 <FontAwesomeIcon className="icons" icon={faFlag} />
@@ -165,54 +178,109 @@ const Registration = () => {
               <div className="input-box">
                 <input
                   className="p-2"
+                  type="text"
+                  placeholder="Enter District"
+                  onChange={(e) =>
+                    setUserData({ ...userData, district: e.target.value })
+                  }
+                  required
+                />
+                <FontAwesomeIcon className="icons" icon={faLocationDot} />
+              </div>
+            </div>
+
+            <div className="d-flex">
+              <div className="input-box">
+                <select
+                  name="Select Role"
+                  id="Role"
+                  className="p-2"
+                  onChange={(e) =>
+                    setUserData({ ...userData, type: e.target.value })
+                  }
+                  required
+                >
+                  <option
+                    id="val"
+                    className="text-dark"
+                    value=""
+                    disabled
+                    selected
+                  >
+                    Type
+                  </option>
+                  <option id="val" className="text-dark" value="recipient">
+                    Recipient
+                  </option>
+                  <option id="val" className="text-dark" value="donor">
+                    Donor{" "}
+                  </option>
+                </select>
+              </div>
+
+              <div className="input-box">
+                <input
+                  className="p-2"
                   type="tel"
                   placeholder="Enter Phone Number"
-                  onChange={(e) => setMobile(e.target.value)}
+                  onChange={(e) =>
+                    setUserData({ ...userData, phone: e.target.value })
+                  }
                   required
                 />
                 <FontAwesomeIcon className="icons" icon={faPhone} />
               </div>
             </div>
-            <div className="mt-3 ms-3">
-              <h5 style={{ fontSize: "15px" }}>Choose your Role:</h5>
-              <div className="d-flex justify-content-between ps-5 pe-5">
-                <label id="label1">
-                  <input
-                    type="radio"
-                    name="role"
-                    value="option1"
-                    checked={selectedOption === "option1"}
-                    onChange={handleOptionChange}
-                    required
-                    className="me-2"
-                  />
-                  Donor
-                </label>
-                <label id="label2">
-                  <input
-                    type="radio"
-                    name="role"
-                    value="option2"
-                    checked={selectedOption === "option2"}
-                    onChange={handleOptionChange}
-                    required
-                    className="me-2"
-                  />
-                  Recipient
-                </label>
+            <div className="d-flex">
+              <div className="input-box">
+                <select
+                  name="Select Gender"
+                  id="Role"
+                  className="p-2"
+                  onChange={(e) =>
+                    setUserData({ ...userData, gender: e.target.value })
+                  }
+                  required
+                >
+                  <option
+                    id="val"
+                    className="text-dark"
+                    value=""
+                    disabled
+                    selected
+                  >
+                    Gender
+                  </option>
+                  <option id="val" className="text-dark" value="male">
+                    Male
+                  </option>
+                  <option id="val" className="text-dark" value="female">
+                    Female
+                  </option>
+                </select>
+              </div>
+              <div className="input-box">
+                <input
+                  className="p-2 text-light"
+                  disabled={userData.type === "recipient" && true}
+                  type="date"
+                  placeholder="Password"
+                  onChange={(e) =>
+                    setUserData({
+                      ...userData,
+                      lastDonation: new Date(e.target.value).toLocaleDateString(
+                        "en-GB"
+                      ),
+                    })
+                  }
+                  required
+                />
               </div>
             </div>
+            <button type="button" onClick={handleRegister}>
+              Register
+            </button>
 
-            <button type="submit">Register</button>
-
-            <div className="remember-forget mt-4">
-              <label>
-                <input type="checkbox" />I agree to all terms & conditions.
-              </label>
-              <a href="#" style={{ color: "white" }}>
-                Forgot Password?
-              </a>
-            </div>
             <div className="register-link">
               <p>
                 Already have an account?{" "}

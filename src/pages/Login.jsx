@@ -1,106 +1,123 @@
-import './Login.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLock, faUser } from '@fortawesome/free-solid-svg-icons'
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-
+import "./Registration.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faLock,
+  faUser,
+  faPhone,
+  faFlag,
+  faLocationDot,
+} from "@fortawesome/free-solid-svg-icons";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { authenticationApi, registrationApi } from "../services/allApi";
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [selectedOption, setSelectedOption] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [userData, setUserData] = useState({
+    phone: "",
+    password: "",
+    type: "",
+  });
   const navigate = useNavigate();
+  console.log(userData);
 
-  const handleOptionChange = (e) => {
-    setSelectedOption(e.target.value);
-  };
-  const handleAlert = () => {
-    if (selectedOption === '') {
-      setError('Please select an option!');
-    }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setError('');
-
-    // Perform basic validation
-    if (username.trim() === '') {
-      setError('Username or Email is required');
-      return;
-    }
-
-    if (password === '') {
-      setError('Password is required');
-      return;
-    }
-   
-
-    setIsLoading(true);
-
-    // Mock login process
-    setTimeout(() => {
-      // Simulate successful login
-      if (username === 'test@example.com' && password === 'password123') {
-        toast.success('Login successful!');
-        navigate('/home');
+  const handleLogin = async () => {
+    const { phone, password, type } = userData;
+    if (!phone || !password || !type) {
+      toast.info("Please fill out the form completely");
+    } else {
+      const checkUser = await authenticationApi(phone, type);
+      if (checkUser.data.length > 0) {
+        const userDetails = checkUser.data;
+        if (password == userDetails[0].password) {
+          toast.success("Login Succesfull");
+          if (userDetails[0].type == "donor") {
+            sessionStorage.setItem("user", JSON.stringify(userDetails));
+            navigate("/donorpage");
+          } else {
+            sessionStorage.setItem("user", JSON.stringify(userDetails));
+            navigate("/userdashboard");
+          }
+        } else {
+          toast.error("Invalid Password");
+        }
       } else {
-        setError('Invalid username/email or password');
+        toast.error("User doesn't exists");
+        navigate("/register");
       }
-      setIsLoading(false);
-    }, 1000);
+    }
   };
-
-
-
   return (
-    <div className="container-fluid login-wrapper">
+    <div className="container-fluid registration-wrapper">
       <div className="wrapper">
-        <div className='form-box login'>
-          {error && <p className="error text-center">{error}</p>}
-          <form action="" onSubmit={handleSubmit}>
-            <h1>Login</h1>
-            <div className="input-box ">
-              <input type="text" className='p-4' placeholder='Username' onChange={(e) => setUsername(e.target.value)} required />
+        <div className="form-box login">
+          <form>
+            <h3 className="fw-bold text-center">Login</h3>
+
+            <div className="input-box">
+              <input
+                className="p-2"
+                type="text"
+                placeholder="Phone"
+                onChange={(e) =>
+                  setUserData({ ...userData, phone: e.target.value })
+                }
+                required
+              />
               <FontAwesomeIcon className="icons" icon={faUser} />
             </div>
             <div className="input-box">
-              <input className='p-4' type="password" placeholder='Password' onChange={(e) => setPassword(e.target.value)} required />
+              <input
+                className="p-2"
+                type="password"
+                placeholder="Password"
+                onChange={(e) =>
+                  setUserData({ ...userData, password: e.target.value })
+                }
+                required
+              />
               <FontAwesomeIcon className="icons" icon={faLock} />
             </div>
 
-
-            <div >
-
-            <h5 style={{ fontSize: '15px' }}>Choose your Role:</h5>
-              <label id="label1">
-                <input type="radio" name="role" value="option1"
-                  checked={selectedOption === 'option1'}
-                  onChange={handleOptionChange}
-                  onClick={handleAlert}  required/>
-                Donor
-              </label>
-              <label id="label2">
-                <input type="radio" name="role" value="option2"
-                  checked={selectedOption === 'option2'}
-                  onChange={handleOptionChange}
-                  onClick={handleAlert} required />
-                Recipient
-              </label><br />
-
-
+            <div className="input-box">
+              <select
+                name="Select Role"
+                id="Role"
+                className="p-2"
+                onChange={(e) =>
+                  setUserData({ ...userData, type: e.target.value })
+                }
+                required
+              >
+                <option
+                  id="val"
+                  className="text-dark"
+                  value=""
+                  disabled
+                  selected
+                >
+                  Type
+                </option>
+                <option id="val" className="text-dark" value="recipient">
+                  Recipient
+                </option>
+                <option id="val" className="text-dark" value="donor">
+                  Donor{" "}
+                </option>
+              </select>
             </div>
-            <div className="remember-forget">
-              <label><input type="checkbox" />Remember Me</label>
-              <a href="#" style={{ color: 'blue' }}>Forget Password?</a>
-            </div>
-            <button type="submit" disabled={isLoading} >
-              {isLoading ? 'Logging in...' : 'Login'}</button>
+
+            <button type="button" onClick={handleLogin}>
+              Login
+            </button>
+
             <div className="register-link">
-              <p>Don't have an account? <Link style={{ color: 'blue' }} to="/Registration">Register</Link></p>
+              <p>
+                Don't have an account?{" "}
+                <Link style={{ color: "white" }} to="/register">
+                  Register
+                </Link>
+              </p>
             </div>
           </form>
         </div>

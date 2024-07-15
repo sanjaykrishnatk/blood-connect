@@ -9,6 +9,7 @@ const drawerWidth = 240;
 const UserDashboard = ({ userHome, userRequests }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [page, setPage] = useState("userHome");
+  const [user, setUser] = useState([]);
   const handlePage = (userHome, userRequests) => {
     if (userHome) {
       setPage("userHome");
@@ -35,8 +36,13 @@ const UserDashboard = ({ userHome, userRequests }) => {
 
   useEffect(() => {
     handlePage(userHome, userRequests);
+    const loggedInUser = sessionStorage.getItem("user");
+    if (loggedInUser) {
+      setUser(JSON.parse(loggedInUser)[0]);
+      console.log(JSON.parse(loggedInUser)[0]);
+    }
   }, [userHome, userRequests]);
-
+  console.log(user);
   return (
     <Box //sx={{ display: 'flex' }}
     >
@@ -52,8 +58,8 @@ const UserDashboard = ({ userHome, userRequests }) => {
         //sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
       >
         <Toolbar />
-        {page == "userHome" && <Request />}
-        {page == "userRequests" && <Reportbloodrequest />}
+        {page == "userHome" && <Request phoneNo={user.phone} />}
+        {page == "userRequests" && <Reportbloodrequest phoneNo={user.phone} />}
       </Box>
     </Box>
   );
