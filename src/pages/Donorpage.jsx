@@ -1,32 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { retrieveLastDonation, updateLastDonationApi, updateRequestDetails, getDonorDetailsApi, updateDonorDetails, getRequestDetails } from '../services/allApi';
-import { serverUrl } from '../services/serverUrl';
+import {
+  retrieveLastDonation,
+  updateLastDonationApi,
+  updateRequestDetails,
+  getDonorDetailsApi,
+  updateDonorDetails,
+  getRequestDetails
+} from '../services/allApi';
 
-function Donorpage({ requestId }) {
-  const [formData, setFormData] = useState({
-    date: '',
-  });
+function Donorpage() {
+  const [formData, setFormData] = useState({ date: '' });
   const [donorId, setDonorId] = useState(1); // Assuming donorId is known and set
   const [requests, setRequests] = useState([]);
   const [donorDetails, setDonorDetails] = useState(null);
-  const [requestDetails, setRequestDetails] = useState(null);
+  const [requestDetails, setRequestDetails] = useState([]);
 
   useEffect(() => {
     fetchLastDonation();
-    fetchRequests();
-    if (requestId) {
+    fetchDonorDetails();
+  }, []);
+
+  useEffect(() => {
+    if (donorDetails) {
       fetchRequestDetails();
     }
-    fetchDonorDetails();
-  }, [requestId]); // Include requestId in dependency array to trigger effect on change
+  }, [donorDetails]);
 
   const fetchLastDonation = async () => {
     try {
       const response = await retrieveLastDonation(donorId);
       if (response) {
-        setFormData({ date: response.data.lastDonation });
+        setFormData({ date: response.lastDonation });
       } else {
         toast.error('Failed to fetch last donation date.');
       }
@@ -36,50 +42,40 @@ function Donorpage({ requestId }) {
     }
   };
 
-  const fetchRequests = async () => {
-    try {
-      const response = await fetch(`${serverUrl}/requests`);
-      if (!response.ok) {
-        throw new Error(`Failed to fetch requests. Status: ${response.status}`);
-      }
-      const data = await response.json();
-
-      // Retrieve accepted request IDs from local storage
-      const acceptedRequestIds = JSON.parse(localStorage.getItem('acceptedRequestIds')) || [];
-
-      // Filter out accepted requests and requests already accepted
-      const filteredRequests = data.filter(request => (
-        request.status !== 'Accepted' && !acceptedRequestIds.includes(request.id)
-      ));
-
-      setRequests(filteredRequests);
-    } catch (error) {
-      console.error('Error fetching requests:', error);
-      toast.error('Failed to fetch requests. Please try again.');
-    }
-  };
-
-  const fetchRequestDetails = async () => {
-    try {
-      const details = await getRequestDetails(requestId);
-      setRequestDetails(details);
-    } catch (error) {
-      console.error('Error fetching request details:', error);
-      toast.error('Failed to fetch request details. Please try again.');
-    }
-  };
-
   const fetchDonorDetails = async () => {
     try {
       const response = await getDonorDetailsApi(donorId);
       if (response) {
-        setDonorDetails(response.data);
+        setDonorDetails(response);
       } else {
         toast.error('Failed to fetch donor details.');
       }
     } catch (error) {
       console.error('Error fetching donor details:', error);
       toast.error('Failed to fetch donor details. Please try again.');
+    }
+  };
+
+  const fetchRequestDetails = async () => {
+    try {
+      const response = await getRequestDetails(donorId); // Assuming donorId is the correct ID to fetch request details
+      if (Array.isArray(response)) {
+        setRequestDetails(response);
+
+        const acceptedRequestIds = JSON.parse(localStorage.getItem('acceptedRequestIds')) || [];
+        const filteredRequests = response.filter(
+          (request) =>
+            request.bloodGroup === donorDetails.bloodGroup &&
+            request.status !== 'Accepted' &&
+            !acceptedRequestIds.includes(request.id)
+        );
+        setRequests(filteredRequests);
+      } else {
+        toast.error('Request details not in expected format.');
+      }
+    } catch (error) {
+      console.error('Error fetching request details:', error);
+      toast.error('Failed to fetch request details. Please try again.');
     }
   };
 
@@ -105,13 +101,11 @@ function Donorpage({ requestId }) {
       const diffTime = Math.abs(currentDate - lastDonationDate);
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-      // Check if it has been at least 90 days since the last donation
       if (diffDays < 90) {
         toast.error('Cannot accept request. It has not been 3 months since the last donation.');
         return;
       }
 
-      // Check if the currentUnit is less than the required unit
       if (request.currentUnit < request.unit) {
         const updatedRequest = {
           ...request,
@@ -119,18 +113,16 @@ function Donorpage({ requestId }) {
           donorList: [...request.donorList, { name: donorDetails.name, mobile: donorDetails.phone }],
         };
 
-        // If the currentUnit meets the required unit, update status to 'Accepted'
         if (updatedRequest.currentUnit === request.unit) {
           updatedRequest.status = 'Accepted';
         }
 
         await updateRequestDetails(request.id, updatedRequest);
 
-        // Update donor details with request history
-        const donor = await getDonorDetailsApi(donorId);
-        if (donor) {
-          donor.history = donor.history || [];
-          donor.history.push({
+        const updatedDonor = await getDonorDetailsApi(donorId);
+        if (updatedDonor) {
+          const updatedHistory = updatedDonor.history || [];
+          updatedHistory.push({
             requestId: request.id,
             userName: request.userName,
             phone: request.phone,
@@ -140,9 +132,8 @@ function Donorpage({ requestId }) {
             startDate: request.startDate,
           });
 
-          await updateDonorDetails(donorId, donor);
+          await updateDonorDetails(donorId, { ...updatedDonor, history: updatedHistory });
 
-          // Show success message and update local state (remove accepted request from list)
           toast.success('Request accepted successfully!');
           const acceptedRequestIds = JSON.parse(localStorage.getItem('acceptedRequestIds')) || [];
           acceptedRequestIds.push(request.id);
@@ -177,27 +168,25 @@ function Donorpage({ requestId }) {
                       display: 'block',
                       width: '100%',
                       padding: '0.5rem',
+                      fontSize: '1rem',
                       borderRadius: '4px',
                       border: '1px solid #ccc',
                     }}
                     value={formData.date}
                     onChange={handleChange}
-                    required
                   />
                 </div>
                 <button
                   type="submit"
                   style={{
-                    padding: '0.5rem 1rem',
-                    borderRadius: '3px',
-                    border: 'none',
-                    background: '#007bff',
-                    color: '#fff',
-                    marginTop: '1rem',
-                    width: '100%',
-                    maxWidth: '100px',
-                    margin: '0 auto',
                     display: 'block',
+                    width: '100%',
+                    padding: '0.5rem',
+                    fontSize: '1rem',
+                    backgroundColor: '#007bff',
+                    color: '#fff',
+                    borderRadius: '4px',
+                    border: 'none',
                   }}
                 >
                   Update
@@ -206,48 +195,25 @@ function Donorpage({ requestId }) {
             </div>
           </div>
         </div>
-      </div>
-      <hr />
-      <div className="row" style={{ marginTop: '2rem', textAlign: 'center' }}>
-        <div className="col-md-12" style={{ margin: '0 auto' }}>
-          <div className="table-responsive" style={{ maxWidth: '100%', overflowX: 'auto', marginTop: '1rem' }}>
-            <table
-              className="table shadow-sm"
-              style={{
-                width: '100%',
-                boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-              }}
-            >
-              <thead className="table-warning">
-                <tr>
-                  <th>#</th>
-                  <th style={{ minWidth: '50px' }}>User Name</th>
-                  <th style={{ minWidth: '50px' }}>Gender</th>
-                  <th style={{ minWidth: '50px' }}>Age</th>
-                  <th style={{ minWidth: '50px' }}>District</th>
-                  <th style={{ minWidth: '50px' }}>Date Needed</th>
-                  <th style={{ minWidth: '50px' }}>Phone</th>
-                  <th style={{ minWidth: '50px' }}>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {requests.map((request, index) => (
-                  <tr key={request.id}>
-                    <td>{index + 1}</td>
-                    <td>{request.userName}</td>
-                    <td>{request.gender}</td>
-                    <td>{request.age}</td>
-                    <td>{request.district}</td>
-                    <td>{request.startDate}</td>
-                    <td>{request.phone}</td>
-                    <td>
-                      <button className="btn btn-success me-2" onClick={() => handleAccept(request)}>Accept</button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+        <div style={{ marginTop: '2rem' }}>
+          <h2 className="fs-5">Available Requests</h2>
+          <ul>
+            {requests.map((request) => (
+              <li key={request.id}>
+                <p>User Name: {request.userName}</p>
+                <p>Blood Group: {request.bloodGroup}</p>
+                <p>Unit: {request.unit}</p>
+                <p>Age: {request.age}</p>
+                <p>Gender: {request.gender}</p>
+                <p>State: {request.state}</p>
+                <p>District: {request.district}</p>
+                <p>Phone: {request.phone}</p>
+                <p>Start Date: {request.startDate}</p>
+                <p>Current Unit: {request.currentUnit}</p>
+                <button onClick={() => handleAccept(request)}>Accept Request</button>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </>
