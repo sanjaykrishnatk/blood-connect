@@ -156,7 +156,7 @@ function Donorpage({ userID, page }) {
         )}
         {page == "requests" && (
           <div>
-            {eligible ? (
+            {eligible && requests.length > 0 ? (
               <div style={{ marginTop: "2rem" }}>
                 <h2 className="fs-5">Available Requests</h2>
 

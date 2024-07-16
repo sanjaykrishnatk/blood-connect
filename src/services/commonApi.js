@@ -6,8 +6,9 @@ export const commonApi = async (httpRequest, url, reqBody) => {
     url,
     data: reqBody,
     headers: {
-    "authorization":"wB2U60QDGRgbP5HW7qdTpZi9rezOMk4nFELucxJX1hCfvYKVlA6ELlu5kNHj824B9zDpsI7RwrCGofbd",
-    "Content-Type":"application/json"
+      authorization:
+        "wB2U60QDGRgbP5HW7qdTpZi9rezOMk4nFELucxJX1hCfvYKVlA6ELlu5kNHj824B9zDpsI7RwrCGofbd",
+      "Content-Type": "application/json",
     },
   };
   return await axios(reqConfig)
@@ -15,7 +16,7 @@ export const commonApi = async (httpRequest, url, reqBody) => {
       return result;
     })
     .catch((err) => {
-      console.log(err)
+      console.log(err);
       return err;
     });
 };

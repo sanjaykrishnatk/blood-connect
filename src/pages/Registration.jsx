@@ -55,6 +55,10 @@ const Registration = () => {
     ) {
       toast.info("Please fill out the form completely");
     } else {
+      if (age < 18) {
+        toast.info("Donor age should be greater than 18");
+        return;
+      }
       const checkUser = await authenticationApi(phone, type);
       if (checkUser.data.length > 0) {
         toast.error("User already exists");
