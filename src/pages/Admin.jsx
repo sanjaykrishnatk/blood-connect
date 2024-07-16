@@ -39,7 +39,7 @@ function Admin({ page }) {
     const result = await retrieveRecipientApi();
     let recipientTableData = result.data.map((item) => {
       return {
-        userName: item.userName,
+        username: item.username,
         bloodGroup: item.bloodGroup,
         gender: item.gender,
         age: item.age,

@@ -13,28 +13,14 @@ import {
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import Card from "react-bootstrap/Card";
-import { Link } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import { getDonorsByBloodGroupApi, smsApi } from "../services/allApi";
+import Footer from "../components/Footer";
+
 function Home() {
-  const handleRequest = async (bloodGroup) => {
-    console.log(bloodGroup);
-    const response = await getDonorsByBloodGroupApi(bloodGroup);
-    const mobileNumbers = response.data.map((item) => item.phone).toString();
-    console.log(mobileNumbers);
-    await Promise.all(
-      response.data.map(async (item) => {
-        let message = {
-          route: "q",
-          message: `Hi ${item?.username}, An urgent blood donation request matches your profile. Your help can save a life! Click here for details and to confirm your donation: https://blood-connect-seven.vercel.app/ 
-Thank you,
-BloodConnect Team`,
-          flash: 0,
-          numbers: item?.phone,
-        };
-        const response = await smsApi(message);
-        console.log(response.data);
-      })
-    );
+  const navigate = useNavigate();
+  const handleRedirect = () => {
+    navigate("/register");
   };
   return (
     <>
@@ -66,7 +52,7 @@ BloodConnect Team`,
                     variant="danger"
                     style={{ backgroundColor: "#DF1626" }}
                     className="fw-bold"
-                    onClick={() => handleRequest("A+")}
+                    onClick={handleRedirect}
                   >
                     DONATE
                   </Button>{" "}
@@ -88,12 +74,14 @@ BloodConnect Team`,
             <Button
               variant="light fw-bold rounded-1 p-2"
               style={{ width: "125px" }}
+              onClick={handleRedirect}
             >
               Get Started
             </Button>{" "}
             <Button
               variant="danger fw-bold rounded-1 ms-3 p-2"
               style={{ width: "125px" }}
+              onClick={handleRedirect}
             >
               Donate Now
             </Button>{" "}
@@ -268,38 +256,6 @@ BloodConnect Team`,
                 </Card.Body>
               </Card>{" "}
             </Col>
-
-            {/* <Col
-              sm={12}
-              md={3}
-              className="mb-5 d-flex  justify-content-center align-items-center"
-            >
-              <Card style={{ width: "18rem" }} className="rounded-0  shadow">
-                <Card.Img
-                  variant="top"
-                  src="/blood-drive.png"
-                  style={{ width: "100%", height: "200px" }}
-                  className="rounded-0"
-                />
-                <Card.Body className="p-5">
-                  <Card.Title className="fw-bold">
-                    Organizing Blood Drives
-                  </Card.Title>
-                  <Card.Text className="text-secondary">
-                    Hosting and managing community blood donation events to
-                    ensure a steady and reliable blood supply for all.
-                  </Card.Text>
-                  <Link
-                    className="text-secondary fw-bold"
-                    to={"/"}
-                    style={{ textDecoration: "none", fontSize: "12px" }}
-                  >
-                    KNOW MORE
-                  </Link>
-                </Card.Body>
-              </Card>{" "}
-            </Col> */}
-
             <Col
               sm={12}
               md={3}
@@ -407,6 +363,7 @@ BloodConnect Team`,
           </Button>{" "}
         </Row>
       </section>
+      <Footer />
     </>
   );
 }

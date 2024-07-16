@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { serverUrl } from "../services/serverUrl";
 function Donorpage({ userID, page }) {
   const [formData, setFormData] = useState({ date: "" });
-  const [donorId, setDonorId] = useState(1);
+  const [donorId, setDonorId] = useState(0);
   const [requests, setRequests] = useState([]);
   const [eligible, setEligible] = useState(false);
   const [history, setHistory] = useState(false);
@@ -22,8 +22,8 @@ function Donorpage({ userID, page }) {
   const navigate = useNavigate();
   useEffect(() => {
     setDonorId(userID);
-    donationCheck(donorId);
-  }, []);
+    donationCheck();
+  }, [userID]);
 
   const handleDonation = (rid) => {
     navigate(`/accept?rid=${rid}&did=${userID}`);
@@ -39,8 +39,9 @@ function Donorpage({ userID, page }) {
     const threeMonthsAgo = new Date(today.setMonth(today.getMonth() - 3));
     return lastDonationDate < threeMonthsAgo;
   };
-  const donationCheck = async (id) => {
-    const donorDetails = await getDonorDetailsApi(id);
+  const donationCheck = async () => {
+    console.log(`donor is is ${donorId}, donor id passed is ${userID}`);
+    const donorDetails = await getDonorDetailsApi(userID);
     setHistory(donorDetails.data.history);
     const lastDonationDate = donorDetails.data.lastDonation;
     const today = new Date();

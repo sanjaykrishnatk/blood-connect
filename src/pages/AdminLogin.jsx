@@ -10,10 +10,8 @@ import {
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { authenticationApi, registrationApi } from "../services/allApi";
-import Footer from "../components/Footer";
 
-const Login = () => {
+const AdminLogin = () => {
   const [userData, setUserData] = useState({
     phone: "",
     password: "",
@@ -35,12 +33,9 @@ const Login = () => {
           if (userDetails[0].type == "donor") {
             sessionStorage.setItem("user", JSON.stringify(userDetails));
             navigate("/donorpage");
-          } else if (userDetails[0].type == "recipient") {
+          } else {
             sessionStorage.setItem("user", JSON.stringify(userDetails));
             navigate("/userdashboard");
-          } else if (userDetails[0].type == "admin") {
-            console.log(`inside admin block`);
-            navigate("/admin");
           }
         } else {
           toast.error("Invalid Password");
@@ -108,9 +103,6 @@ const Login = () => {
                 <option id="val" className="text-dark" value="donor">
                   Donor{" "}
                 </option>
-                <option id="val" className="text-dark" value="admin">
-                  Admin{" "}
-                </option>
               </select>
             </div>
 
@@ -133,4 +125,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default AdminLogin;

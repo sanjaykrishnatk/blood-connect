@@ -99,7 +99,15 @@ export const registrationApi = async (reqBody, type) => {
 
 //authenticate user api
 export const authenticationApi = async (phone, type) => {
-  let urlType = type == "recipient" ? "recipients" : "donors";
+  let urlType = "";
+
+  if (type == "recipient") {
+    urlType = "recipients";
+  } else if (type == "donor") {
+    urlType = "donors";
+  } else if (type == "admin") {
+    urlType = "admin";
+  }
   return await commonApi("GET", `${serverUrl}/${urlType}?phone=${phone}`, "");
 };
 
