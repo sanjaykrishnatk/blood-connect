@@ -27,7 +27,7 @@ const Registration = () => {
     history: [],
   });
   const navigate = useNavigate();
-  console.log(userData);
+
   const handleRegister = async () => {
     const {
       username,

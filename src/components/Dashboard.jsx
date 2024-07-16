@@ -78,7 +78,6 @@ const Dashboard = ({ home, requests, donorsPage, recipients }) => {
   useEffect(() => {
     handlePage(home, requests, donorsPage, recipients);
   }, [home, requests, donorsPage, recipients]);
-  console.log("page loaded is " + page);
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />

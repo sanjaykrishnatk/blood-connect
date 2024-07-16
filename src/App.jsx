@@ -19,8 +19,20 @@ import AcceptRequest from "./pages/AcceptRequest";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AdminLogin from "./pages/AdminLogin";
+import Lenis from "lenis";
 
 function App() {
+  const lenis = new Lenis();
+  lenis.on("scroll", (e) => {
+    console.log(e);
+  });
+
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+
+  requestAnimationFrame(raf);
   return (
     <>
       <Routes>

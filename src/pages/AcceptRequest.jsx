@@ -10,6 +10,7 @@ import {
 } from "../services/allApi";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Footer from "../components/Footer";
 
 function AcceptRequest() {
   const [fulfilled, setFulfilled] = useState(false);
@@ -67,9 +68,9 @@ function AcceptRequest() {
             did,
             updatedDonorDetails
           );
-          console.log(historyStatus);
+
           const updateStatus = await updateRequestDetails(id, updatedRequest);
-          console.log(updateStatus.data);
+
           if (updateStatus.status >= 200 && updateStatus.status < 300) {
             toast.success("Interest marked successfully!");
             // navigate("/");
@@ -147,6 +148,9 @@ function AcceptRequest() {
             {requestDetails.phone}
           </h4>
         )}
+      </div>
+      <div style={{ position: "fixed", bottom: "0px", width: "100%" }}>
+        <Footer />
       </div>
     </>
   );

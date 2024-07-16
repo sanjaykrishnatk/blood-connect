@@ -69,7 +69,6 @@ function Request({ phoneNo }) {
     } = bloodRequest;
     const formattedStartDate = startDate.toLocaleDateString("en-GB");
 
-    // console.log({ ...bloodRequest, phone: phoneNo });
     if (
       !userName ||
       !bloodGroup ||
@@ -82,9 +81,6 @@ function Request({ phoneNo }) {
     ) {
       toast.info("Please fill the form completely");
     } else {
-      // const result = await addRequestApi(bloodRequest)
-      // console.log(result);
-      console.log(bloodRequest);
       const result = await addRequestApi({
         ...bloodRequest,
         phone: phoneNo,
@@ -96,28 +92,27 @@ function Request({ phoneNo }) {
         handleClose();
         toast.success("Form Submitted Successfully");
         const donorDetails = await getDonorsByBloodGroupApi(bloodGroup);
-        console.log(donorDetails.data);
+
         const eligibleDonors = donorDetails.data.filter((donor) =>
           atleastThreeMonths(donor.lastDonation, formattedStartDate)
         );
-        console.log(eligibleDonors);
+
         const mobileNumbers = eligibleDonors
           .map((item) => item.phone)
           .toString();
-        console.log(mobileNumbers);
+
         await Promise.all(
           eligibleDonors.map(async (item) => {
             let message = {
               route: "q",
               message: `Hi ${item?.username}, An urgent blood donation request matches your profile. Your help can save a life! Click here for details and to confirm your donation: https://blood-connect-seven.vercel.app/accept?rid=${rid}&did=${item.id}
 
-      Thank you,
-      BloodConnect Team`,
+Thank you,
+BloodConnect Team`,
               flash: 0,
               numbers: item?.phone,
             };
             const smsResponse = await smsApi(message);
-            console.log(smsResponse.data);
           })
         );
       } else {
@@ -142,7 +137,7 @@ function Request({ phoneNo }) {
                   value={bloodRequest.userName}
                   onChange={(event) => {
                     const value = event.target.value;
-                    console.log(value);
+
                     setBloodRequest({ ...bloodRequest, userName: value });
                   }}
                 />
@@ -156,7 +151,7 @@ function Request({ phoneNo }) {
                   value={bloodRequest.age}
                   onChange={(event) => {
                     const value = event.target.value;
-                    console.log(value);
+
                     setBloodRequest({ ...bloodRequest, age: value });
                   }}
                 />
@@ -177,7 +172,7 @@ function Request({ phoneNo }) {
                       checked={bloodRequest.gender === "male"}
                       onChange={(event) => {
                         const value = event.target.value;
-                        console.log(value);
+
                         setBloodRequest({ ...bloodRequest, gender: value });
                       }}
                     />
@@ -191,7 +186,7 @@ function Request({ phoneNo }) {
                       checked={bloodRequest.gender === "female"}
                       onChange={(event) => {
                         const value = event.target.value;
-                        console.log(value);
+
                         setBloodRequest({ ...bloodRequest, gender: value });
                       }}
                     />
@@ -208,7 +203,7 @@ function Request({ phoneNo }) {
                   value={bloodRequest.bloodGroup}
                   onChange={(event) => {
                     const value = event.target.value;
-                    console.log(value);
+
                     setBloodRequest({ ...bloodRequest, bloodGroup: value });
                   }}
                 >
@@ -240,7 +235,7 @@ function Request({ phoneNo }) {
                   value={bloodRequest.unit}
                   onChange={(event) => {
                     const value = event.target.value;
-                    console.log(value);
+
                     setBloodRequest({ ...bloodRequest, unit: value });
                   }}
                 />
@@ -254,7 +249,7 @@ function Request({ phoneNo }) {
                   value={bloodRequest.state}
                   onChange={(event) => {
                     const value = event.target.value;
-                    console.log(value);
+
                     setBloodRequest({ ...bloodRequest, state: value });
                   }}
                 >
@@ -273,7 +268,7 @@ function Request({ phoneNo }) {
                   value={bloodRequest.district}
                   onChange={(event) => {
                     const value = event.target.value;
-                    console.log(value);
+
                     setBloodRequest({ ...bloodRequest, district: value });
                   }}
                 />

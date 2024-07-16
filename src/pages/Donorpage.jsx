@@ -40,14 +40,13 @@ function Donorpage({ userID, page }) {
     return lastDonationDate < threeMonthsAgo;
   };
   const donationCheck = async () => {
-    console.log(`donor is is ${donorId}, donor id passed is ${userID}`);
     const donorDetails = await getDonorDetailsApi(userID);
     setHistory(donorDetails.data.history);
     const lastDonationDate = donorDetails.data.lastDonation;
     const today = new Date();
     const formattedDate = today.toLocaleDateString("en-GB");
     const eligible = atleastThreeMonths(lastDonationDate, formattedDate);
-    console.log(eligible);
+
     if (eligible) {
       setEligible(true);
       const requestData = await getRequestsByBloodGroupApi(

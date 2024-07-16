@@ -25,7 +25,12 @@ function Home() {
   return (
     <>
       <section id="landing">
-        <Navbar expand="lg" className="bg-body-transparent">
+        <Navbar
+          expand="lg"
+          className="bg-body-transparent"
+          data-aos="fade-down"
+          data-aos-duration="1000"
+        >
           <Container>
             <Navbar.Brand href="#home" style={{ width: "79%" }}>
               <img src="logo1.png" alt="logo" className="w-25" />
@@ -61,7 +66,11 @@ function Home() {
             </Navbar.Collapse>
           </Container>
         </Navbar>
-        <Row className="ms-0 me-0 w-100 d-flex flex-column pb-5">
+        <Row
+          className="ms-0 me-0 w-100 d-flex flex-column pb-5"
+          data-aos="fade-right"
+          data-aos-duration="1000"
+        >
           <h1 className=" landing-header mb-0" style={{ marginTop: "100px" }}>
             <span style={{ color: "#DF1626" }}>hope</span> starts
             <br />
@@ -95,7 +104,11 @@ function Home() {
             sm={12}
             className="d-flex flex-column  align-items-center "
           >
-            <div className="sec-2-content d-flex flex-column ">
+            <div
+              className="sec-2-content d-flex flex-column "
+              data-aos="fade-right"
+              data-aos-duration="1000"
+            >
               <h1 className="md-mb-0 impact-header">
                 Making an
                 <br />
@@ -107,13 +120,21 @@ function Home() {
                 community through donation and awareness. Together, we make a
                 difference.
               </p>
-              <Button variant="dark" className="rounded-1  know-more-btn">
+              <Button
+                variant="dark"
+                className="rounded-1  know-more-btn"
+                onClick={handleRedirect}
+              >
                 KNOW MORE
               </Button>
             </div>
           </Col>
           <Col md={6} sm={12}>
-            <Row className="ms-0 me-0 d-flex">
+            <Row
+              className="ms-0 me-0 d-flex"
+              data-aos="fade-down"
+              data-aos-duration="1000"
+            >
               <Col md={6} sm={12} className="d-flex flex-column impact-column ">
                 <FontAwesomeIcon
                   icon={faHeartPulse}
@@ -145,7 +166,11 @@ function Home() {
                 </p>
               </Col>
             </Row>
-            <Row className="ms-0 me-0 d-flex mt-4">
+            <Row
+              className="ms-0 me-0 d-flex mt-4"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+            >
               <Col md={6} sm={12} className="d-flex flex-column impact-column">
                 <FontAwesomeIcon
                   icon={faDroplet}
@@ -181,13 +206,21 @@ function Home() {
       </section>
       <section id="section-3">
         <Row className="me-0 ms-0 w-100">
-          <Col md={6} sm={12} className="d-flex  align-items-center">
+          <Col
+            md={6}
+            sm={12}
+            className="d-flex  align-items-center"
+            data-aos="fade-left"
+            data-aos-duration="1000"
+          >
             <img src="/v2.gif" alt="blood-img" className="blood-donation-img" />
           </Col>
           <Col
             md={6}
             sm={12}
             className="d-flex flex-column justify-content-center section-3-content"
+            data-aos="fade-right"
+            data-aos-duration="1000"
           >
             <h1 className="section-3-header">
               A Drop of <span style={{ color: "#DF1626" }}> Hope</span>
@@ -203,7 +236,11 @@ function Home() {
         </Row>
       </section>
       <section id="section-4">
-        <Row className="ms-0 me-0 w-100 md-p-0">
+        <Row
+          className="ms-0 me-0 w-100 md-p-0"
+          data-aos="fade-down"
+          data-aos-duration="1000"
+        >
           <iframe
             className="p-md-0"
             width="100%"
@@ -218,10 +255,18 @@ function Home() {
       </section>
       <section id="section-5">
         <Row className="ms-0 me-0 w-100">
-          <h1 className="text-center services-header">
+          <h1
+            className="text-center services-header"
+            data-aos="fade-down"
+            data-aos-duration="1000"
+          >
             Our <span style={{ color: "#DF1626" }}>Services</span>
           </h1>
-          <p className="text-center text-secondary mb-5 section-5-sub-txt">
+          <p
+            className="text-center text-secondary mb-5 section-5-sub-txt"
+            data-aos="fade-down"
+            data-aos-duration="1000"
+          >
             Empowering Communities with Lifesaving Blood. Every Drop, a Step
             Toward Hope.
           </p>
@@ -231,7 +276,12 @@ function Home() {
               md={3}
               className="mb-5 d-flex  justify-content-center align-items-center"
             >
-              <Card style={{ width: "18rem" }} className="rounded-0  shadow">
+              <Card
+                style={{ width: "18rem" }}
+                className="rounded-0  shadow"
+                data-aos="fade-left"
+                data-aos-duration="1000"
+              >
                 <Card.Img
                   variant="top"
                   src="/blood-donation.jpg"
@@ -261,7 +311,12 @@ function Home() {
               md={3}
               className="mb-5 d-flex  justify-content-center align-items-center"
             >
-              <Card style={{ width: "18rem" }} className="rounded-0  shadow">
+              <Card
+                style={{ width: "18rem" }}
+                className="rounded-0  shadow"
+                data-aos="fade-up"
+                data-aos-duration="1000"
+              >
                 <Card.Img
                   variant="top"
                   src="/blood-drive.png"
@@ -291,7 +346,12 @@ function Home() {
               md={3}
               className="mb-5 d-flex  justify-content-center align-items-center"
             >
-              <Card style={{ width: "18rem" }} className="rounded-0  shadow">
+              <Card
+                style={{ width: "18rem" }}
+                className="rounded-0  shadow"
+                data-aos="fade-left"
+                data-aos-duration="1000"
+              >
                 <Card.Img
                   variant="top"
                   src="/blood-pack.jpg"
@@ -329,12 +389,22 @@ function Home() {
             minHeight: "230px",
           }}
         >
-          <h1 className="banner-header " style={{ color: "#DF1626" }}>
+          <h1
+            className="banner-header "
+            style={{ color: "#DF1626" }}
+            data-aos="fade-right"
+            data-aos-duration="1000"
+          >
             100+
             <br />
             Donors
           </h1>
-          <h1 className="banner-header " style={{ color: "#DF1626" }}>
+          <h1
+            className="banner-header "
+            style={{ color: "#DF1626" }}
+            data-aos="fade-right"
+            data-aos-duration="1000"
+          >
             200+
             <br />
             Lives Saved
@@ -349,7 +419,13 @@ function Home() {
             padding: "60px",
           }}
         >
-          <h1 className="donor-header text-center">Become a Donor</h1>
+          <h1
+            className="donor-header text-center"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+          >
+            Become a Donor
+          </h1>
           <Button
             variant="light"
             style={{
@@ -358,6 +434,9 @@ function Home() {
               backgroundColor: "#DFDFDF",
             }}
             className="fw-bold"
+            onClick={handleRedirect}
+            data-aos="fade-up"
+            data-aos-duration="1000"
           >
             DONATE
           </Button>{" "}

@@ -20,7 +20,6 @@ const Login = () => {
     type: "",
   });
   const navigate = useNavigate();
-  console.log(userData);
 
   const handleLogin = async () => {
     const { phone, password, type } = userData;
@@ -39,7 +38,6 @@ const Login = () => {
             sessionStorage.setItem("user", JSON.stringify(userDetails));
             navigate("/userdashboard");
           } else if (userDetails[0].type == "admin") {
-            console.log(`inside admin block`);
             navigate("/admin");
           }
         } else {

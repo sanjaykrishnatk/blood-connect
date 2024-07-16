@@ -32,7 +32,6 @@ function Admin({ page }) {
   ]);
 
   const handlePageLoading = (page) => {
-    console.log("function called page value: " + page);
     setPageValue(page);
   };
   const retrieveRecipients = async () => {
@@ -64,8 +63,7 @@ function Admin({ page }) {
       };
     });
     setRequests(requestTableData);
-    console.log("Requests data:", result.data);
-    console.log(`Table data: ${requestTableData}`);
+
     const updatedDataset = [
       { Total: 0, Fulfilled: 0, month: "Jan" },
       { Total: 0, Fulfilled: 0, month: "Feb" },
@@ -92,7 +90,6 @@ function Admin({ page }) {
     });
 
     setDataset(updatedDataset);
-    console.log("Updated dataset:", updatedDataset);
   };
 
   const retrieveDonors = async () => {
@@ -110,11 +107,6 @@ function Admin({ page }) {
       };
     });
     setDonors(donorData);
-    // console.log(`donor data : ${result.data}`); JSON.stringify(donorData, null, 2)
-    console.log(
-      "Transformed donor data:",
-      JSON.stringify(result.data, null, 2)
-    );
   };
 
   const deleteRequest = async (id) => {
@@ -145,7 +137,6 @@ function Admin({ page }) {
   };
 
   const valueFormatter = (value) => `${value}`;
-  console.log("donors:" + donors);
 
   const donorsCard = {
     logo: "https://thumbs.dreamstime.com/b/blood-donors-logo-symbol-icon-your-needs-such-donor-sign-public-information-add-to-presentation-website-app-etc-154842885.jpg",
@@ -164,7 +155,7 @@ function Admin({ page }) {
     title: "Requests",
     count: requests.length,
   };
-  console.log(pageValue);
+
   return (
     <>
       <div className="row w-100 py-3  ms-0 me-0">

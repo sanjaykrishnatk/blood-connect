@@ -39,10 +39,9 @@ const UserDashboard = ({ userHome, userRequests }) => {
     const loggedInUser = sessionStorage.getItem("user");
     if (loggedInUser) {
       setUser(JSON.parse(loggedInUser)[0]);
-      console.log(JSON.parse(loggedInUser)[0]);
     }
   }, [userHome, userRequests]);
-  console.log(user);
+
   return (
     <Box //sx={{ display: 'flex' }}
     >

@@ -16,8 +16,6 @@ function Reportbloodrequest({ phoneNo }) {
     }
   };
 
-  console.log(requestReport);
-
   useEffect(() => {
     getReport(phoneNo);
   }, []);

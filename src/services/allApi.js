@@ -1,12 +1,15 @@
 import { commonApi } from "./commonApi";
 import { serverUrl } from "./serverUrl";
 //sms api
+// export const smsApi = async (reqBody) => {
+//   return await commonApi(
+//     "POST",
+//     "https://www.fast2sms.com/dev/bulkV2",
+//     reqBody
+//   );
+// };
 export const smsApi = async (reqBody) => {
-  return await commonApi(
-    "POST",
-    "https://www.fast2sms.com/dev/bulkV2",
-    reqBody
-  );
+  return await commonApi("POST", `${serverUrl}/api/sms`, reqBody);
 };
 //api to get donors grouped by blood group
 export const getDonorsByBloodGroupApi = async (bloodGroup) => {

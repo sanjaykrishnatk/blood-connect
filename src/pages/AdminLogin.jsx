@@ -18,7 +18,6 @@ const AdminLogin = () => {
     type: "",
   });
   const navigate = useNavigate();
-  console.log(userData);
 
   const handleLogin = async () => {
     const { phone, password, type } = userData;

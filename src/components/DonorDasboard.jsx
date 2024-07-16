@@ -47,7 +47,6 @@ const DonorDashboard = ({ donorHome, donorRequests, donorHistory }) => {
     const loggedInUser = sessionStorage.getItem("user");
     if (loggedInUser) {
       setUser(JSON.parse(loggedInUser)[0]);
-      console.log(JSON.parse(loggedInUser)[0]);
     }
     handlePage(donorHome, donorRequests, donorHistory);
   }, [donorHome, donorRequests, donorHistory]);
