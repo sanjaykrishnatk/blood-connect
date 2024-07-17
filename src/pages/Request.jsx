@@ -97,12 +97,13 @@ function Request({ phoneNo }) {
           atleastThreeMonths(donor.lastDonation, formattedStartDate)
         );
 
-        const mobileNumbers = eligibleDonors
-          .map((item) => item.phone)
-          .toString();
+        const districtWise = eligibleDonors.filter(
+          (donor) =>
+            donor.district.toLowerCase() == bloodRequest.district.toLowerCase()
+        );
 
         await Promise.all(
-          eligibleDonors.map(async (item) => {
+          districtWise.map(async (item) => {
             let message = {
               route: "q",
               message: `Hi ${item?.username}, An urgent blood donation request matches your profile. Your help can save a life! Click here for details and to confirm your donation: https://blood-connect-seven.vercel.app/accept?rid=${rid}&did=${item.id}
